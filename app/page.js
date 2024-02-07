@@ -1,9 +1,11 @@
+import Banner from "@/components/home/banner";
 import React from "react";
 
 export default function Home() {
   return (
     <div>
-      <h1 className="text-blushPink">Home Page</h1>
+      <Banner />
+      <h1 className="bg-dark-50">Home Page</h1>
     </div>
   );
 }

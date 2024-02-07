@@ -64,7 +64,7 @@ const Navbar = () => {
                   <button>Fragrance</button>
                 </div>
                 <div>
-                  <button>Undergarments</button>
+                  <button className="">Undergarments</button>
                 </div>
                 <div>
                   <button>Buy 1 GET 1</button>
@@ -134,16 +134,16 @@ const Navbar = () => {
           <button>Personal care</button>
           <button>Mom & Baby</button>
           <button>Fragrance</button>
-          <button className="px-4 py-1 rounded-full text-white bg-blue-500">
+          <button className="px-4 py-1 rounded-full text-white bg-SubBlue">
             Undergarments
           </button>
-          <button className="px-4 py-1 rounded-full text-white bg-purple-500">
+          <button className="px-4 py-1 rounded-full text-white bg-Coral">
             Buy 1 GET 1
           </button>
-          <button className="px-4 py-1 rounded-full text-white bg-cyan-500">
+          <button className="px-4 py-1 rounded-full text-white bg-green">
             Clearance Sell
           </button>
-          <button className="px-4 py-1 rounded-full text-white bg-green-500">
+          <button className="px-4 py-1 rounded-full text-white bg-Gold">
             Men
           </button>
         </div>
