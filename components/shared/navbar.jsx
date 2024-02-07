@@ -5,6 +5,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
+      {/* mobile */}
       <div>
         <div className="bg-white lg:hidden sm:block dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600 flex justify-between items-center p-2">
           <button className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -94,12 +95,13 @@ const Navbar = () => {
           <div className="flex justify-center">
             <input
               type="search"
-              className="p-2 w-72 border-2 border-pink-500 text-sm bg-gray-100 rounded-3xl"
+              className="p-2 w-72 border-2 border-primary-500 text-sm bg-gray-100 rounded-3xl"
               placeholder="Search for products..."
             />
           </div>
         </div>
       </div>
+      {/* Laptop */}
       <div className="hidden lg:block">
         <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600">
           <div className="flex items-center justify-between mx-auto p-2 lg:gap-52">
@@ -111,23 +113,23 @@ const Navbar = () => {
                 <input
                   type="search"
                   name=""
-                  className="p-2 w-96 border-2 bg-gray-100 dark:bg-gray-50 text-black dark:text-white border-pink-500 text-sm rounded-3xl"
+                  className="p-2 w-96 border-2 bg-gray-100 dark:bg-gray-50 text-black dark:text-white border-primary-500 text-sm rounded-3xl"
                   placeholder="Search for products..."
                   id=""
                 />
               </div>
               <div className="flex gap-4 items-center">
-                <button className="bg-gray-100 dark:bg-gray-50 text-black  px-4 py-2 rounded-full">
+                <button className="bg-Beige dark:bg-gray-50 text-black  px-4 py-2 rounded-full">
                   My Account
                 </button>
-                <button className="bg-pink-400 px-4 py-2 text-white rounded-full">
+                <button className="bg-primary-400 px-4 py-2 text-white rounded-full">
                   My Bag
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div className="py-2 bg-white dark:bg-gray-900 gap-12 justify-center flex items-center uppercase dark:text-white text-black">
+        <div className="py-2 bg-white dark:bg-gray-900 gap-12 justify-center flex items-center uppercase font-medium dark:text-white text-black">
           <button>Makeup</button>
           <button>Skin</button>
           <button>Hair</button>
