@@ -21,7 +21,7 @@ const Login = () => {
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label
-              for="email"
+              htmlFor="email"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
               Your email
@@ -39,7 +39,7 @@ const Login = () => {
           </div>
           <div>
             <label
-              for="password"
+              htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Your password
