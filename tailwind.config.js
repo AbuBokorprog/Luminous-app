@@ -33,6 +33,8 @@ module.exports = {
         900: "#3d3d3d",
         950: "#000000",
       },
+      white: "#ffffff",
+      black: "#000000",
       green: "#98FB98",
       Beige: `#F5F5DC`,
       Ivory: `#FFFFF0`,

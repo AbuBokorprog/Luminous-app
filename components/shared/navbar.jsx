@@ -1,8 +1,11 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
+
   return (
     <>
       {/* mobile */}
@@ -105,9 +108,12 @@ const Navbar = () => {
       <div className="hidden lg:block">
         <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600">
           <div className="flex items-center justify-between mx-auto p-2 lg:gap-52">
-            <h2 className="w-80 dark:text-white text-black uppercase lg:text-5xl font-bold">
+            <Link
+              href={"/"}
+              className="w-80 dark:text-white text-black uppercase lg:text-5xl font-bold"
+            >
               Luminous
-            </h2>
+            </Link>
             <div className="flex items-center gap-6">
               <div>
                 <input
@@ -118,18 +124,57 @@ const Navbar = () => {
                   id=""
                 />
               </div>
-              <div className="flex gap-4 items-center">
-                <button className="bg-Beige dark:bg-gray-50 text-black  px-4 py-2 rounded-full">
-                  My Account
-                </button>
+              <div className="flex gap-4 items-center relative">
                 <button className="bg-primary-400 px-4 py-2 text-white rounded-full">
                   My Bag
                 </button>
+                <button
+                  onClick={() => setIsOpenDropdown(!isOpenDropdown)}
+                  className="bg-Beige dark:bg-gray-50 text-black  px-4 py-2 rounded-full"
+                >
+                  My Account
+                </button>
+                {isOpenDropdown && (
+                  <div className="z-10 hidden absolute -right-4 w-36 top-10 lg:block bg-primary-50 divide-y divide-gray-100 rounded-lg shadow dark:bg-dark-700">
+                    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+                      <li>
+                        <Link
+                          href={"/dashboard"}
+                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Dashboard
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link
+                          href="/login"
+                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Login
+                        </Link>
+                      </li>
+                      <li>
+                        <button class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                          Logout
+                        </button>
+                      </li>
+                      <li>
+                        <Link
+                          href="/sign_up"
+                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Sign Up
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-        <div className="py-2 bg-white dark:bg-gray-900 gap-12 justify-center flex items-center uppercase font-medium dark:text-white text-black">
+        <div className="py-4 bg-white dark:bg-gray-900 gap-12 justify-center flex items-center uppercase font-medium dark:text-white text-black">
           <button>Makeup</button>
           <button>Skin</button>
           <button>Hair</button>
