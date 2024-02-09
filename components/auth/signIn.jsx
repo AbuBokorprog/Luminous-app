@@ -1,16 +1,53 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { authContext } from "@/utils/provider/auth_provider";
+import { usePostUserMutation } from "@/redux/feature/counter/api";
 
 const SignIn = () => {
+  const { createUser, updateUser } = useContext(authContext);
+  const [postUser, { isLoading, isError, error }] = usePostUserMutation();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+
+  const onSubmit = async (data) => {
+    const displayName = data.displayName;
+    const email = data.email;
+    const password = data.password;
+    const photoURL = data.photoURL;
+    const user = { displayName, email, password, photoURL };
+    const confirmPassword = data.confirmPassword;
+    if (password !== confirmPassword) {
+      return console.log("passwords do not match");
+    }
+    try {
+      const result = await postUser(user);
+
+      console.log(result.data.message);
+      if (result.data.message === "user saved successfully") {
+        createUser(email, password)
+          .then((result) => {
+            const loggedUser = result.user;
+            updateUser(displayName, photoURL)
+              .then(() => {
+                console.log("updated user");
+              })
+              .catch((error) => {});
+            console.log(loggedUser);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    } catch (err) {
+      // Handle error
+      console.error("Error creating user:", err.message);
+    }
   };
 
   return (
@@ -22,7 +59,7 @@ const SignIn = () => {
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label
-              htmlFor="name"
+              htmlFor="displayName"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
               Your Name
@@ -30,10 +67,10 @@ const SignIn = () => {
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Type your name"
-              {...register("name", { required: true })}
-              aria-invalid={errors.name ? "true" : "false"}
+              {...register("displayName", { required: true })}
+              aria-invalid={errors.displayName ? "true" : "false"}
             />
-            {errors.name?.type === "required" && (
+            {errors.displayName?.type === "required" && (
               <p role="alert">Name is required</p>
             )}
           </div>
@@ -93,7 +130,7 @@ const SignIn = () => {
           </div>
           <div>
             <label
-              htmlFor="imageURL"
+              htmlFor="photoURL"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Image URL
@@ -101,10 +138,10 @@ const SignIn = () => {
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="paste your Image URL"
-              {...register("imageURL", { required: true })}
-              aria-invalid={errors.imageURL ? "true" : "false"}
+              {...register("photoURL", { required: true })}
+              aria-invalid={errors.photoURL ? "true" : "false"}
             />
-            {errors.imageURL?.type === "required" && (
+            {errors.photoURL?.type === "required" && (
               <p role="alert">Image is required</p>
             )}
           </div>

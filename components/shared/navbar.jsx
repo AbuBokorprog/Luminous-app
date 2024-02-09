@@ -135,7 +135,10 @@ const Navbar = () => {
                   My Account
                 </button>
                 {isOpenDropdown && (
-                  <div className="z-10 hidden absolute -right-4 w-36 top-10 lg:block bg-primary-50 divide-y divide-gray-100 rounded-lg shadow dark:bg-dark-700">
+                  <div
+                    onClick={() => setIsOpenDropdown(false)}
+                    className="z-10 hidden absolute -right-4 w-36 top-10 lg:block bg-primary-50 divide-y divide-gray-100 rounded-lg shadow dark:bg-dark-700"
+                  >
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                       <li>
                         <Link

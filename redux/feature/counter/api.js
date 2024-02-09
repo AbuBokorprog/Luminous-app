@@ -7,7 +7,14 @@ export const Api = createApi({
     getUser: builder.query({
       query: () => "/users",
     }),
+    postUser: builder.mutation({
+      query: (data) => ({
+        url: "/users",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetUserQuery } = Api;
+export const { useGetUserQuery, usePostUserMutation } = Api;

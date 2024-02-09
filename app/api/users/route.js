@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 
 database();
 export async function POST(request, _) {
-  const { name, email, password, imageURL } = await request.json();
-  const user = new User({ name, email, password, imageURL });
+  const { displayName, email, password, photoURL } = await request.json();
+  const user = new User({ displayName, email, password, photoURL });
   try {
     const result = await user.save();
     const response = NextResponse.json({
