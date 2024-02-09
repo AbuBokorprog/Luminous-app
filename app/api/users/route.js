@@ -9,14 +9,14 @@ export async function POST(request, _) {
   try {
     const result = await user.save();
     const response = NextResponse.json({
-      message: "user saved successfully",
+      message: "Registered successfully",
       status: 200,
       user: result,
     });
     return response;
   } catch (error) {
     return NextResponse.json({
-      message: "user saved failed",
+      message: "Registered failed",
       status: false,
       error: error.message,
     });

@@ -1,9 +1,12 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { authContext } from "@/utils/provider/auth_provider";
 
 const Login = () => {
+  const { signIn } = useContext(authContext);
+
   const {
     register,
     formState: { errors },
@@ -11,6 +14,16 @@ const Login = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    const email = data.email;
+    const password = data.password;
+    signIn(email, password)
+      .then((result) => {
+        const loggedIn = result.user;
+        // console.log(loggedIn);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div className="mx-auto flex justify-center my-10 lg:my-20 ">

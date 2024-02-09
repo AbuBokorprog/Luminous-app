@@ -1,11 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
+import { FaBagShopping } from "react-icons/fa6";
+import { authContext } from "@/utils/provider/auth_provider";
 
 const Navbar = () => {
+  const { user, logout } = useContext(authContext);
+
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
+  const logoutHandler = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => {});
+  };
   return (
     <>
       {/* mobile */}
@@ -125,8 +134,8 @@ const Navbar = () => {
                 />
               </div>
               <div className="flex gap-4 items-center relative">
-                <button className="bg-primary-400 px-4 py-2 text-white rounded-full">
-                  My Bag
+                <button className="text-primary-400 p-2 rounded-full">
+                  <FaBagShopping className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => setIsOpenDropdown(!isOpenDropdown)}
@@ -143,33 +152,30 @@ const Navbar = () => {
                       <li>
                         <Link
                           href={"/dashboard"}
-                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           Dashboard
                         </Link>
                       </li>
-
-                      <li>
-                        <Link
-                          href="/login"
-                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          Login
-                        </Link>
-                      </li>
-                      <li>
-                        <button class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                          Logout
-                        </button>
-                      </li>
-                      <li>
-                        <Link
-                          href="/sign_up"
-                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                        >
-                          Sign Up
-                        </Link>
-                      </li>
+                      {user?.email ? (
+                        <li>
+                          <button
+                            onClick={logoutHandler}
+                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          >
+                            Logout
+                          </button>
+                        </li>
+                      ) : (
+                        <li>
+                          <Link
+                            href="/login"
+                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          >
+                            Login
+                          </Link>
+                        </li>
+                      )}
                     </ul>
                   </div>
                 )}

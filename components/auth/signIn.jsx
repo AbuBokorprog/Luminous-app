@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { authContext } from "@/utils/provider/auth_provider";
@@ -7,10 +7,13 @@ import { usePostUserMutation } from "@/redux/feature/counter/api";
 
 const SignIn = () => {
   const { createUser, updateUser } = useContext(authContext);
-  const [postUser, { isLoading, isError, error }] = usePostUserMutation();
+  const [isMatch, setIsMatch] = useState("");
+  const [postUser, { isLoading, isError, error, isSuccess }] =
+    usePostUserMutation();
 
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
@@ -23,31 +26,29 @@ const SignIn = () => {
     const user = { displayName, email, password, photoURL };
     const confirmPassword = data.confirmPassword;
     if (password !== confirmPassword) {
-      return console.log("passwords do not match");
+      setIsMatch("passwords do not match");
     }
     try {
       const result = await postUser(user);
 
-      console.log(result.data.message);
-      if (result.data.message === "user saved successfully") {
+      // console.log(result.data.message);
+      setIsMatch("");
+      if (result.data.message === "Registered successfully") {
         createUser(email, password)
           .then((result) => {
             const loggedUser = result.user;
             updateUser(displayName, photoURL)
-              .then(() => {
-                console.log("updated user");
-              })
+              .then(() => {})
               .catch((error) => {});
-            console.log(loggedUser);
           })
           .catch((error) => {
-            console.log(error.message);
+            // console.log(error.message);
           });
       }
     } catch (err) {
-      // Handle error
-      console.error("Error creating user:", err.message);
+      // console.error("Error creating user:", err.message);
     }
+    reset();
   };
 
   return (
@@ -56,6 +57,10 @@ const SignIn = () => {
         <h5 className="text-3xl text-center font-medium text-dark-900 dark:text-white">
           Registered
         </h5>
+        {isError && <p className="text-primary-500 text-center">{error}</p>}
+        {isSuccess && (
+          <p className="text-green text-center">Registered Success</p>
+        )}
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label
@@ -127,6 +132,7 @@ const SignIn = () => {
             {errors.confirmPassword?.type === "required" && (
               <p role="alert">Confirm Password is required</p>
             )}
+            {isMatch && <p className="text-primary-500">{isMatch}</p>}
           </div>
           <div>
             <label
@@ -145,12 +151,22 @@ const SignIn = () => {
               <p role="alert">Image is required</p>
             )}
           </div>
-          <button
-            type="submit"
-            className="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Registered
-          </button>
+          {isLoading ? (
+            <button
+              type="submit"
+              className="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Loading....
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Registered
+            </button>
+          )}
+
           <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
             Already registered?
             <Link
