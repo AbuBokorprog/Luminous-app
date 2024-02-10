@@ -1,10 +1,12 @@
 // components/Sidebar.js
 "use client";
+import { authContext } from "@/utils/provider/auth_provider";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useContext(authContext);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -47,35 +49,102 @@ const Sidebar = () => {
             isOpen ? "w-44" : "hidden lg:block"
           }`}
         >
-          <h2 className="text-xl font-bold p-4">Dashboard</h2>
           <ul>
+            {/* users */}
+            <h2 className="text-xl font-bold p-4">User dashboard</h2>
             <li className="py-2 px-4 hover:bg-gray-800">
-              <Link href="/dashboard">Dashboard Home</Link>
+              <Link href="/users">Dashboard Home</Link>
+            </li>
+            <li className="py-2 px-4 hover:bg-gray-800">
+              <Link href="/dashboard/orders">Orders</Link>
+            </li>
+            <li className="py-2 px-4 hover:bg-gray-800">
+              <Link href="/dashboard">Address</Link>
             </li>
             <li className="py-2 px-4 hover:bg-gray-800">
               <Link href="/dashboard/profile">Profile</Link>
             </li>
             <li className="py-2 px-4 hover:bg-gray-800">
+              <Link href="/dashboard">Account Details</Link>
+            </li>
+            {/* manager */}
+            <h2 className="text-xl font-bold p-4">Manager dashboard</h2>
+            <li className="py-2 px-4 hover:bg-gray-800">
+              <Link href="/dashboard">Add Product</Link>
+            </li>
+            <li className="py-2 px-4 hover:bg-gray-800">
+              <Link href="/dashboard">Total Product</Link>
+            </li>
+            {/* Admin */}
+            <h2 className="text-xl font-bold p-4">Admin dashboard</h2>
+            <li className="py-2 px-4 hover:bg-gray-800">
+              <Link href="/dashboard">All Users</Link>
+            </li>
+            <li className="py-2 px-4 hover:bg-gray-800">
+              <Link href="/dashboard">All Products</Link>
+            </li>
+            {/* common */}
+            <hr className="border-2 my-2" />
+            <li className="py-2 px-4 hover:bg-gray-800">
               <Link href="/dashboard/settings">Settings</Link>
             </li>
+            <li className="py-2 px-4 hover:bg-gray-800">
+              <Link href="/dashboard">Logout</Link>
+            </li>
+
             {/* Add more sidebar links as needed */}
           </ul>
         </div>
       )}
       <div
-        className={`bg-gray-900 text-black border border-black bg-white w-64 h-96 hidden lg:block`}
+        className={`bg-gray-900 text-black border border-black bg-white w-64 hidden lg:block`}
       >
-        <h2 className="text-xl font-bold p-4">Dashboard</h2>
         <ul>
+          {/* users */}
+          <h2 className="text-xl font-bold p-4">User dashboard</h2>
           <li className="py-2 px-4 hover:bg-gray-800">
-            <Link href="/dashboard">Dashboard Home</Link>
+            <Link href="/users">Dashboard Home</Link>
           </li>
+          <li className="py-2 px-4 hover:bg-gray-800">
+            <Link href="/users/orders">Orders</Link>
+          </li>
+          <li className="py-2 px-4 hover:bg-gray-800">
+            <Link href="/users/address">Address</Link>
+          </li>
+          {/* manager */}
+          <h2 className="text-xl font-bold p-4">Manager dashboard</h2>
+          <li className="py-2 px-4 hover:bg-gray-800">
+            <Link href="/manager">Dashboard Home</Link>
+          </li>
+          <li className="py-2 px-4 hover:bg-gray-800">
+            <Link href="/manager/addProduct">Add Product</Link>
+          </li>
+          <li className="py-2 px-4 hover:bg-gray-800">
+            <Link href="/dashboard">Total Product</Link>
+          </li>
+          {/* Admin */}
+          <h2 className="text-xl font-bold p-4">Admin dashboard</h2>
+          <li className="py-2 px-4 hover:bg-gray-800">
+            <Link href="/admin">Dashboard Home</Link>
+          </li>
+          <li className="py-2 px-4 hover:bg-gray-800">
+            <Link href="/admin/allUsers">All Users</Link>
+          </li>
+          <li className="py-2 px-4 hover:bg-gray-800">
+            <Link href="/admin/product">Products</Link>
+          </li>
+          {/* common */}
+          <hr className="border-2 my-2" />
           <li className="py-2 px-4 hover:bg-gray-800">
             <Link href="/dashboard/profile">Profile</Link>
           </li>
           <li className="py-2 px-4 hover:bg-gray-800">
-            <Link href="/dashboard/settings">Settings</Link>
+            <Link href="/settings">Settings</Link>
           </li>
+          <li className="py-2 px-4 hover:bg-gray-800">
+            <Link href="/profile">Logout</Link>
+          </li>
+
           {/* Add more sidebar links as needed */}
         </ul>
       </div>
