@@ -20,6 +20,10 @@ const Navbar = () => {
       {/* mobile */}
       <div>
         <div className="bg-white lg:hidden sm:block dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600 flex justify-between items-center p-2">
+          <div></div>
+          <h2 className="text-xl font-bold dark:text-white text-black">
+            Luminous
+          </h2>
           <button className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? (
               <svg
@@ -46,18 +50,23 @@ const Navbar = () => {
               </svg>
             )}
           </button>
-          <h2 className="text-xl font-bold dark:text-white text-black">
-            Luminous
-          </h2>
-          <div></div>
         </div>
         {isOpen && (
           <aside
             id="default-sidebar"
-            className="fixed top-0 left-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right"
+            className="fixed top-0 bg-white right-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right"
           >
             <div className="h-full flex justify-between px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-              <div className="space-y-2 flex-col dark:text-white text-black font-medium">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="w-8 h-8 dark:text-white text-black"
+                onClick={() => setIsOpen(false)}
+              >
+                <path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z" />
+              </svg>
+              <div className="space-y-2 text-right flex-col dark:text-white text-black font-medium">
                 <div>
                   <button>Makeup</button>
                 </div>
@@ -89,15 +98,6 @@ const Navbar = () => {
                   <button>Men</button>
                 </div>
               </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="w-8 h-8 dark:text-white text-black"
-                onClick={() => setIsOpen(false)}
-              >
-                <path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z" />
-              </svg>
             </div>
           </aside>
         )}
