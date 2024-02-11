@@ -28,7 +28,6 @@ const Navbar = () => {
     })
       .then((response) => {
         if (response.ok) {
-          console.log("logout successful");
           logout()
             .then(() => {})
             .catch((error) => {});
