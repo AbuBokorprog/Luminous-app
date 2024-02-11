@@ -23,7 +23,8 @@ const SignIn = () => {
     const email = data.email;
     const password = data.password;
     const photoURL = data.photoURL;
-    const user = { displayName, email, password, photoURL };
+    const role = "user";
+    const user = { displayName, email, password, photoURL, role };
     const confirmPassword = data.confirmPassword;
     if (password !== confirmPassword) {
       setIsMatch("passwords do not match");
