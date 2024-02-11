@@ -54,7 +54,7 @@ export async function PUT(req, { params }) {
 export async function DELETE(_, { params }) {
   const { id } = params;
   try {
-    const deleteUser = await User.findOneAndDelete({ id: id });
+    const deleteUser = await User.findOneAndDelete({ _id: id });
     if (!deleteUser) {
       return NextResponse.json({
         message: "User not found",
