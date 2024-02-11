@@ -7,6 +7,9 @@ export const Api = createApi({
     getUser: builder.query({
       query: () => "/users",
     }),
+    getCurrentUser: builder.query({
+      query: (email) => `/users/email/${email}`,
+    }),
     postUser: builder.mutation({
       query: (data) => ({
         url: "/users",
@@ -17,4 +20,5 @@ export const Api = createApi({
   }),
 });
 
-export const { useGetUserQuery, usePostUserMutation } = Api;
+export const { useGetUserQuery, useGetCurrentUserQuery, usePostUserMutation } =
+  Api;

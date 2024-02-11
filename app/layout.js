@@ -15,15 +15,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body className={`${inter.className} container mx-auto `}>
-          <ReduxProvider>
+      <body className={`${inter.className} container mx-auto `}>
+        <ReduxProvider>
+          <AuthProvider>
             <Navbar />
             {children}
             <Footer />
-          </ReduxProvider>
-        </body>
-      </AuthProvider>
+          </AuthProvider>
+        </ReduxProvider>
+      </body>
     </html>
   );
 }

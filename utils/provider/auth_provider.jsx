@@ -9,13 +9,18 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { App } from "@/firebase.config";
+import { useGetCurrentUserQuery } from "@/redux/feature/counter/api";
 
 export const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const [currentUser, SetCurrentUser] = useState([]);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const auth = getAuth(App);
+
+  const { data, isLoading, isError } = useGetCurrentUserQuery(user?.email);
+  SetCurrentUser(data?.user[0]);
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -46,7 +51,14 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const authInfo = { user, createUser, signIn, logout, updateUser, loading };
+  const authInfo = {
+    currentUser,
+    createUser,
+    signIn,
+    logout,
+    updateUser,
+    loading,
+  };
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>
   );
