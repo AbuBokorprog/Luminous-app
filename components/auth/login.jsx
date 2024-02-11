@@ -3,24 +3,27 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useLoginUserMutation } from "@/redux/feature/counter/api";
 
 const Login = () => {
   const { signIn } = useContext(authContext);
-
+  const [loginUser, { isError, isLoading, isSuccess }] = useLoginUserMutation();
   const {
     register,
     reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
     const email = data.email;
     const password = data.password;
+    try {
+      const login = await loginUser({ email, password });
+      console.log(login);
+    } catch (error) {}
     signIn(email, password)
       .then((result) => {
         const loggedIn = result.user;
-        // console.log(loggedIn);
         reset();
       })
       .catch((error) => {

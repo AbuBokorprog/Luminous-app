@@ -16,5 +16,34 @@ export async function POST(req, res) {
         status: 500,
       });
     }
-  } catch (error) {}
+
+    const matched = bcrypt.compareSync(password, user.password);
+    if (!matched) {
+      return NextResponse.json({
+        message: "Password mismatch",
+        status: 500,
+      });
+    }
+    const token = jwt.sign(
+      {
+        _id: user._id,
+        name: user.displayName,
+      },
+      process.env.JWT_KEY
+    );
+    const response = NextResponse.json({
+      message: "Login success",
+      user: user,
+    });
+    response.cookies.set("authToken", token, {
+      expiresIn: "1d",
+      httpOnly: true,
+    });
+    return response;
+  } catch (error) {
+    return NextResponse.json({
+      message: "login failed",
+      status: 500,
+    });
+  }
 }

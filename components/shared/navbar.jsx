@@ -20,9 +20,25 @@ const Navbar = () => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
   const logoutHandler = () => {
-    logout()
-      .then(() => {})
-      .catch((error) => {});
+    fetch("/api/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("logout successful");
+          logout()
+            .then(() => {})
+            .catch((error) => {});
+        } else {
+          console.error("Logout request failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error during logout:", error);
+      });
   };
 
   return (
