@@ -46,7 +46,6 @@ const AuthProvider = ({ children }) => {
       photoURL: photoURL,
     });
   };
-
   const authInfo = {
     user,
     createUser,

@@ -32,7 +32,7 @@ const SignIn = () => {
     try {
       const result = await postUser(user);
 
-      // console.log(result.data.message);
+      console.log(result.data.message);
       setIsMatch("");
       if (result.data.message === "Registered successfully") {
         createUser(email, password)
@@ -43,7 +43,7 @@ const SignIn = () => {
               .catch((error) => {});
           })
           .catch((error) => {
-            // console.log(error.message);
+            console.log(error.message);
           });
       }
     } catch (err) {
@@ -59,9 +59,7 @@ const SignIn = () => {
           Registered
         </h5>
         {isError && <p className="text-primary-500 text-center">{error}</p>}
-        {isSuccess && (
-          <p className="text-green text-center">Registered Success</p>
-        )}
+
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label

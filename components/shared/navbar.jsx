@@ -3,22 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { FaBagShopping } from "react-icons/fa6";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useGetCurrentUserQuery } from "@/redux/feature/counter/api";
 
 const Navbar = () => {
   const { user, logout } = useContext(authContext);
-  const [currentUser, setCurrentUser] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/users/email/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCurrentUser(data?.user[0]);
-      });
-  }, [user?.email]);
-
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
+  const { data, isLoading } = useGetCurrentUserQuery(user?.email);
   const logoutHandler = () => {
     fetch("/api/logout", {
       method: "POST",
@@ -174,33 +166,43 @@ const Navbar = () => {
                     className="z-10 hidden absolute -right-4 w-36 top-10 lg:block bg-primary-50 divide-y divide-gray-100 rounded-lg shadow dark:bg-dark-700"
                   >
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-                      {currentUser?.role === "admin" ? (
-                        <li>
-                          <Link
-                            href={"/admin"}
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            Dashboard
-                          </Link>
-                        </li>
-                      ) : currentUser?.role === "manager" ? (
-                        <li>
-                          <Link
-                            href={"/manager"}
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            Dashboard
-                          </Link>
-                        </li>
+                      {isLoading ? (
+                        <p className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                          Loading....
+                        </p>
                       ) : (
-                        <li>
-                          <Link
-                            href={"/users"}
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >
-                            Dashboard
-                          </Link>
-                        </li>
+                        <>
+                          {data?.user[0]?.role === "admin" ? (
+                            <li>
+                              <Link
+                                href={"/admin"}
+                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                              >
+                                Dashboard
+                              </Link>
+                            </li>
+                          ) : data?.user[0]?.role === "manager" ? (
+                            <li>
+                              <Link
+                                href={"/manager"}
+                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                              >
+                                Dashboard
+                              </Link>
+                            </li>
+                          ) : data?.user[0]?.role === "user" ? (
+                            <li>
+                              <Link
+                                href={"/users"}
+                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                              >
+                                Dashboard
+                              </Link>
+                            </li>
+                          ) : (
+                            <></>
+                          )}
+                        </>
                       )}
                       {user?.email ? (
                         <li>

@@ -189,7 +189,7 @@ const Sidebar = () => {
                   </Link>
                 </li>
               </>
-            ) : (
+            ) : data?.user[0].role === "user" ? (
               <>
                 {/* users */}
                 <h2 className="text-xl font-bold p-4">User dashboard</h2>
@@ -204,11 +204,16 @@ const Sidebar = () => {
                   </Link>
                 </li>
                 <li className="py-2 mb-4 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
-                  <Link className="lg:text-lg mx-auto" href="/users/address">
+                  <Link
+                    className="lg:text-lg mx-auto"
+                    href="/users/address/editAddress"
+                  >
                     Address
                   </Link>
                 </li>
               </>
+            ) : (
+              <p>Loading.....</p>
             )}
 
             {/* common */}

@@ -1,9 +1,9 @@
 import React from "react";
-
-export default function AddProduct() {
+import AddProduct from "@/components/dashboard/manager/addProduct";
+export default function addProduct() {
   return (
     <div>
-      <h2>Add Product</h2>
+      <AddProduct />
     </div>
   );
 }

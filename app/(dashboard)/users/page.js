@@ -1,9 +1,10 @@
+import UserDashboard from "@/components/dashboard/user/user";
 import React from "react";
 
-export default function page() {
+export default function User() {
   return (
     <div>
-      <h2>User Dashboard</h2>
+      <UserDashboard />
     </div>
   );
 }

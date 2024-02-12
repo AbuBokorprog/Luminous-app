@@ -28,6 +28,8 @@ export function middleware(request) {
   ) {
     if (!authToken) {
       return NextResponse.redirect(new URL("/login", request.url));
+    } else {
+      return;
     }
   }
 }
