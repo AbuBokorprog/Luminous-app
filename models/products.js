@@ -47,9 +47,10 @@ const productsSchema = mongoose.Schema({
   status: {
     type: String,
     enum: ["pending", "approved", "declined"],
+    default: "pending",
   },
 });
 
 const Products =
-  mongoose.models.products || mongoose.model("Products", productsSchema);
+  mongoose.models.Products || mongoose.model("Products", productsSchema);
 export default Products;
