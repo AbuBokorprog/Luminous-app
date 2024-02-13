@@ -28,7 +28,7 @@ const billingAddressSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  Phone: {
+  phone: {
     type: Number,
     required: true,
   },
@@ -40,7 +40,7 @@ const billingAddressSchema = mongoose.Schema({
     required: true,
   },
   state: {
-    type: Number,
+    type: String,
     required: true,
   },
 });
