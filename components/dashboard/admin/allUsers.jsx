@@ -1,10 +1,24 @@
 "use client";
-import { useGetUserQuery } from "@/redux/feature/counter/api";
-import React, { useState } from "react";
+import {
+  useDeleteUserMutation,
+  useGetUserQuery,
+} from "@/redux/feature/counter/api";
+import Image from "next/image";
+import { authContext } from "@/utils/provider/auth_provider";
+import React, { useContext, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 const AllUsers = () => {
-  const { data, isError, isLoading, error } = useGetUserQuery();
-
+  const { data, isError, isLoading, refetch } = useGetUserQuery();
+  const { userDelete } = useContext(authContext);
+  const [deleteUser, { error }] = useDeleteUserMutation();
+  const deleteHandler = async (id) => {
+    console.log(id);
+    const result = await deleteUser(id);
+    alert(result?.data?.message);
+    if (result.data?.message === "User deleted successfully") {
+      refetch();
+    }
+  };
   return (
     <>
       {isLoading ? (
@@ -46,7 +60,13 @@ const AllUsers = () => {
                       scope="row"
                       className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
-                      Image
+                      <img
+                        className="rounded-full"
+                        src={u?.photoURL}
+                        alt="user Profile"
+                        width={60}
+                        height={60}
+                      />
                     </th>
                     <th
                       scope="row"
@@ -67,7 +87,10 @@ const AllUsers = () => {
                     </td>
                     <td className="px-6 py-4">
                       <div className="text-center">
-                        <button className="hover:text-primary-500 p-2">
+                        <button
+                          onClick={() => deleteHandler(u?._id)}
+                          className="hover:text-primary-500 p-2"
+                        >
                           <FaTrash className="w-4 h-4 mx-auto" />
                         </button>
                       </div>

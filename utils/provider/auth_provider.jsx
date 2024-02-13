@@ -2,6 +2,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -48,6 +49,10 @@ const AuthProvider = ({ children }) => {
       photoURL: photoURL,
     });
   };
+
+  const userDelete = () => {
+    return deleteUser(auth.currentUser);
+  };
   const authInfo = {
     user,
     currentUser,
@@ -56,6 +61,7 @@ const AuthProvider = ({ children }) => {
     logout,
     updateUser,
     loading,
+    userDelete,
   };
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>

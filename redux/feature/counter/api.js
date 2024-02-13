@@ -10,6 +10,12 @@ export const Api = createApi({
     getCurrentUser: builder.query({
       query: (email) => `/users/email/${email}`,
     }),
+    deleteUser: builder.mutation({
+      query: (id) => ({
+        url: `/users/${id}`,
+        method: "DELETE",
+      }),
+    }),
     postUser: builder.mutation({
       query: (data) => ({
         url: "/users",
@@ -37,6 +43,7 @@ export const Api = createApi({
 export const {
   useGetUserQuery,
   useGetCurrentUserQuery,
+  useDeleteUserMutation,
   usePostUserMutation,
   useLoginUserMutation,
   usePostProductMutation,
