@@ -142,7 +142,7 @@ const Sidebar = () => {
       )}
 
       <div
-        className={`bg-gray-900 text-black bg-Beige w-64 py-4 rounded-lg px-4 hidden lg:block`}
+        className={`bg-gray-900 text-black bg-Beige h-screen py-4 rounded-lg px-4 hidden lg:block`}
       >
         {data?.user[0]?.email === user?.email && (
           <ul>
@@ -150,12 +150,12 @@ const Sidebar = () => {
               <>
                 {/* manager */}
                 <h2 className="text-xl font-bold p-4">Manager dashboard</h2>
-                <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link className="lg:text-lg mx-auto" href="/manager">
                     Dashboard Home
                   </Link>
                 </li>
-                <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link
                     className="lg:text-lg mx-auto"
                     href="/manager/addProduct"
@@ -163,7 +163,7 @@ const Sidebar = () => {
                     Add Product
                   </Link>
                 </li>
-                <li className="py-2 px-4 mb-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link className="lg:text-lg mx-auto" href="/dashboard">
                     Total Product
                   </Link>
@@ -173,37 +173,37 @@ const Sidebar = () => {
               <>
                 {/* Admin */}
                 <h2 className="text-xl font-bold p-4">Admin dashboard</h2>
-                <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link className="lg:text-lg mx-auto" href="/admin">
                     Dashboard Home
                   </Link>
                 </li>
-                <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link className="lg:text-lg mx-auto" href="/admin/allUsers">
                     All Users
                   </Link>
                 </li>
-                <li className="py-2 mb-4 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link className="lg:text-lg mx-auto" href="/admin/product">
                     Products
                   </Link>
                 </li>
               </>
-            ) : data?.user[0].role === "user" ? (
+            ) : data?.user[0]?.role === "user" ? (
               <>
                 {/* users */}
                 <h2 className="text-xl font-bold p-4">User dashboard</h2>
-                <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link href="/users" className="lg:text-lg mx-auto">
                     Dashboard Home
                   </Link>
                 </li>
-                <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link className="lg:text-lg mx-auto" href="/users/orders">
                     Orders
                   </Link>
                 </li>
-                <li className="py-2 mb-4 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link
                     className="lg:text-lg mx-auto"
                     href="/users/address/editAddress"
@@ -217,18 +217,18 @@ const Sidebar = () => {
             )}
 
             {/* common */}
-            <hr className="border-2 my-2" />
-            <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+            <hr className="border-2 mt-44" />
+            <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
               <Link className="lg:text-lg mx-auto" href="/dashboard/profile">
                 Profile
               </Link>
             </li>
-            <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+            <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
               <Link className="lg:text-lg mx-auto" href="/settings">
                 Settings
               </Link>
             </li>
-            <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
+            <li className="py-2 px-4 my-4 text-center hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
               <Link className="lg:text-lg mx-auto" href="/profile">
                 Logout
               </Link>

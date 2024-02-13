@@ -1,9 +1,10 @@
 "use client";
+import { usePostProductMutation } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 const AddProduct = () => {
-  const { user } = useContext(authContext);
+  const { currentUser } = useContext(authContext);
 
   const categories = [
     {
@@ -34,20 +35,18 @@ const AddProduct = () => {
     { label: "Eyes", value: "eyes" },
     { label: "Lips", value: "lips" },
     { label: "Nails", value: "nails" },
-    { label: "Tools & Brushes", value: "tools" },
-    { label: "Top Brands", value: "brands" },
-    { label: "Face", value: "face" },
-    { label: "K-beauty", value: "kbeauty" },
-    { label: "Hand & Feet", value: "handfeet" },
+    { label: "Tools & Brushes", value: "tools&Brush" },
+    { label: "Top Brands", value: "topBrands" },
+    { label: "K-beauty", value: "kBeauty" },
+
     { label: "Body", value: "body" },
-    { label: "Eye Care", value: "eyecare" },
+    { label: "Eye Care", value: "eyeCare" },
     { label: "Hair care", value: "haircare" },
     { label: "Hair Styling", value: "Hairstyling" },
     { label: "Tools & accessories", value: "Tools_&_accessories" },
     { label: "Bath & shower", value: "bath&shower" },
     { label: "Feminine Hygience", value: "FeminineHygience" },
-    { label: "Body", value: "Body" },
-    { label: "Face", value: "Face" },
+
     { label: "Hands & Feet", value: "Hands&Feet" },
     { label: "Wellness", value: "Wellness" },
     { label: "Oral Care", value: "Oral Care" },
@@ -56,8 +55,6 @@ const AddProduct = () => {
     { label: "Lotion", value: "Lotion" },
     { label: "Oil", value: "Oil" },
     { label: "Powder", value: "Powder" },
-    { label: "Shampoo", value: "Shampoo" },
-    { label: "Soap & Bodywash", value: "Soap & Bodywash" },
     { label: "Wipes", value: "Wipes" },
     { label: "Bath Time", value: "Bath Time" },
     { label: "Sunscreen", value: "Sunscreen" },
@@ -66,13 +63,8 @@ const AddProduct = () => {
     { label: "Hair Care", value: "HairCare" },
     { label: "Shaving", value: "Shaving" },
     { label: "Skin Care", value: "SkinCare" },
-    { label: "Powder", value: "Powder" },
     { label: "Shampoo", value: "Shampoo" },
     { label: "Soap & Bodywash", value: "Soap & Bodywash" },
-    { label: "Wipes", value: "Wipes" },
-    { label: "Bath Time", value: "Bath Time" },
-    { label: "Sunscreen", value: "Sunscreen" },
-    { label: "Baby care", value: "Baby care" },
     { label: "Deodorants/Roll-Ons", value: "Deodorants/Roll-Ons" },
     { label: "Body mist/Spray", value: "BodyMist/Spray" },
     { label: "Perfumes", value: "Perfumes" },
@@ -80,23 +72,55 @@ const AddProduct = () => {
   ];
 
   const concerns = [
-    { label: "Acne", value: "concern-acne" },
-    { label: "Anti aging", value: "Antiaging" },
-    { label: "Oil Control", value: "oilControl" },
+    { label: "Acne", value: "Acne" },
+    { label: "Anti aging", value: "Anti aging" },
+    { label: "Oil Control", value: "Oil Control" },
     { label: "Pore", value: "pore" },
     { label: "Dandruff", value: "Dandruff" },
     { label: "Dry Skin", value: "DrySkin" },
     { label: "Spot", value: "Spot" },
     { label: "Hair Thinning", value: "Hair Thinning" },
   ];
+  const [postProduct, { isLoading, isError, error }] = usePostProductMutation();
   const {
     register,
     reset,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const name = data.name;
+    const userId = currentUser?._id;
+    const image1 = data.image1;
+    const image2 = data.image2;
+    const image3 = data.image3;
+    const image4 = data.image4;
+    const category = data.category;
+    const sub_category = data.sub_category;
+    const concern = data.concern;
+    const offer = data.offer;
+    const brands = data.brands;
+    const quantity = data.quantity;
+    const product = {
+      name,
+      userId,
+      image1,
+      image2,
+      image3,
+      image4,
+      category,
+      sub_category,
+      concern,
+      offer,
+      brands,
+      quantity,
+    };
+    const result = await postProduct(product);
+    alert(result?.data?.message);
+    if (isError) {
+      alert(error);
+    }
+    reset();
   };
   return (
     <div className="py-4 px-2">
@@ -147,15 +171,15 @@ const AddProduct = () => {
           </div>
           <div>
             <label
-              htmlFor="subcategory"
+              htmlFor="sub_category"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
               Sub-category
             </label>
             <select
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              {...register("subcategory", { required: true })}
-              aria-invalid={errors.subcategory ? "true" : "false"}
+              {...register("sub_category", { required: true })}
+              aria-invalid={errors.sub_category ? "true" : "false"}
             >
               <option value="">Select sub-category</option>
               {subcategories.map((sc) => (
@@ -164,7 +188,7 @@ const AddProduct = () => {
                 </option>
               ))}
             </select>
-            {errors.subcategory?.type === "required" && (
+            {errors.sub_category?.type === "required" && (
               <p role="alert">Sub-category is required</p>
             )}
           </div>
@@ -177,7 +201,7 @@ const AddProduct = () => {
             </label>
             <select
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              {...register("offer", { required: true })}
+              {...register("offer")}
               aria-invalid={errors.offer ? "true" : "false"}
             >
               <option value="">Select Offer</option>
@@ -198,12 +222,12 @@ const AddProduct = () => {
             </label>
             <select
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              {...register("subcategory", { required: true })}
+              {...register("concern")}
               aria-invalid={errors.concern ? "true" : "false"}
             >
               <option value="">Select Concern</option>
               {concerns.map((sc) => (
-                <option key={sc.label} value={sc.value}>
+                <option key={sc.label} value={sc.label}>
                   {sc.label}
                 </option>
               ))}
@@ -241,7 +265,7 @@ const AddProduct = () => {
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="paste your Image URL"
-              {...register("image2", { required: true })}
+              {...register("image2")}
               aria-invalid={errors.image2 ? "true" : "false"}
             />
             {errors.image2?.type === "required" && (
@@ -258,7 +282,7 @@ const AddProduct = () => {
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="paste your Image URL"
-              {...register("image3", { required: true })}
+              {...register("image3")}
               aria-invalid={errors.image3 ? "true" : "false"}
             />
             {errors.image3?.type === "required" && (
@@ -275,7 +299,7 @@ const AddProduct = () => {
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="paste your Image URL"
-              {...register("image4", { required: true })}
+              {...register("image4")}
               aria-invalid={errors.image4 ? "true" : "false"}
             />
             {errors.image4?.type === "required" && (
@@ -320,12 +344,23 @@ const AddProduct = () => {
             )}
           </div>
         </div>
-        <button
-          type="submit"
-          className="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Add Product
-        </button>
+        <div>
+          {isLoading ? (
+            <button
+              type="submit"
+              className="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Loading...
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Add Product
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

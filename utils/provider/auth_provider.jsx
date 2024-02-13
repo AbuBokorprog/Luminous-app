@@ -40,6 +40,8 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const { data } = useGetCurrentUserQuery(user?.email);
+  const currentUser = data?.user[0];
   const updateUser = (name, photoURL) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
@@ -48,6 +50,7 @@ const AuthProvider = ({ children }) => {
   };
   const authInfo = {
     user,
+    currentUser,
     createUser,
     signIn,
     logout,

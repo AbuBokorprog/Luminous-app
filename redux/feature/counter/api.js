@@ -24,6 +24,13 @@ export const Api = createApi({
         body: data,
       }),
     }),
+    postProduct: builder.mutation({
+      query: (data) => ({
+        url: "/products",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -32,4 +39,5 @@ export const {
   useGetCurrentUserQuery,
   usePostUserMutation,
   useLoginUserMutation,
+  usePostProductMutation,
 } = Api;
