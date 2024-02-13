@@ -1,9 +1,10 @@
+import AllUsers from "@/components/dashboard/admin/allUsers";
 import React from "react";
 
-export default function AllUsers() {
+export default function allUsers() {
   return (
     <div>
-      <h2>All Users</h2>
+      <AllUsers />
     </div>
   );
 }

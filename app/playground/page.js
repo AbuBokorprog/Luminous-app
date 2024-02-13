@@ -1,117 +1,56 @@
 "use client";
 import React, { useState } from "react";
 
-const categories = [
-  {
-    label: "Makeup",
-    subcategories: [
-      { label: "Face", value: "makeup-face" },
-      { label: "Eyes", value: "makeup-eyes" },
-      { label: "Lips", value: "makeup-lips" },
-      { label: "Nails", value: "makeup-nails" },
-      { label: "Tools & Brushes", value: "makeup-tools" },
-      { label: "Top Brands", value: "makeup-brands" },
-    ],
-  },
-  {
-    label: "Skin",
-    subcategories: [
-      { label: "Face", value: "skin-face" },
-      { label: "K-beauty", value: "skin-kbeauty" },
-      { label: "Hand & Feet", value: "skin-handfeet" },
-      { label: "Body", value: "skin-body" },
-      { label: "Eye Care", value: "skin-eyecare" },
-      { label: "Shop by Concern", value: "skin-concerns" },
-    ],
-  },
-  // ... other categories and their subcategories
-];
-
-const concerns = [
-  { label: "Acne", value: "concern-acne" },
-  { label: "Anti aging", value: "concern-antiaging" },
-  { label: "Oil Control", value: "concern-oilcontrol" },
-  { label: "Pore", value: "concern-pore" },
-  // ... other concerns
-];
-
-function ProductCategorySelection() {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedConcern, setSelectedConcern] = useState("");
-
-  const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value);
-    setSelectedConcern(""); // Reset concern on category change
-  };
-
-  const handleConcernChange = (event) => {
-    setSelectedConcern(event.target.value);
-  };
-
-  const getSubcategories = () => {
-    return (
-      categories.find((category) => category.label === selectedCategory)
-        ?.subcategories || []
-    );
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target);
-  };
-
+export default function page() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
-      <h1>Select Product Category and Concern</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="category">Category:</label>
-          <select
-            id="category"
-            name="category"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          >
-            <option value="">Please Select</option>
-            {categories.map((category) => (
-              <option key={category.label} value={category.label}>
-                {category.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        {selectedCategory && (
-          <div>
-            <label htmlFor="concern">Concern (optional):</label>
-            <select
-              id="concern"
-              name="concern"
-              value={selectedConcern}
-              onChange={handleConcernChange}
-            >
-              <option value="">None</option>
-              {getSubcategories().map((subcategory) => (
-                <option key={subcategory.value} value={subcategory.value}>
-                  {subcategory.label}
-                </option>
-              ))}
-              {selectedCategory === "Skin" && ( // Optionally show concerns only for Skin category
-                <optgroup label="Other Concerns">
-                  {concerns.map((concern) => (
-                    <option key={concern.value} value={concern.value}>
-                      {concern.label}
-                    </option>
-                  ))}
-                </optgroup>
-              )}
-            </select>
-          </div>
-        )}
-        <button>add</button>
-      </form>
+    <div className="relative">
+      <h1>Dropdown</h1>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="text-black dark:text-white hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+      >
+        ...
+      </button>
 
-      {/* You can display selected category and concern values here */}
+      {isOpen && (
+        <div className="z-10 absolute bg-primary-200 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+          <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Dashboard
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Settings
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Earnings
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Sign out
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
-
-export default ProductCategorySelection;
