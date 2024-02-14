@@ -16,18 +16,17 @@ export async function GET(req, { params }) {
 }
 export async function PUT(req, { params }) {
   const { id } = params;
-  const { quantity, status, image1, image2, image3, image4, offer } =
+  const { quantity, status, images, offer, price, discountPrice } =
     await req.json();
   try {
     const product = await Products.findOneAndUpdate(
       { _id: id },
       {
         quantity: quantity,
+        price: price,
+        discountPrice: discountPrice,
         status: status,
-        image1: image1,
-        image2: image2,
-        image3: image3,
-        image4: image4,
+        images: images,
         offer: offer,
       },
       { new: true, runValidators: true }

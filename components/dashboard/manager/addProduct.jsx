@@ -2,7 +2,7 @@
 import { usePostProductMutation } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 const AddProduct = () => {
   const { currentUser } = useContext(authContext);
 
@@ -85,16 +85,37 @@ const AddProduct = () => {
   const {
     register,
     reset,
+    control,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const {
+    fields: benefitsField,
+    append: benefitsAppend,
+    remove: benefitsRemove,
+  } = useFieldArray({
+    control,
+    name: "benefits",
+  });
+  const {
+    fields: imagesField,
+    append: imagesAppend,
+    remove: imagesRemove,
+  } = useFieldArray({
+    control,
+    name: "images",
+  });
+
   const onSubmit = async (data) => {
+    // console.log(data);
     const name = data.name;
     const userId = currentUser?._id;
-    const image1 = data.image1;
-    const image2 = data.image2;
-    const image3 = data.image3;
-    const image4 = data.image4;
+    const images = data.images;
+    const benefits = data.benefits;
+    const price = data.price;
+    const discountPrice = data.discountPrice;
+    const ml = data.ml;
+    const description = data.description;
     const category = data.category;
     const sub_category = data.sub_category;
     const concern = data.concern;
@@ -104,10 +125,12 @@ const AddProduct = () => {
     const product = {
       name,
       userId,
-      image1,
-      image2,
-      image3,
-      image4,
+      images,
+      benefits,
+      price,
+      discountPrice,
+      ml,
+      description,
       category,
       sub_category,
       concern,
@@ -144,6 +167,62 @@ const AddProduct = () => {
           {errors.name?.type === "required" && (
             <p role="alert">Name is required</p>
           )}
+        </div>
+        <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-4 items-center">
+          <div>
+            <label
+              htmlFor="price"
+              className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+            >
+              Price
+            </label>
+            <input
+              type="number"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Type your product price"
+              {...register("price", { required: true })}
+              aria-invalid={errors.price ? "true" : "false"}
+            />
+            {errors.price?.type === "required" && (
+              <p role="alert">Price is required</p>
+            )}
+          </div>
+          <div>
+            <label
+              htmlFor="discountPrice"
+              className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+            >
+              Discount Price
+            </label>
+            <input
+              type="number"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Type your product discount price"
+              {...register("discountPrice", { required: true })}
+              aria-invalid={errors.discountPrice ? "true" : "false"}
+            />
+            {errors.discountPrice?.type === "required" && (
+              <p role="alert">Discount Price is required</p>
+            )}
+          </div>
+          <div>
+            <label
+              htmlFor="ml"
+              className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+            >
+              ML
+            </label>
+            <input
+              type="number"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Type your product ML"
+              {...register("ml", { required: true })}
+              aria-invalid={errors.price ? "true" : "false"}
+            />
+            {errors.ml?.type === "required" && (
+              <p role="alert">ML is required</p>
+            )}
+          </div>
         </div>
         <div className="grid grid-cols-1 mx-auto md:grid-cols-2 gap-4 items-center">
           <div>
@@ -237,76 +316,7 @@ const AddProduct = () => {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-1 mx-auto md:grid-cols-2 lg:grid-cols-4 gap-2 items-center">
-          <div>
-            <label
-              htmlFor="image1"
-              className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
-            >
-              Image URL
-            </label>
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              placeholder="Paste your image URL"
-              {...register("image1", { required: true })}
-              aria-invalid={errors.image1 ? "true" : "false"}
-            />
-            {errors.image1?.type === "required" && (
-              <p role="alert">Image1 is required</p>
-            )}
-          </div>
-          <div>
-            <label
-              htmlFor="image2"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Image URL
-            </label>
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              placeholder="paste your Image URL"
-              {...register("image2")}
-              aria-invalid={errors.image2 ? "true" : "false"}
-            />
-            {errors.image2?.type === "required" && (
-              <p role="alert">Image2 is required</p>
-            )}
-          </div>
-          <div>
-            <label
-              htmlFor="image3"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Image URL
-            </label>
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              placeholder="paste your Image URL"
-              {...register("image3")}
-              aria-invalid={errors.image3 ? "true" : "false"}
-            />
-            {errors.image3?.type === "required" && (
-              <p role="alert">Image3 is required</p>
-            )}
-          </div>
-          <div>
-            <label
-              htmlFor="image4"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Image URL
-            </label>
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              placeholder="paste your Image URL"
-              {...register("image4")}
-              aria-invalid={errors.image4 ? "true" : "false"}
-            />
-            {errors.image4?.type === "required" && (
-              <p role="alert">Image4 is required</p>
-            )}
-          </div>
-        </div>
+
         <div className="grid grid-cols-1 mx-auto md:grid-cols-2 gap-4 items-center">
           <div>
             <label
@@ -343,6 +353,89 @@ const AddProduct = () => {
               <p role="alert">Quantity is required</p>
             )}
           </div>
+        </div>
+        <div>
+          <label
+            htmlFor="benefits"
+            className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+          >
+            Benefits
+          </label>
+          {benefitsField.map((benefitsField, index) => (
+            <div key={benefitsField.id}>
+              <input
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                {...register(`benefits.${index}`)}
+                defaultValue={benefitsField.value} // Set default value if needed
+              />
+              <button
+                type="button"
+                className="px-2 py-1 my-2 rounded-md border-2 "
+                onClick={() => benefitsRemove(index)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+            className="px-2 py-1 rounded-md border-2 "
+            type="button"
+            onClick={() => benefitsAppend("")}
+          >
+            Add Benefit
+          </button>
+        </div>
+        <div>
+          <label
+            htmlFor="images"
+            className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+          >
+            Images
+          </label>
+          {imagesField.map((imagesField, index) => (
+            <div key={imagesField.id}>
+              <input
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                {...register(`images.${index}`)}
+                defaultValue={imagesField.value}
+              />
+              <button
+                type="button"
+                className="px-2 py-1 my-2 rounded-md border-2 "
+                onClick={() => imagesRemove(index)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+            className="px-2 py-1 rounded-md border-2 "
+            type="button"
+            onClick={() => imagesAppend("")}
+          >
+            Add Image
+          </button>
+        </div>
+        <div>
+          <label
+            htmlFor="description"
+            className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+          >
+            Description
+          </label>
+          <textarea
+            rows={5}
+            maxLength={150}
+            placeholder="Type description"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            {...register("description", { required: true })}
+            aria-invalid={errors.description ? "true" : "false"}
+          />
+          {errors.description?.type === "required" && (
+            <p role="alert">Description is required</p>
+          )}
         </div>
         <div>
           {isLoading ? (

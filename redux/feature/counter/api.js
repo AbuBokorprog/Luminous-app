@@ -37,12 +37,16 @@ export const Api = createApi({
         body: data,
       }),
     }),
+    getProduct: builder.query({
+      query: () => "/products",
+    }),
   }),
 });
 
 export const {
   useGetUserQuery,
   useGetCurrentUserQuery,
+  useGetProductQuery,
   useDeleteUserMutation,
   usePostUserMutation,
   useLoginUserMutation,

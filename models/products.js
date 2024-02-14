@@ -9,18 +9,13 @@ const productsSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  image1: {
-    type: String,
+  images: {
+    type: Array,
     required: true,
   },
-  image2: {
-    type: String,
-  },
-  image3: {
-    type: String,
-  },
-  image4: {
-    type: String,
+  benefits: {
+    type: Array,
+    required: true,
   },
   category: {
     type: String,
@@ -42,6 +37,23 @@ const productsSchema = mongoose.Schema({
   },
   quantity: {
     type: Number,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  discountPrice: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+    maxLength: 150,
+  },
+  ml: {
+    type: String,
     required: true,
   },
   status: {
