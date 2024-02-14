@@ -8,7 +8,7 @@ export async function POST(req, res) {
     name,
     price,
     discountPrice,
-    ml,
+    weight,
     description,
     userId,
     images,
@@ -25,7 +25,7 @@ export async function POST(req, res) {
       name,
       price,
       discountPrice,
-      ml,
+      weight,
       description,
       benefits,
       userId,
@@ -45,7 +45,7 @@ export async function POST(req, res) {
     });
   } catch (error) {
     return NextResponse.json({
-      message: "Products save failed",
+      message: `${error.message}`,
       status: false,
     });
   }

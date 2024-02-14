@@ -15,7 +15,6 @@ const productsSchema = mongoose.Schema({
   },
   benefits: {
     type: Array,
-    required: true,
   },
   category: {
     type: String,
@@ -45,16 +44,13 @@ const productsSchema = mongoose.Schema({
   },
   discountPrice: {
     type: Number,
-    required: true,
   },
   description: {
     type: String,
-    required: true,
     maxLength: 150,
   },
-  ml: {
+  weight: {
     type: String,
-    required: true,
   },
   status: {
     type: String,

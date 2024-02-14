@@ -1,11 +1,16 @@
 "use client";
 import { usePostProductMutation } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 const AddProduct = () => {
   const { currentUser } = useContext(authContext);
 
+  const router = useRouter();
+  if (currentUser?.role !== "manager") {
+    router.push("/");
+  }
   const categories = [
     {
       label: "Makeup",
@@ -107,14 +112,13 @@ const AddProduct = () => {
   });
 
   const onSubmit = async (data) => {
-    // console.log(data);
     const name = data.name;
     const userId = currentUser?._id;
     const images = data.images;
     const benefits = data.benefits;
     const price = data.price;
     const discountPrice = data.discountPrice;
-    const ml = data.ml;
+    const weight = data.weight;
     const description = data.description;
     const category = data.category;
     const sub_category = data.sub_category;
@@ -129,7 +133,7 @@ const AddProduct = () => {
       benefits,
       price,
       discountPrice,
-      ml,
+      weight,
       description,
       category,
       sub_category,
@@ -198,30 +202,21 @@ const AddProduct = () => {
               type="number"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Type your product discount price"
-              {...register("discountPrice", { required: true })}
-              aria-invalid={errors.discountPrice ? "true" : "false"}
+              {...register("discountPrice")}
             />
-            {errors.discountPrice?.type === "required" && (
-              <p role="alert">Discount Price is required</p>
-            )}
           </div>
           <div>
             <label
-              htmlFor="ml"
+              htmlFor="weight"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              ML
+              Weight
             </label>
             <input
-              type="number"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              placeholder="Type your product ML"
-              {...register("ml", { required: true })}
-              aria-invalid={errors.price ? "true" : "false"}
+              placeholder="Type your product weight"
+              {...register("weight")}
             />
-            {errors.ml?.type === "required" && (
-              <p role="alert">ML is required</p>
-            )}
           </div>
         </div>
         <div className="grid grid-cols-1 mx-auto md:grid-cols-2 gap-4 items-center">
@@ -305,6 +300,7 @@ const AddProduct = () => {
               aria-invalid={errors.concern ? "true" : "false"}
             >
               <option value="">Select Concern</option>
+              <option value="shopByConcern">Shop By Concern</option>
               {concerns.map((sc) => (
                 <option key={sc.label} value={sc.label}>
                   {sc.label}
@@ -430,7 +426,7 @@ const AddProduct = () => {
             maxLength={150}
             placeholder="Type description"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-            {...register("description", { required: true })}
+            {...register("description")}
             aria-invalid={errors.description ? "true" : "false"}
           />
           {errors.description?.type === "required" && (

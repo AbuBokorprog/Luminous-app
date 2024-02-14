@@ -3,13 +3,19 @@ import {
   useGetProductQuery,
   useUpdateProductMutation,
 } from "@/redux/feature/counter/api";
-import React from "react";
-import Image from "next/image";
+import { authContext } from "@/utils/provider/auth_provider";
+import { useRouter } from "next/navigation";
+import React, { useContext } from "react";
 
 const AllProducts = () => {
+  const router = useRouter();
+  const { currentUser } = useContext(authContext);
   const { data: product, isLoading, refetch, error } = useGetProductQuery();
 
-  // const pendingProducts = product?.filter((p) => p.status === "pending");
+  if (currentUser?.role !== "admin") {
+    router.push("/");
+  }
+
   const [updateProduct, { isError }] = useUpdateProductMutation();
 
   const pendingHandler = async (id) => {
@@ -51,6 +57,8 @@ const AllProducts = () => {
     }
   };
 
+  const pendingProducts = product?.filter((p) => p.status === "pending");
+
   return (
     <>
       {isLoading ? (
@@ -60,22 +68,19 @@ const AllProducts = () => {
           <h2 className="text-4xl font-medium text-center mx-auto">
             All Products ({product.length})
           </h2>
-          <div className="mt-4">
+          <div className="mt-4 grid grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-3 mx-auto items-center md:gap-4 lg:gap-2">
             {product?.map((p) => (
-              <div
-                key={p._id}
-                className="grid grid-cols-1 md:grid-cols-2 mx-auto items-center gap-4"
-              >
-                <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <div key={p._id}>
+                <div className="w-full lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                   <img
-                    className="rounded-t-lg h-55 w-full"
+                    className="rounded-t-lg lg:h-44 w-full"
                     src={p?.images[0]}
-                    alt=""
+                    alt={p?.name}
                   />
 
-                  <div className="p-5">
-                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      {p?.name}
+                  <div className="p-2">
+                    <h2 className="mb-2 text-xl font-bold tracking-tight text-dark-900 dark:text-white">
+                      {p?.name.slice(0, 25)}
                     </h2>
 
                     <p className="mb-3 font-normal text-primary-500 ">
@@ -85,7 +90,7 @@ const AllProducts = () => {
                       {p?.status === "pending" ? (
                         <button
                           disabled
-                          className=" px-3 py-2 text-sm font-medium text-center text-white bg-dark-700 rounded-lg hover:bg-dark-800 focus:ring-4 focus:outline-none focus:ring-dark-300 dark:bg-dark-600 dark:hover:bg-dark-700 dark:focus:ring-dark-800"
+                          className=" px-2 py-2 text-sm font-medium text-center text-white bg-dark-700 rounded-lg hover:bg-dark-800 focus:ring-4 focus:outline-none focus:ring-dark-300 dark:bg-dark-600 dark:hover:bg-dark-700 dark:focus:ring-dark-800"
                         >
                           Pending
                         </button>

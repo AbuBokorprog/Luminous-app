@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  const { data } = useGetCurrentUserQuery(user?.email);
+  const { data, isLoading } = useGetCurrentUserQuery(user?.email);
   const currentUser = data?.user[0];
   const updateUser = (name, photoURL) => {
     return updateProfile(auth.currentUser, {
@@ -61,6 +61,7 @@ const AuthProvider = ({ children }) => {
     logout,
     updateUser,
     loading,
+    isLoading,
     userDelete,
   };
   return (

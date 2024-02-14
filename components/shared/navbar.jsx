@@ -1,16 +1,14 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { FaBagShopping } from "react-icons/fa6";
 import { authContext } from "@/utils/provider/auth_provider";
-import { useGetCurrentUserQuery } from "@/redux/feature/counter/api";
 
 const Navbar = () => {
-  const { user, logout } = useContext(authContext);
+  const { user, currentUser, logout, isLoading } = useContext(authContext);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
-  const { data, isLoading } = useGetCurrentUserQuery(user?.email);
   const logoutHandler = () => {
     fetch("/api/logout", {
       method: "POST",
@@ -172,7 +170,7 @@ const Navbar = () => {
                         </p>
                       ) : (
                         <>
-                          {data?.user[0]?.role === "admin" ? (
+                          {currentUser?.role === "admin" ? (
                             <li>
                               <Link
                                 href={"/admin"}
@@ -181,7 +179,7 @@ const Navbar = () => {
                                 Dashboard
                               </Link>
                             </li>
-                          ) : data?.user[0]?.role === "manager" ? (
+                          ) : currentUser?.role === "manager" ? (
                             <li>
                               <Link
                                 href={"/manager"}
@@ -190,7 +188,7 @@ const Navbar = () => {
                                 Dashboard
                               </Link>
                             </li>
-                          ) : data?.user[0]?.role === "user" ? (
+                          ) : currentUser?.role === "user" ? (
                             <li>
                               <Link
                                 href={"/users"}
