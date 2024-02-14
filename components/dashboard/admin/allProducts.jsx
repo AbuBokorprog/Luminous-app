@@ -77,7 +77,6 @@ const AllProducts = () => {
                     src={p?.images[0]}
                     alt={p?.name}
                   />
-
                   <div className="p-2">
                     <h2 className="mb-2 text-xl font-bold tracking-tight text-dark-900 dark:text-white">
                       {p?.name.slice(0, 25)}

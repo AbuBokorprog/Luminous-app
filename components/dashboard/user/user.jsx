@@ -5,7 +5,7 @@ import { authContext } from "@/utils/provider/auth_provider";
 
 const UserDashboard = () => {
   const router = useRouter();
-  const { currentUser } = useContext(authContext);
+  const { currentUser, isLoading } = useContext(authContext);
 
   if (currentUser?.role !== "user") {
     router.push("/");
@@ -18,8 +18,8 @@ const UserDashboard = () => {
       ) : (
         <div className="bg-dark-100 lg:h-96 p-2">
           <h2 className="text-2xl font-md">
-            Hello {currentUser?.user[0]?.displayName} (not{" "}
-            {currentUser?.user[0]?.displayName}? Please Logout)
+            Hello {currentUser?.displayName} (not {currentUser?.displayName}?
+            Please Logout)
           </h2>
           <p className="text-md my-2">
             From your account dashboard you can view your recent orders, manage
@@ -27,7 +27,7 @@ const UserDashboard = () => {
             account details.
           </p>
           <p className="mt-10 text-4xl">Account Information</p>
-          <p>{currentUser?.user[0]?.email}</p>
+          <p>{currentUser?.email}</p>
         </div>
       )}
     </div>
