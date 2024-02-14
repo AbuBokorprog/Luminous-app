@@ -1,41 +1,31 @@
-"use client";
-import React, { useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import React from "react";
 
-export default function page() {
-  const { register, handleSubmit, control } = useForm();
-  const onSubmit = async (data) => {
-    console.log(data);
-  };
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "benefits", // Name of the array field
-  });
+const page = () => {
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Benefits</label>
-          {fields.map((field, index) => (
-            <div key={field.id}>
-              <input
-                type="text"
-                {...register(`benefits.${index}`)}
-                defaultValue={field.value} // Set default value if needed
-              />
-              <button type="button" onClick={() => remove(index)}>
-                Remove
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={() => append("")}>
-            Add Benefit
+      <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <img
+          className="rounded-t-lg"
+          src="/docs/images/blog/image-1.jpg"
+          alt=""
+        />
+
+        <div className="p-5">
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            Noteworthy technology acquisitions 2021
+          </h5>
+
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Here are the biggest enterprise technology acquisitions of 2021 so
+            far, in reverse chronological order.
+          </p>
+          <button className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            Read more
           </button>
         </div>
-
-        {/* Submit button */}
-        <button type="submit">Submit</button>
-      </form>
+      </div>
     </div>
   );
-}
+};
+
+export default page;

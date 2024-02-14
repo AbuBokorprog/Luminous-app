@@ -37,6 +37,13 @@ export const Api = createApi({
         body: data,
       }),
     }),
+    updateProduct: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/products/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
     getProduct: builder.query({
       query: () => "/products",
     }),
@@ -51,4 +58,5 @@ export const {
   usePostUserMutation,
   useLoginUserMutation,
   usePostProductMutation,
+  useUpdateProductMutation,
 } = Api;
