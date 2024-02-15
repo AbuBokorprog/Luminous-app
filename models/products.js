@@ -17,7 +17,7 @@ const productsSchema = mongoose.Schema({
     type: Array,
   },
   category: {
-    type: String,
+    type: Array,
     required: true,
   },
   sub_category: {

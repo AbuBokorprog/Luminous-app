@@ -5,7 +5,9 @@ import makeup from "@/public/images/pageBanner/Nirvana-Color-Category-Banner.web
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Makeup = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const makeupProducts = products?.filter((p) => p.category === "Makeup");
+  const makeupProducts = products?.filter((p) =>
+    p.category.some((sub) => sub === "Makeup")
+  );
 
   return (
     <div>

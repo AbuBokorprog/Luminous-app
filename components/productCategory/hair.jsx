@@ -5,8 +5,9 @@ import hairBanner from "@/public/images/pageBanner/Hawaa-Category-Banner.webp";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Hair = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const hairProducts = products?.filter((p) => p.category === "Hair");
-  console.log(hairProducts);
+  const hairProducts = products?.filter((p) =>
+    p.category.some((sub) => sub === "Hair")
+  );
   return (
     <div>
       <Image

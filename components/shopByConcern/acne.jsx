@@ -4,7 +4,7 @@ import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Acne = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const acneProducts = products?.filter((p) =>
-    p.concern.some((sub) => sub === "acne")
+    p.concern.some((sub) => sub === "Acne")
   );
   return (
     <div>

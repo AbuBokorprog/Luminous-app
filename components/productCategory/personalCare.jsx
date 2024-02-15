@@ -5,8 +5,8 @@ import makeup from "@/public/images/pageBanner/Rajkonna-catagory-web-banner.webp
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const PersonalCare = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const personalCareProducts = products?.filter(
-    (p) => p.category === "Personal Care"
+  const personalCareProducts = products?.filter((p) =>
+    p.category.some((sub) => sub === "Personal Care")
   );
   console.log(personalCareProducts);
   return (

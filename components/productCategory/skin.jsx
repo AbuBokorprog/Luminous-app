@@ -5,7 +5,9 @@ import Image from "next/image";
 import banner from "@/public/images/pageBanner/SkinCafe-Category-Banner.webp";
 const Skin = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const skinProducts = products?.filter((p) => p.category === "Skin");
+  const skinProducts = products?.filter((p) =>
+    p.category.some((sub) => sub === "Skin")
+  );
 
   return (
     <div>

@@ -3,7 +3,9 @@ import React from "react";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Mom_Baby = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const momBabyProducts = products?.filter((p) => p.category === "Mom & Baby");
+  const momBabyProducts = products?.filter((p) =>
+    p.category.some((sub) => sub === "Mom & Baby")
+  );
 
   return (
     <div>

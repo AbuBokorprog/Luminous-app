@@ -5,8 +5,8 @@ import undergarments from "@/public/images/pageBanner/undergarments-catagory-ban
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Undergarments = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const undergarmentsProducts = products?.filter(
-    (p) => p.category === "Undergarments"
+  const undergarmentsProducts = products?.filter((p) =>
+    p.category.some((sub) => sub === "Undergarments")
   );
 
   return (

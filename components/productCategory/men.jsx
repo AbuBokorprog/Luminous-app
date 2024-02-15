@@ -5,7 +5,9 @@ import men from "@/public/images/pageBanner/Men-Catagory-Banner.webp";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Men = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const menProducts = products?.filter((p) => p.category === "Men");
+  const menProducts = products?.filter((p) =>
+    p.category.some((sub) => sub === "Men")
+  );
 
   return (
     <div>
