@@ -10,7 +10,7 @@ const Skin = () => {
   return (
     <div>
       <Image
-        className="full"
+        className="w-full h-28"
         src={banner}
         alt="Skin banner"
         width={2000}

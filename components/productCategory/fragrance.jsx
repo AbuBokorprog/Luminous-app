@@ -1,18 +1,18 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import makeup from "@/public/images/pageBanner/Nirvana-Color-Category-Banner.webp";
+import fragrance from "@/public/images/pageBanner/Fragrance.webp";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
-const Makeup = () => {
+const Fragrance = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const makeupProducts = products?.filter((p) => p.category === "Makeup");
+  const fragranceProducts = products?.filter((p) => p.category === "Fragrance");
 
   return (
     <div>
       <Image
         className="w-full h-28"
-        src={makeup}
-        alt="makeup banner"
+        src={fragrance}
+        alt="fragrance banner"
         width={2000}
         height={500}
       />
@@ -20,9 +20,9 @@ const Makeup = () => {
         <p>loading...</p>
       ) : (
         <>
-          {makeupProducts?.length > 0 ? (
+          {fragranceProducts?.length > 0 ? (
             <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-4 mx-auto items-center md:gap-4 lg:gap-2">
-              {makeupProducts?.map((p) => (
+              {fragranceProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img
@@ -57,4 +57,4 @@ const Makeup = () => {
   );
 };
 
-export default Makeup;
+export default Fragrance;

@@ -233,7 +233,7 @@ const Navbar = () => {
           <Link href={"/product_category/skin"}>Skin</Link>
           <Link href={"/product_category/hair"}>Hair</Link>
           <Link href={"/product_category/personal_care"}>Personal care</Link>
-          <Link href={"/product_category/mom_&_baby"}>Mom & Baby</Link>
+          <Link href={"/product_category/mom_baby"}>Mom & Baby</Link>
           <Link href={"/product_category/fragrance"}>Fragrance</Link>
           <Link
             href={"/product_category/undergarments"}

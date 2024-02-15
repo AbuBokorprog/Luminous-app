@@ -10,7 +10,7 @@ const Hair = () => {
   return (
     <div>
       <Image
-        className="full"
+        className="w-full h-28"
         src={hairBanner}
         alt="makeup banner"
         width={2000}
