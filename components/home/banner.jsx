@@ -34,36 +34,16 @@ const Banner = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image
-            className="min-h-fit w-screen"
-            objectFit="cover"
-            src={banner1}
-            alt="Banner 1"
-          />
+          <Image className="min-h-fit w-screen" src={banner1} alt="Banner 1" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image
-            src={banner2}
-            objectFit="cover"
-            className="min-h-fit w-screen"
-            alt="Banner 1"
-          />
+          <Image src={banner2} className="min-h-fit w-screen" alt="Banner 1" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image
-            src={banner3}
-            alt="Banner 1"
-            objectFit="cover"
-            className="min-h-fit w-screen"
-          />
+          <Image src={banner3} alt="Banner 1" className="min-h-fit w-screen" />
         </SwiperSlide>
         <SwiperSlide>
-          <Image
-            src={banner4}
-            alt="Banner 1"
-            objectFit="cover"
-            className="min-h-fit w-screen"
-          />
+          <Image src={banner4} alt="Banner 1" className="min-h-fit w-screen" />
         </SwiperSlide>
         <br />
         <br />

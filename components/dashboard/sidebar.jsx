@@ -1,14 +1,12 @@
 // components/Sidebar.js
 "use client";
-import { useGetCurrentUserQuery } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import Link from "next/link";
 import { useContext, useState } from "react";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useContext(authContext);
-  const { data, isLoading, isError } = useGetCurrentUserQuery(user?.email);
+  const { user, currentUser } = useContext(authContext);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -51,11 +49,11 @@ const Sidebar = () => {
             isOpen ? "w-44" : "hidden lg:block"
           }`}
         >
-          {data?.user[0]?.email === user?.email && (
+          {currentUser?.email === user?.email && (
             <ul>
               {/* users */}
 
-              {data?.user[0]?.role === "user" ? (
+              {currentUser?.role === "user" ? (
                 <>
                   <h2 className="text-xl font-bold p-4">User dashboard</h2>
                   <li className="py-2 px-4 my-1 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
@@ -74,7 +72,7 @@ const Sidebar = () => {
                     </Link>
                   </li>
                 </>
-              ) : data?.user[0]?.role === "admin" ? (
+              ) : currentUser?.role === "admin" ? (
                 <>
                   {/* manager */}
                   <h2 className="text-xl font-bold p-4">Manager dashboard</h2>
@@ -144,9 +142,9 @@ const Sidebar = () => {
       <div
         className={`bg-gray-900 text-black bg-Beige h-screen py-4 rounded-lg px-4 hidden lg:block`}
       >
-        {data?.user[0]?.email === user?.email && (
+        {currentUser?.email === user?.email && (
           <ul>
-            {data?.user[0]?.role === "manager" ? (
+            {currentUser?.role === "manager" ? (
               <>
                 {/* manager */}
                 <h2 className="text-xl font-bold p-4">Manager dashboard</h2>
@@ -164,12 +162,15 @@ const Sidebar = () => {
                   </Link>
                 </li>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-                  <Link className="lg:text-lg mx-auto" href="/dashboard">
+                  <Link
+                    className="lg:text-lg mx-auto"
+                    href="/manager/totalProduct"
+                  >
                     Total Product
                   </Link>
                 </li>
               </>
-            ) : data?.user[0]?.role === "admin" ? (
+            ) : currentUser?.role === "admin" ? (
               <>
                 {/* Admin */}
                 <h2 className="text-xl font-bold p-4">Admin dashboard</h2>
@@ -189,7 +190,7 @@ const Sidebar = () => {
                   </Link>
                 </li>
               </>
-            ) : data?.user[0]?.role === "user" ? (
+            ) : currentUser?.role === "user" ? (
               <>
                 {/* users */}
                 <h2 className="text-xl font-bold p-4">User dashboard</h2>

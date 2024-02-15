@@ -33,6 +33,12 @@ const AddProduct = () => {
     {
       label: "Fragrance",
     },
+    {
+      label: "Natural",
+    },
+    {
+      label: "Clothing & More",
+    },
   ];
 
   const subcategories = [
@@ -43,15 +49,21 @@ const AddProduct = () => {
     { label: "Tools & Brushes", value: "tools&Brush" },
     { label: "Top Brands", value: "topBrands" },
     { label: "K-beauty", value: "kBeauty" },
-
+    { label: "Makeup kits", value: "makeupKits" },
     { label: "Body", value: "body" },
+    { label: "Sun Care", value: "sunCare" },
     { label: "Eye Care", value: "eyeCare" },
     { label: "Hair care", value: "haircare" },
     { label: "Hair Styling", value: "Hairstyling" },
     { label: "Tools & accessories", value: "Tools_&_accessories" },
     { label: "Bath & shower", value: "bath&shower" },
+    { label: "Bath & Body", value: "Bath & Body" },
     { label: "Feminine Hygience", value: "FeminineHygience" },
-
+    { label: "Feminine Care", value: "FeminineCare" },
+    { label: "Home Care", value: "HomeCare" },
+    { label: "Moisturizers", value: "Moisturizers" },
+    { label: "Face wash", value: "FaceWash" },
+    { label: "Lip Balms/Lip Care", value: "LipBalms/LipCare" },
     { label: "Hands & Feet", value: "Hands&Feet" },
     { label: "Wellness", value: "Wellness" },
     { label: "Oral Care", value: "Oral Care" },
@@ -69,11 +81,30 @@ const AddProduct = () => {
     { label: "Shaving", value: "Shaving" },
     { label: "Skin Care", value: "SkinCare" },
     { label: "Shampoo", value: "Shampoo" },
-    { label: "Soap & Bodywash", value: "Soap & Bodywash" },
+    { label: "Soap & Body wash", value: "Soap & Body wash" },
     { label: "Deodorants/Roll-Ons", value: "Deodorants/Roll-Ons" },
     { label: "Body mist/Spray", value: "BodyMist/Spray" },
     { label: "Perfumes", value: "Perfumes" },
-    { label: "High-end Perfume", value: "HighEndPerfume" },
+    { label: "Masks & Peels", value: "masks&peels" },
+    { label: "Hair Oils", value: "HairOils" },
+    { label: "Serums", value: "Serums" },
+    { label: "cleansing Oils / cleanser", value: "cleansing Oils / cleanser" },
+    { label: "Shower Gels & Body Wash", value: "Shower Gels & Body Wash" },
+    { label: "Shampoo & Conditioner", value: "Shampoo & Conditioner" },
+    { label: "Scrubs & Exfoliators", value: "Scrubs & Exfoliators" },
+    { label: "Hair Mask", value: "Hair Mask" },
+    { label: "Toner & astringents", value: "Toner & astringents" },
+    { label: "Sheet Mask", value: "Sheet Mask" },
+    { label: "Body Butter", value: "Body Butter" },
+    { label: "Sleeping Mask", value: "Sleeping Mask" },
+    { label: "Essence", value: "Essence" },
+    { label: "Shop By Hair Type", value: "Shop By Hair Type" },
+    { label: "Shop By Concern", value: "Shop By Concern" },
+    { label: "Creams, lotion and oils", value: "Creams, lotion and oils" },
+    { label: "Oils", value: "Oils" },
+    { label: "Leggings", value: "Leggings" },
+    { label: "Trousers", value: "Trousers" },
+    { label: "Fragrance", value: "Fragrance" },
   ];
 
   const concerns = [
@@ -84,7 +115,20 @@ const AddProduct = () => {
     { label: "Dandruff", value: "Dandruff" },
     { label: "Dry Skin", value: "DrySkin" },
     { label: "Spot", value: "Spot" },
-    { label: "Hair Thinning", value: "Hair Thinning" },
+    { label: "Dull Skin Treatment", value: "Dull Skin Treatment" },
+    { label: "Skin Lightening", value: "Skin Lightening" },
+    { label: "Pore Care", value: "Pore Care" },
+    { label: "Pigmentation", value: "Pigmentation" },
+    { label: "Acne Treatment", value: "Acne Treatment" },
+    { label: "Tan Removal", value: "Tan Removal" },
+    { label: "Hair Removal", value: "Hair Removal" },
+    { label: "Dry Skin Remedy", value: "Dry Skin Remedy" },
+    { label: "Cold Protection", value: "Cold Protection" },
+    { label: "Sun Protection", value: "Sun Protection" },
+    { label: "Dry & Frizzy Hair", value: "Dry & Frizzy Hair" },
+    { label: "Hairfall Thinning", value: "Hairfall Thinning" },
+    { label: "Split Ends", value: "Split Ends" },
+    { label: "Color protection", value: "Color protection" },
   ];
   const [postProduct, { isLoading, isError, error }] = usePostProductMutation();
   const {
@@ -254,6 +298,7 @@ const AddProduct = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               {...register("sub_category", { required: true })}
               aria-invalid={errors.sub_category ? "true" : "false"}
+              multiple
             >
               <option value="">Select sub-category</option>
               {subcategories.map((sc) => (
@@ -274,18 +319,16 @@ const AddProduct = () => {
               Offer/Events
             </label>
             <select
+              multiple
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               {...register("offer")}
-              aria-invalid={errors.offer ? "true" : "false"}
             >
               <option value="">Select Offer</option>
-              <option value="ValentineSale">Valentine Sale</option>
+              <option value="Top Selling">Top Selling</option>
+              <option value="Free Delivery">Free Delivery</option>
               <option value="Buy1GET1">Buy 1 GET 1</option>
               <option value="ClearanceSale">Clearance sale</option>
             </select>
-            {errors.offer?.type === "required" && (
-              <p role="alert">offer is required</p>
-            )}
           </div>
           <div>
             <label
@@ -295,6 +338,7 @@ const AddProduct = () => {
               Concern
             </label>
             <select
+              multiple
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               {...register("concern")}
               aria-invalid={errors.concern ? "true" : "false"}
@@ -423,7 +467,6 @@ const AddProduct = () => {
           </label>
           <textarea
             rows={5}
-            maxLength={150}
             placeholder="Type description"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
             {...register("description")}

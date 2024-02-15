@@ -21,14 +21,14 @@ const productsSchema = mongoose.Schema({
     required: true,
   },
   sub_category: {
-    type: String,
+    type: Array,
     required: true,
   },
   concern: {
-    type: String,
+    type: Array,
   },
   offer: {
-    type: String,
+    type: Array,
   },
   brands: {
     type: String,
@@ -47,7 +47,6 @@ const productsSchema = mongoose.Schema({
   },
   description: {
     type: String,
-    maxLength: 150,
   },
   weight: {
     type: String,
