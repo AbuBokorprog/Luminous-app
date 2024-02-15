@@ -8,6 +8,7 @@ import image6 from "@/public/images/category/Mom-Baby.png";
 import image7 from "@/public/images/category/Skin-Care.png";
 import image8 from "@/public/images/category/Undergarments.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Category = () => {
   return (
@@ -16,14 +17,26 @@ const Category = () => {
         SHOP BEAUTY PRODUCTS BY CATEGORY
       </h2>
       <div className="grid md:grid-cols-1 lg:grid-cols-4 mx-auto gap-4 my-16">
-        <Image src={image1} alt="Image1" />
-        <Image src={image2} alt="Image2" />
-        <Image src={image3} alt="Image3" />
-        <Image src={image4} alt="Image4" />
-        <Image src={image5} alt="Image4" />
-        <Image src={image6} alt="Image4" />
-        <Image src={image7} alt="Image4" />
-        <Image src={image8} alt="Image4" />
+        <Link href={"/product_category/makeup"}>
+          <Image src={image1} alt="Makeup" />
+        </Link>
+        <Link href={"/product_category/fragrance"}>
+          <Image src={image2} alt="Fragrance" />
+        </Link>
+        <Image src={image3} alt="Accessories" />
+        <Link href={"/product_category/hair"}>
+          <Image src={image4} alt="Hair" />
+        </Link>
+        <Image src={image5} alt="K-beauty" />
+        <Link href={"/product_category/mom_baby"}>
+          <Image src={image6} alt="Mom & Baby" />
+        </Link>
+        <Link href={"/product_category/skin"}>
+          <Image src={image7} alt="Skin" />
+        </Link>
+        <Link href={"/product_category/undergarments"}>
+          <Image src={image8} alt="Undergarments" />
+        </Link>
       </div>
     </div>
   );

@@ -5,8 +5,8 @@ import fragrance from "@/public/images/pageBanner/Fragrance.webp";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Fragrance = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const fragranceProducts = products.filter((product) =>
-    product.sub_category.some((sub) => sub === "Fragrance")
+  const fragranceProducts = products?.filter((product) =>
+    product?.sub_category?.some((sub) => sub === "Fragrance")
   );
 
   return (
