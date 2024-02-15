@@ -1,21 +1,21 @@
 "use client";
 import React from "react";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
-const Buy1Get1 = () => {
+const HairFall = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const buy1get1Products = products?.filter((p) =>
-    p.offer.some((sub) => sub === "Buy1GET1")
+  const acneProducts = products?.filter((p) =>
+    p.concern.some((sub) => sub === "acne")
   );
   return (
     <div>
-      <h4 className="text-lg py-8 bg-dark-200 text-center">Buy 1 Get 1</h4>
+      <h4 className="text-lg py-8 bg-dark-200 text-center">HairFall</h4>
       {isLoading ? (
         <p>loading...</p>
       ) : (
         <>
-          {buy1get1Products?.length > 0 ? (
+          {acneProducts?.length > 0 ? (
             <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-4 mx-auto items-center md:gap-4 lg:gap-2">
-              {buy1get1Products?.map((p) => (
+              {acneProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img
@@ -50,4 +50,4 @@ const Buy1Get1 = () => {
   );
 };
 
-export default Buy1Get1;
+export default HairFall;

@@ -10,6 +10,7 @@ import image8 from "@/public/images/concern/Pore.png";
 import image9 from "@/public/images/concern/Sun-Burn.png";
 import image10 from "@/public/images/concern/Spot.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Concern = () => {
   return (
@@ -18,16 +19,36 @@ const Concern = () => {
         SHOP by concern
       </h2>
       <div className="grid md:grid-cols-1 lg:grid-cols-5 mx-auto gap-4 my-16">
-        <Image src={image1} alt="Image1" />
-        <Image src={image2} alt="Image2" />
-        <Image src={image3} alt="Image3" />
-        <Image src={image4} alt="Image4" />
-        <Image src={image5} alt="Image4" />
-        <Image src={image6} alt="Image4" />
-        <Image src={image7} alt="Image4" />
-        <Image src={image8} alt="Image4" />
-        <Image src={image9} alt="Image4" />
-        <Image src={image10} alt="Image4" />
+        <Link href={"/shop_by_concern/acne"}>
+          <Image src={image1} alt="Acne" />
+        </Link>
+        <Link href={"/shop_by_concern/anti_aging"}>
+          <Image src={image2} alt="Anti Aging" />
+        </Link>
+        <Link href={"/shop_by_concern/dandruff"}>
+          <Image src={image3} alt="Dandruff" />
+        </Link>
+        <Link href={"/shop_by_concern/dry_skin"}>
+          <Image src={image4} alt="Dry Skin" />
+        </Link>
+        <Link href={"/shop_by_concern/hair_fall"}>
+          <Image src={image5} alt="Hair Fall" />
+        </Link>
+        <Link href={"/shop_by_concern/hair_thinning"}>
+          <Image src={image6} alt="Hair Thinning" />
+        </Link>
+        <Link href={"/shop_by_concern/oil_control"}>
+          <Image src={image7} alt="Oil Control" />
+        </Link>
+        <Link href={"/shop_by_concern/pore"}>
+          <Image src={image8} alt="Pore" />
+        </Link>
+        <Link href={"/shop_by_concern/sun_burn"}>
+          <Image src={image9} alt="Sun Burn" />
+        </Link>
+        <Link href={"/shop_by_concern/spot"}>
+          <Image src={image10} alt="Spot" />
+        </Link>
       </div>
     </div>
   );

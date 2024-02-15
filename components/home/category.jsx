@@ -23,11 +23,15 @@ const Category = () => {
         <Link href={"/product_category/fragrance"}>
           <Image src={image2} alt="Fragrance" />
         </Link>
-        <Image src={image3} alt="Accessories" />
+        <Link href={"/product_category/accessories"}>
+          <Image src={image3} alt="Accessories" />
+        </Link>
         <Link href={"/product_category/hair"}>
           <Image src={image4} alt="Hair" />
         </Link>
-        <Image src={image5} alt="K-beauty" />
+        <Link href={"/product_category/kbeauty"}>
+          <Image src={image5} alt="K-beauty" />
+        </Link>
         <Link href={"/product_category/mom_baby"}>
           <Image src={image6} alt="Mom & Baby" />
         </Link>
