@@ -242,7 +242,7 @@ const Navbar = () => {
             Undergarments
           </Link>
           <Link
-            href={"/product_category/buy_1_get_1"}
+            href={"/product_category/buy1get1"}
             className="px-4 py-1 rounded-full text-white bg-Coral"
           >
             Buy 1 GET 1
