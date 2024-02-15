@@ -1,9 +1,12 @@
 "use client";
-import { useGetProductByUserIdQuery } from "@/redux/feature/counter/api";
+import {
+  useDeleteProductMutation,
+  useGetProductByUserIdQuery,
+} from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
-
+import { FaTrash } from "react-icons/fa";
 const TotalProduct = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -13,10 +16,23 @@ const TotalProduct = () => {
     refetch,
     error,
   } = useGetProductByUserIdQuery(currentUser?._id);
-
+  const [
+    deleteProduct,
+    { isLoading: deleteIsLoading, isError: deleteIsError, error: deleteError },
+  ] = useDeleteProductMutation();
   if (currentUser?.role !== "manager") {
     router.push("/");
   }
+  const deleteHandler = async (id) => {
+    console.log(id);
+    try {
+      const result = await deleteProduct({ id });
+      refetch();
+      alert(result?.data?.message);
+    } catch (error) {
+      alert(error?.message);
+    }
+  };
   return (
     <>
       {isLoading ? (
@@ -46,7 +62,12 @@ const TotalProduct = () => {
                     <p>Status: {p?.status}</p>
                     <div className="flex justify-between items-center">
                       <button>Edit</button>
-                      <button>Delete</button>
+                      <button
+                        className="p-2"
+                        onClick={() => deleteHandler(p?._id)}
+                      >
+                        <FaTrash className="w-4 h-4 text-primary-500" />
+                      </button>
                     </div>
                   </div>
                 </div>

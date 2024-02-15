@@ -62,7 +62,7 @@ export async function DELETE(req, { params }) {
     });
   } catch (error) {
     return NextResponse.json({
-      error: "Couldn't delete product",
+      error: `Couldn't delete product ${error.message}`,
       status: false,
     });
   }

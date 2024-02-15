@@ -37,6 +37,12 @@ export const Api = createApi({
         body: data,
       }),
     }),
+    getProduct: builder.query({
+      query: () => "/products",
+    }),
+    getProductByUserId: builder.query({
+      query: (id) => `/products/userId/${id}`,
+    }),
     updateProduct: builder.mutation({
       query: ({ id, data }) => ({
         url: `/products/${id}`,
@@ -44,11 +50,11 @@ export const Api = createApi({
         body: data,
       }),
     }),
-    getProduct: builder.query({
-      query: () => "/products",
-    }),
-    getProductByUserId: builder.query({
-      query: (id) => `/products/userId/${id}`,
+    deleteProduct: builder.mutation({
+      query: ({ id }) => ({
+        url: `/products/${id}`,
+        method: "DELETE",
+      }),
     }),
   }),
 });
@@ -63,4 +69,5 @@ export const {
   useLoginUserMutation,
   usePostProductMutation,
   useUpdateProductMutation,
+  useDeleteProductMutation,
 } = Api;
