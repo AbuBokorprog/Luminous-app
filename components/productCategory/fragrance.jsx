@@ -5,7 +5,9 @@ import fragrance from "@/public/images/pageBanner/Fragrance.webp";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Fragrance = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const fragranceProducts = products?.filter((p) => p.category === "Fragrance");
+  const fragranceProducts = products.filter((product) =>
+    product.sub_category.some((sub) => sub === "Fragrance")
+  );
 
   return (
     <div>
@@ -31,7 +33,7 @@ const Fragrance = () => {
                       alt={p?.name}
                     />
                     <div className="p-2">
-                      <h2 className="mb-2 text-center text-xl font-bold tracking-tight text-dark-900 dark:text-white">
+                      <h2 className="mb-2 text-center h-12 text-xl font-bold tracking-tight text-dark-900 dark:text-white">
                         {p?.name.slice(0, 30)}
                       </h2>
 

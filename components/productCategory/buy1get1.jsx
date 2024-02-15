@@ -5,8 +5,10 @@ import makeup from "@/public/images/pageBanner/Nirvana-Color-Category-Banner.web
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Buy1Get1 = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const makeupProducts = products?.filter((p) => p.category === "Buy1Get1");
-
+  //   const buy1get1Products = products?.filter((p) => p.category === "Buy1Get1");
+  const buy1get1Products = products?.filter((p) =>
+    p.offer.some((sub) => sub === "Buy1GET1")
+  );
   return (
     <div>
       <h4 className="text-lg py-8 bg-dark-200 text-center">Buy 1 Get 1</h4>
@@ -14,9 +16,9 @@ const Buy1Get1 = () => {
         <p>loading...</p>
       ) : (
         <>
-          {makeupProducts?.length > 0 ? (
+          {buy1get1Products?.length > 0 ? (
             <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-4 mx-auto items-center md:gap-4 lg:gap-2">
-              {makeupProducts?.map((p) => (
+              {buy1get1Products?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img
@@ -25,7 +27,7 @@ const Buy1Get1 = () => {
                       alt={p?.name}
                     />
                     <div className="p-2">
-                      <h2 className="mb-2 text-center text-xl font-bold tracking-tight text-dark-900 dark:text-white">
+                      <h2 className="mb-2 text-center h-12 text-xl font-bold tracking-tight text-dark-900 dark:text-white">
                         {p?.name.slice(0, 30)}
                       </h2>
 

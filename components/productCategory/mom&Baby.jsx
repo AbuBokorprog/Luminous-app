@@ -21,7 +21,7 @@ const Mom_Baby = () => {
                   alt={p?.name}
                 />
                 <div className="p-2">
-                  <h2 className="mb-2 text-center text-xl font-bold tracking-tight text-dark-900 dark:text-white">
+                  <h2 className="mb-2 text-center h-12 text-xl font-bold tracking-tight text-dark-900 dark:text-white">
                     {p?.name.slice(0, 30)}
                   </h2>
 
