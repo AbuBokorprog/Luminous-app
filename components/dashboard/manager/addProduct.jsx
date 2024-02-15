@@ -37,6 +37,9 @@ const AddProduct = () => {
       label: "Natural",
     },
     {
+      label: "Undergarments",
+    },
+    {
       label: "Clothing & More",
     },
   ];
@@ -63,6 +66,8 @@ const AddProduct = () => {
     { label: "Home Care", value: "HomeCare" },
     { label: "Moisturizers", value: "Moisturizers" },
     { label: "Face wash", value: "FaceWash" },
+    { label: "Bra", value: "Bra" },
+    { label: "Panty", value: "Panty" },
     { label: "Lip Balms/Lip Care", value: "LipBalms/LipCare" },
     { label: "Hands & Feet", value: "Hands&Feet" },
     { label: "Wellness", value: "Wellness" },

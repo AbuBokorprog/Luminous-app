@@ -228,25 +228,37 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="py-4 bg-white dark:bg-gray-900 gap-12 justify-center flex items-center uppercase font-medium dark:text-white text-black">
-          <button>Makeup</button>
-          <button>Skin</button>
-          <button>Hair</button>
-          <button>Personal care</button>
-          <button>Mom & Baby</button>
-          <button>Fragrance</button>
-          <button className="px-4 py-1 rounded-full text-white bg-SubBlue">
+        <div className="py-4 bg-white dark:bg-gray-900 gap-8 justify-center flex items-center uppercase font-medium dark:text-white text-black">
+          <Link href={"/product_category/makeup"}>Makeup</Link>
+          <Link href={"/product_category/skin"}>Skin</Link>
+          <Link href={"/product_category/Hair"}>Hair</Link>
+          <Link href={"/product_category/personal_care"}>Personal care</Link>
+          <Link href={"/product_category/mom_&_baby"}>Mom & Baby</Link>
+          <Link href={"/product_category/fragrance"}>Fragrance</Link>
+          <Link
+            href={"/product_category/undergarments"}
+            className="px-4 py-1 rounded-full text-white bg-SubBlue"
+          >
             Undergarments
-          </button>
-          <button className="px-4 py-1 rounded-full text-white bg-Coral">
+          </Link>
+          <Link
+            href={"/product_category/buy_1_get_1"}
+            className="px-4 py-1 rounded-full text-white bg-Coral"
+          >
             Buy 1 GET 1
-          </button>
-          <button className="px-4 py-1 rounded-full text-white bg-green">
+          </Link>
+          <Link
+            href={"/product_category/clearance_sell"}
+            className="px-4 py-1 rounded-full text-white bg-green"
+          >
             Clearance Sell
-          </button>
-          <button className="px-4 py-1 rounded-full text-white bg-Gold">
+          </Link>
+          <Link
+            href={"/product_category/men"}
+            className="px-4 py-1 rounded-full text-white bg-Gold"
+          >
             Men
-          </button>
+          </Link>
         </div>
       </div>
     </>
