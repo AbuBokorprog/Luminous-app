@@ -231,7 +231,7 @@ const Navbar = () => {
         <div className="py-4 bg-white dark:bg-gray-900 gap-8 justify-center flex items-center uppercase font-medium dark:text-white text-black">
           <Link href={"/product_category/makeup"}>Makeup</Link>
           <Link href={"/product_category/skin"}>Skin</Link>
-          <Link href={"/product_category/Hair"}>Hair</Link>
+          <Link href={"/product_category/hair"}>Hair</Link>
           <Link href={"/product_category/personal_care"}>Personal care</Link>
           <Link href={"/product_category/mom_&_baby"}>Mom & Baby</Link>
           <Link href={"/product_category/fragrance"}>Fragrance</Link>
