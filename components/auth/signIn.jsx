@@ -4,9 +4,11 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { authContext } from "@/utils/provider/auth_provider";
 import { usePostUserMutation } from "@/redux/feature/counter/api";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
   const { createUser, updateUser } = useContext(authContext);
+  const router = useRouter();
   const [isMatch, setIsMatch] = useState("");
   const [postUser, { isLoading, isError, error, isSuccess }] =
     usePostUserMutation();
@@ -39,7 +41,10 @@ const SignIn = () => {
           .then((result) => {
             const loggedUser = result.user;
             updateUser(displayName, photoURL)
-              .then(() => {})
+              .then(() => {
+                router.push("/");
+                reset();
+              })
               .catch((error) => {});
           })
           .catch((error) => {
@@ -49,7 +54,6 @@ const SignIn = () => {
     } catch (err) {
       // console.error("Error creating user:", err.message);
     }
-    reset();
   };
 
   return (

@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useLoginUserMutation } from "@/redux/feature/counter/api";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
   const { signIn } = useContext(authContext);
   const [loginUser, { isError, isLoading, isSuccess }] = useLoginUserMutation();
   const {
@@ -23,6 +25,7 @@ const Login = () => {
         signIn(email, password)
           .then((result) => {
             const loggedIn = result.user;
+            router.push("/");
             reset();
           })
           .catch((error) => {

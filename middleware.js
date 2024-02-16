@@ -22,9 +22,11 @@ export function middleware(request) {
     }
   }
   if (
-    request.nextUrl.pathname === "/admin" ||
-    request.nextUrl.pathname === "/users" ||
-    request.nextUrl.pathname === "/manager"
+    request.nextUrl.pathname === "/admin/:path*" ||
+    request.nextUrl.pathname === "/users/:path*" ||
+    request.nextUrl.pathname === "/manager/:path*" ||
+    request.nextUrl.pathname === "/product_category/:path*" ||
+    request.nextUrl.pathname === "/shop_by_concern/:path*"
   ) {
     if (!authToken) {
       return NextResponse.redirect(new URL("/login", request.url));
@@ -35,5 +37,14 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/login", "/sign_up", "/users", "/manager", "/admin"],
+  matcher: [
+    "/login",
+    "/sign_up",
+    "/product_category/:path*",
+    "/shop_by_concern/:path*",
+    "/users/:path*",
+    "/manager/:path*",
+    "/admin/:path*",
+    // "/api/:path*",
+  ],
 };
