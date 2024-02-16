@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useLoginUserMutation } from "@/redux/feature/counter/api";
 import { useRouter } from "next/navigation";
+import swal from "sweetalert";
 
 const Login = () => {
   const router = useRouter();
@@ -25,11 +26,12 @@ const Login = () => {
         signIn(email, password)
           .then((result) => {
             const loggedIn = result.user;
+            swal("Login successful", "", "success");
             router.push("/");
             reset();
           })
           .catch((error) => {
-            console.log(error.message);
+            swal(`${error.message}`, "", "error");
           });
       }
     } catch (error) {

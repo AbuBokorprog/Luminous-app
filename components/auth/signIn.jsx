@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { authContext } from "@/utils/provider/auth_provider";
 import { usePostUserMutation } from "@/redux/feature/counter/api";
 import { useRouter } from "next/navigation";
+import swal from "sweetalert";
 
 const SignIn = () => {
   const { createUser, updateUser } = useContext(authContext);
@@ -34,7 +35,6 @@ const SignIn = () => {
     try {
       const result = await postUser(user);
 
-      console.log(result.data.message);
       setIsMatch("");
       if (result.data.message === "Registered successfully") {
         createUser(email, password)
@@ -42,13 +42,14 @@ const SignIn = () => {
             const loggedUser = result.user;
             updateUser(displayName, photoURL)
               .then(() => {
+                swal("Registered successful", "", "success");
                 router.push("/");
                 reset();
               })
               .catch((error) => {});
           })
           .catch((error) => {
-            console.log(error.message);
+            swal(`${error.message}`, "", "error");
           });
       }
     } catch (err) {
