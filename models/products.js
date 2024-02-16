@@ -51,6 +51,12 @@ const productsSchema = mongoose.Schema({
   weight: {
     type: String,
   },
+  made: {
+    type: String,
+  },
+  size: {
+    type: Array,
+  },
   status: {
     type: String,
     enum: ["pending", "approved", "declined"],

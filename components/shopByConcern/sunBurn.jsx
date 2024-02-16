@@ -3,19 +3,19 @@ import React from "react";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const SunBurn = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const acneProducts = products?.filter((p) =>
-    p.concern.some((sub) => sub === "acne")
+  const SunBurnProducts = products?.filter((p) =>
+    p.concern.some((sub) => sub === "Sun Burn")
   );
   return (
     <div>
-      <h4 className="text-lg py-8 bg-dark-200 text-center">SunBurn</h4>
+      <h4 className="text-lg py-8 bg-dark-200 text-center">Sun Burn</h4>
       {isLoading ? (
         <p>loading...</p>
       ) : (
         <>
-          {acneProducts?.length > 0 ? (
+          {SunBurnProducts?.length > 0 ? (
             <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-4 mx-auto items-center md:gap-4 lg:gap-2">
-              {acneProducts?.map((p) => (
+              {SunBurnProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img

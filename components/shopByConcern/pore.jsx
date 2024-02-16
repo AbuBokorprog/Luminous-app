@@ -3,8 +3,8 @@ import React from "react";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Pore = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const acneProducts = products?.filter((p) =>
-    p.concern.some((sub) => sub === "acne")
+  const poreProducts = products?.filter((p) =>
+    p.concern.some((sub) => sub === "pore")
   );
   return (
     <div>
@@ -13,9 +13,9 @@ const Pore = () => {
         <p>loading...</p>
       ) : (
         <>
-          {acneProducts?.length > 0 ? (
+          {poreProducts?.length > 0 ? (
             <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-4 mx-auto items-center md:gap-4 lg:gap-2">
-              {acneProducts?.map((p) => (
+              {poreProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <img

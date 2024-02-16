@@ -19,6 +19,8 @@ export async function POST(req, res) {
     offer,
     brands,
     quantity,
+    made,
+    size,
   } = await req.json();
   try {
     const products = new Products({
@@ -35,6 +37,8 @@ export async function POST(req, res) {
       concern,
       offer,
       brands,
+      made,
+      size,
       quantity,
     });
     const result = await products.save();

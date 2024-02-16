@@ -123,6 +123,7 @@ const AddProduct = () => {
     { label: "Dull Skin Treatment", value: "Dull Skin Treatment" },
     { label: "Skin Lightening", value: "Skin Lightening" },
     { label: "Pore Care", value: "Pore Care" },
+    { label: "Hair Fall", value: "Hair Fall" },
     { label: "Pigmentation", value: "Pigmentation" },
     { label: "Acne Treatment", value: "Acne Treatment" },
     { label: "Tan Removal", value: "Tan Removal" },
@@ -131,8 +132,9 @@ const AddProduct = () => {
     { label: "Cold Protection", value: "Cold Protection" },
     { label: "Sun Protection", value: "Sun Protection" },
     { label: "Dry & Frizzy Hair", value: "Dry & Frizzy Hair" },
-    { label: "Hairfall Thinning", value: "Hairfall Thinning" },
+    { label: "Hair fall Thinning", value: "Hair fall Thinning" },
     { label: "Split Ends", value: "Split Ends" },
+    { label: "Sun Burn", value: "Sun Burn" },
     { label: "Color protection", value: "Color protection" },
   ];
   const [postProduct, { isLoading, isError, error }] = usePostProductMutation();
@@ -175,6 +177,8 @@ const AddProduct = () => {
     const offer = data.offer;
     const brands = data.brands;
     const quantity = data.quantity;
+    const made = data.made;
+    const size = data.size;
     const product = {
       name,
       userId,
@@ -190,6 +194,8 @@ const AddProduct = () => {
       offer,
       brands,
       quantity,
+      made,
+      size,
     };
     const result = await postProduct(product);
     alert(result?.data?.message);
@@ -331,6 +337,7 @@ const AddProduct = () => {
             >
               <option value="">Select Offer</option>
               <option value="Top Selling">Top Selling</option>
+              <option value="Top Brands">Top Brands</option>
               <option value="Free Delivery">Free Delivery</option>
               <option value="Buy1GET1">Buy 1 GET 1</option>
               <option value="ClearanceSale">Clearance sale</option>
@@ -391,13 +398,41 @@ const AddProduct = () => {
             <input
               type="number"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-              placeholder="Type your name"
+              placeholder="Type product quantity"
               {...register("quantity", { required: true })}
               aria-invalid={errors.quantity ? "true" : "false"}
             />
             {errors.quantity?.type === "required" && (
               <p role="alert">Quantity is required</p>
             )}
+          </div>
+        </div>
+        <div className="grid grid-cols-1 mx-auto md:grid-cols-2 gap-4 items-center">
+          <div>
+            <label
+              htmlFor="made"
+              className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+            >
+              Made
+            </label>
+            <input
+              placeholder="Type which country made in"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              {...register("made")}
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="size"
+              className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+            >
+              Size
+            </label>
+            <input
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+              placeholder="Type products size"
+              {...register("size")}
+            />
           </div>
         </div>
         <div>
