@@ -43,6 +43,7 @@ const AuthProvider = ({ children }) => {
 
   const { data, isLoading } = useGetCurrentUserQuery(user?.email);
   const currentUser = data?.user[0];
+
   const updateUser = (name, photoURL) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
