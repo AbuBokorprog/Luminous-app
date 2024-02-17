@@ -3,8 +3,10 @@ import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { FaBagShopping } from "react-icons/fa6";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useGetProductQuery } from "@/redux/feature/counter/api";
 
 const Navbar = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const { user, currentUser, logout, isLoading } = useContext(authContext);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -29,9 +31,23 @@ const Navbar = () => {
         console.error("Error during logout:", error);
       });
   };
+  const {
+    data: product,
+    isLoading: searchLoading,
+    isError: searchError,
+    error,
+  } = useGetProductQuery();
+  const searchHandler = (event) => {
+    console.log(event.target.value);
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredProducts = product?.filter((p) =>
+    p.name.toLowerCase().includes(searchQuery?.toLowerCase())
+  );
 
   return (
-    <>
+    <div className="relative">
       {/* mobile */}
       <div>
         <div className="bg-white lg:hidden sm:block dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600 flex justify-between items-center p-2">
@@ -69,9 +85,51 @@ const Navbar = () => {
         {isOpen && (
           <aside
             id="default-sidebar"
-            className="fixed top-0 bg-white right-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right"
+            className="fixed top-0 bg-white left-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right"
           >
             <div className="h-full flex justify-between px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+              <div className="space-y-2 flex-col dark:text-white text-black font-medium">
+                <div>
+                  <Link href={"/product_category/makeup"}>Makeup</Link>
+                </div>
+                <div>
+                  <Link href={"/product_category/skin"}>Skin</Link>
+                </div>
+                <div>
+                  <Link href={"/product_category/hair"}>Hair</Link>
+                </div>
+                <div>
+                  <Link href={"/product_category/personal_care"}>
+                    Personal care
+                  </Link>
+                </div>
+                <div>
+                  <Link href={"/product_category/mom_baby"}>Mom & Baby</Link>
+                </div>
+                <div>
+                  <Link href={"/product_category/fragrance"}>Fragrance</Link>
+                </div>
+                <div>
+                  <Link href={"/product_category/undergarments"} className="">
+                    Undergarments
+                  </Link>
+                </div>
+                <div>
+                  <Link href={"/product_category/buy1get1"} className="">
+                    Buy 1 GET 1
+                  </Link>
+                </div>
+                <div>
+                  <Link href={"/product_category/clearance_sell"} className="">
+                    Clearance Sell
+                  </Link>
+                </div>
+                <div>
+                  <Link href={"/product_category/men"} className="">
+                    Men
+                  </Link>
+                </div>
+              </div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -81,50 +139,46 @@ const Navbar = () => {
               >
                 <path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z" />
               </svg>
-              <div className="space-y-2 text-right flex-col dark:text-white text-black font-medium">
-                <div>
-                  <button>Makeup</button>
-                </div>
-                <div>
-                  <button>Skin</button>
-                </div>
-                <div>
-                  <button>Hair</button>
-                </div>
-                <div>
-                  <button>Personal care</button>
-                </div>
-                <div>
-                  <button>Mom & Baby</button>
-                </div>
-                <div>
-                  <button>Fragrance</button>
-                </div>
-                <div>
-                  <button className="">Undergarments</button>
-                </div>
-                <div>
-                  <button>Buy 1 GET 1</button>
-                </div>
-                <div>
-                  <button>Clearance Sell</button>
-                </div>
-                <div>
-                  <button>Men</button>
-                </div>
-              </div>
             </div>
           </aside>
         )}
 
         {/* Search bar centered */}
         <div className="bg-white dark:bg-gray-900 border-b lg:hidden block border-gray-200 dark:border-gray-600 p-2">
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center">
             <input
               type="search"
               className="p-2 w-72 border-2 border-primary-500 text-sm bg-gray-100 rounded-3xl"
+              onChange={searchHandler}
               placeholder="Search for products..."
             />
+          </div>
+          <div className="">
+            {searchQuery.trim !== "" && searchLoading && (
+              <p className="absolute z-50 text-center">Loading...</p>
+            )}
+            {searchQuery.trim !== "" && searchError && (
+              <p>Error: {searchErrorMessage}</p>
+            )}
+            {searchQuery.trim() !== "" && filteredProducts && (
+              <div className=" absolute z-50 text-center bg-white mx-1 left-1 p-2">
+                {filteredProducts?.slice(0, 6)?.map((product) => (
+                  <div
+                    key={product._id}
+                    className="bg-dark-200 grid my-2 grid-cols-2 gap-1 items-center px-1 py-2 justify-center rounded-md"
+                  >
+                    <img
+                      src={product?.images[0]}
+                      alt={product.name}
+                      className="w-12 rounded-xl"
+                    />
+                    <div className="text-lg font-bold">
+                      {product.name.slice(0, 20)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -142,11 +196,39 @@ const Navbar = () => {
               <div>
                 <input
                   type="search"
-                  name=""
+                  name="search"
+                  onChange={searchHandler}
                   className="p-2 w-96 border-2 bg-gray-100 dark:bg-gray-50 text-black dark:text-white border-primary-500 text-sm rounded-3xl"
                   placeholder="Search for products..."
                   id=""
                 />
+                <div className="">
+                  {/* {searchQuery.trim !== "" && searchLoading && (
+                    <p className="absolute z-50 text-center">Loading...</p>
+                  )} */}
+                  {/* {searchQuery.trim !== "" && searchError && (
+                    <p>Error: {searchErrorMessage}</p>
+                  )} */}
+                  {searchQuery.trim() !== "" && filteredProducts && (
+                    <div className=" absolute z-50 text-center bg-white p-2">
+                      {filteredProducts?.slice(0, 6)?.map((product) => (
+                        <div
+                          key={product._id}
+                          className="bg-dark-200 grid my-2 grid-cols-2 gap-1 items-center px-1 py-2 justify-center rounded-md"
+                        >
+                          <img
+                            src={product?.images[0]}
+                            alt={product.name}
+                            className="w-12 rounded-xl"
+                          />
+                          <div className="text-lg font-bold">
+                            {product.name.slice(0, 20)}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="flex gap-4 items-center relative">
                 <button className="text-primary-400 p-2 rounded-full">
@@ -261,7 +343,7 @@ const Navbar = () => {
           </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

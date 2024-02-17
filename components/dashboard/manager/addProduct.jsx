@@ -46,6 +46,7 @@ const AddProduct = () => {
 
   const subcategories = [
     { label: "Face", value: "face" },
+    { label: "Accessories", value: "Accessories" },
     { label: "Eyes", value: "eyes" },
     { label: "Lips", value: "lips" },
     { label: "Nails", value: "nails" },
