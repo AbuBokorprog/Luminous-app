@@ -39,7 +39,7 @@ const Skin = () => {
                     ${p?.price}
                   </p>
                 </div>
-                <button className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-primary-400">
+                <button className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-violet hover:bg-primary-400">
                   Add To Card
                 </button>
               </div>

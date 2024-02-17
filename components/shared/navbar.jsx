@@ -198,17 +198,11 @@ const Navbar = () => {
                   type="search"
                   name="search"
                   onChange={searchHandler}
-                  className="p-2 w-96 border-2 bg-gray-100 dark:bg-gray-50 text-black dark:text-white border-primary-500 text-sm rounded-3xl"
+                  className="p-2 w-96 border-2 dark:text-black bg-gray-100 dark:bg-gray-50 text-black border-primary-500 text-sm rounded-3xl"
                   placeholder="Search for products..."
                   id=""
                 />
                 <div className="">
-                  {/* {searchQuery.trim !== "" && searchLoading && (
-                    <p className="absolute z-50 text-center">Loading...</p>
-                  )} */}
-                  {/* {searchQuery.trim !== "" && searchError && (
-                    <p>Error: {searchErrorMessage}</p>
-                  )} */}
                   {searchQuery.trim() !== "" && filteredProducts && (
                     <div className=" absolute z-50 text-center bg-white p-2">
                       {filteredProducts?.slice(0, 6)?.map((product) => (
@@ -247,7 +241,7 @@ const Navbar = () => {
                   >
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                       {isLoading ? (
-                        <p className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                        <p className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white">
                           Loading....
                         </p>
                       ) : (
@@ -256,7 +250,7 @@ const Navbar = () => {
                             <li>
                               <Link
                                 href={"/admin"}
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
                               >
                                 Dashboard
                               </Link>
@@ -265,7 +259,7 @@ const Navbar = () => {
                             <li>
                               <Link
                                 href={"/manager"}
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
                               >
                                 Dashboard
                               </Link>
@@ -274,7 +268,7 @@ const Navbar = () => {
                             <li>
                               <Link
                                 href={"/users"}
-                                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
                               >
                                 Dashboard
                               </Link>
@@ -288,7 +282,7 @@ const Navbar = () => {
                         <li>
                           <button
                             onClick={logoutHandler}
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
                           >
                             Logout
                           </button>
@@ -297,7 +291,7 @@ const Navbar = () => {
                         <li>
                           <Link
                             href="/login"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                            className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
                           >
                             Login
                           </Link>
