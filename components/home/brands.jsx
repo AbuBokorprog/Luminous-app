@@ -6,6 +6,7 @@ import image4 from "@/public/images/brands/Ponds-1.png";
 import image5 from "@/public/images/brands/Simple-1.png";
 import image6 from "@/public/images/brands/Tresemme-40-OFF.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Brands = () => {
   return (
@@ -14,12 +15,24 @@ const Brands = () => {
         Top brands and offers
       </h2>
       <div className="grid md:grid-cols-1 lg:grid-cols-3 mx-auto gap-4 my-16">
-        <Image src={image1} alt="Image1" />
-        <Image src={image2} alt="Image2" />
-        <Image src={image3} alt="Image3" />
-        <Image src={image4} alt="Image4" />
-        <Image src={image5} alt="Image4" />
-        <Image src={image6} alt="Image4" />
+        <Link href={"/product_category/brand/veet"}>
+          <Image src={image1} alt="Veet" />
+        </Link>
+        <Link href={"/product_category/brand/nirvana"}>
+          <Image src={image2} alt="Nirvana" />
+        </Link>
+        <Link href={"/product_category/brand/naturale"}>
+          <Image src={image3} alt="Naturale" />
+        </Link>
+        <Link href={"/product_category/brand/ponds"}>
+          <Image src={image4} alt="Ponds" />
+        </Link>
+        <Link href={"/product_category/brand/simple"}>
+          <Image src={image5} alt="Simple" />
+        </Link>
+        <Link href={"/product_category/brand/tresemme"}>
+          <Image src={image6} alt="Tresseme" />
+        </Link>
       </div>
     </div>
   );
