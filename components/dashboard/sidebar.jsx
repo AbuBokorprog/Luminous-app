@@ -45,7 +45,7 @@ const Sidebar = () => {
       </button>
       {isOpen && (
         <div
-          className={`bg-gray-900 bg-white text-black h-screen ${
+          className={`dark:bg-gray-900 bg-white text-black h-screen ${
             isOpen ? "w-44" : "hidden lg:block"
           }`}
         >
@@ -140,7 +140,7 @@ const Sidebar = () => {
       )}
 
       <div
-        className={`bg-gray-900 text-black bg-Beige h-screen py-4 rounded-lg px-4 hidden lg:block`}
+        className={`dark:bg-gray-900 dark:text-white text-black bg-dark-50 h-screen py-4 rounded-lg px-4 hidden lg:block`}
       >
         {currentUser?.email === user?.email && (
           <ul>

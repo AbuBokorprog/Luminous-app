@@ -3,7 +3,10 @@ import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { FaBagShopping } from "react-icons/fa6";
 import { authContext } from "@/utils/provider/auth_provider";
-import { useGetProductQuery } from "@/redux/feature/counter/api";
+import {
+  useCartGetByUserQuery,
+  useGetProductQuery,
+} from "@/redux/feature/counter/api";
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -45,7 +48,13 @@ const Navbar = () => {
   const filteredProducts = product?.filter((p) =>
     p.name.toLowerCase().includes(searchQuery?.toLowerCase())
   );
-
+  const {
+    data: cart,
+    isLoading: cartLoading,
+    isError,
+    error: cartError,
+  } = useCartGetByUserQuery(currentUser?._id);
+  // console.log(cart?.length);
   return (
     <div className="relative">
       {/* mobile */}
@@ -225,8 +234,9 @@ const Navbar = () => {
                 </div>
               </div>
               <div className="flex gap-4 items-center relative">
-                <button className="text-primary-400 p-2 rounded-full">
-                  <FaBagShopping className="w-5 h-5" />
+                <button className="flex text-lg items-center gap-2 px-4 py-2 bg-primary-400 rounded-full">
+                  <FaBagShopping className="w-5 h-5" />{" "}
+                  <span>({cart?.length})</span>
                 </button>
                 <button
                   onClick={() => setIsOpenDropdown(!isOpenDropdown)}
