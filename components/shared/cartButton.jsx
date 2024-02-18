@@ -1,5 +1,6 @@
 "use client";
 import {
+  useCartDeleteMutation,
   useCartGetByUserQuery,
   useCartUpdateMutation,
 } from "@/redux/feature/counter/api";
@@ -34,6 +35,7 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
     refetch,
     error: cartError,
   } = useCartGetByUserQuery(currentUser?._id);
+  const [cartDelete, { isLoading: deleteIsLoading }] = useCartDeleteMutation();
   const totalQuantity = cart?.reduce((total, item) => total + item.quantity, 0);
 
   const [cartUpdate, { isLoading }] = useCartUpdateMutation();
@@ -60,6 +62,18 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
       }
     } catch (error) {
       alert(error.message);
+    }
+  };
+
+  const deleteHandler = async (id) => {
+    try {
+      const response = await cartDelete(id);
+      if (response?.data?.success) {
+        refetch();
+        alert(response.data.success);
+      }
+    } catch (error) {
+      console.log(error?.message);
     }
   };
 
@@ -145,7 +159,7 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
                               </button>
                             </div>
                             <div>
-                              <button>
+                              <button onClick={() => deleteHandler(item?._id)}>
                                 <FaTrash className="text-Red w-4 h-4" />
                               </button>
                             </div>

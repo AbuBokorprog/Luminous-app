@@ -56,6 +56,13 @@ export const Api = createApi({
         method: "DELETE",
       }),
     }),
+    cartPost: builder.mutation({
+      query: (data) => ({
+        url: "/cart",
+        method: "POST",
+        body: data,
+      }),
+    }),
     cartGetByUser: builder.query({
       query: (userId) => `/cart/userId/${userId}`,
     }),
@@ -67,7 +74,7 @@ export const Api = createApi({
       }),
     }),
     cartDelete: builder.mutation({
-      query: ({ id }) => ({
+      query: (id) => ({
         url: `/cart/${id}`,
         method: "DELETE",
       }),
@@ -86,6 +93,7 @@ export const {
   usePostProductMutation,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useCartPostMutation,
   useCartGetByUserQuery,
   useCartUpdateMutation,
   useCartDeleteMutation,

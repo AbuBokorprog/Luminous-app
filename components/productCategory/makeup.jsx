@@ -1,13 +1,39 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import makeup from "@/public/images/pageBanner/Nirvana-Color-Category-Banner.webp";
-import { useGetProductQuery } from "@/redux/feature/counter/api";
+import {
+  useCartGetByUserQuery,
+  useCartPostMutation,
+  useGetProductQuery,
+} from "@/redux/feature/counter/api";
+import { authContext } from "@/utils/provider/auth_provider";
 const Makeup = () => {
+  const { currentUser } = useContext(authContext);
   const { data: products, isLoading, isError, error } = useGetProductQuery();
+  const [
+    postCart,
+    { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
+  ] = useCartPostMutation();
+  const { refetch } = useCartGetByUserQuery(currentUser?._id);
   const makeupProducts = products?.filter((p) =>
     p.category.some((sub) => sub === "Makeup")
   );
+
+  const addToCart = async (id) => {
+    const userId = currentUser?._id;
+    const productId = id;
+    const cart = { userId, productId };
+    try {
+      const response = await postCart(cart);
+      if (response?.data?.success) {
+        refetch();
+        alert(response?.data?.success);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div>
@@ -41,7 +67,10 @@ const Makeup = () => {
                         ${p?.price}
                       </p>
                     </div>
-                    <button className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-violet hover:bg-primary-400">
+                    <button
+                      onClick={() => addToCart(p?._id)}
+                      className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-violet hover:bg-primary-400"
+                    >
                       Add To Card
                     </button>
                   </div>
