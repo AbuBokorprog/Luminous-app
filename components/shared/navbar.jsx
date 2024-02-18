@@ -8,7 +8,7 @@ import {
   useGetProductQuery,
 } from "@/redux/feature/counter/api";
 
-const Navbar = () => {
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const { user, currentUser, logout, isLoading } = useContext(authContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -54,7 +54,10 @@ const Navbar = () => {
     isError,
     error: cartError,
   } = useCartGetByUserQuery(currentUser?._id);
-  // console.log(cart?.length);
+  const totalQuantity = cart?.reduce((total, item) => total + item.quantity, 0);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
     <div className="relative">
       {/* mobile */}
@@ -234,9 +237,12 @@ const Navbar = () => {
                 </div>
               </div>
               <div className="flex gap-4 items-center relative">
-                <button className="flex text-lg items-center gap-2 px-4 py-2 bg-primary-400 rounded-full">
+                <button
+                  onClick={toggleSidebar}
+                  className="flex text-lg items-center gap-2 px-4 py-2 bg-primary-400 rounded-full"
+                >
                   <FaBagShopping className="w-5 h-5" />{" "}
-                  <span>({cart?.length})</span>
+                  <span>({totalQuantity})</span>
                 </button>
                 <button
                   onClick={() => setIsOpenDropdown(!isOpenDropdown)}

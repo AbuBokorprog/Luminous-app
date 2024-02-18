@@ -4,6 +4,8 @@ import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import AuthProvider from "@/utils/provider/auth_provider";
 import ReduxProvider from "@/utils/provider/reduxProvider";
+import CartButton from "@/components/shared/cartButton";
+import Header from "@/components/shared/header";
 
 const inter = Playfair_Display({ subsets: ["latin"], style: ["normal"] });
 
@@ -15,10 +17,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} container mx-auto `}>
+      <body className={`${inter.className} container mx-auto relative`}>
         <ReduxProvider>
           <AuthProvider>
-            <Navbar />
+            <Header />
             {children}
             <Footer />
           </AuthProvider>

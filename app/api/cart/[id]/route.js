@@ -36,7 +36,10 @@ export async function PUT(req, { params }) {
         status: 404,
       });
     }
-    return NextResponse.json(cart);
+    return NextResponse.json({
+      success: "Cart updated successfully",
+      status: true,
+    });
   } catch (error) {
     return NextResponse.json({
       error: `Cart ${error.message}`,
