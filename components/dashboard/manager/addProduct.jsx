@@ -1,5 +1,8 @@
 "use client";
-import { usePostProductMutation } from "@/redux/feature/counter/api";
+import {
+  useGetProductQuery,
+  usePostProductMutation,
+} from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
@@ -28,6 +31,9 @@ const AddProduct = () => {
       label: "Mom & Baby",
     },
     {
+      label: "Body",
+    },
+    {
       label: "Men",
     },
     {
@@ -42,11 +48,13 @@ const AddProduct = () => {
     {
       label: "Clothing & More",
     },
+    {
+      label: "Tools & Accessories",
+    },
   ];
 
   const subcategories = [
     { label: "Face", value: "face" },
-    { label: "Accessories", value: "Accessories" },
     { label: "Eyes", value: "eyes" },
     { label: "Lips", value: "lips" },
     { label: "Nails", value: "nails" },
@@ -72,6 +80,7 @@ const AddProduct = () => {
     { label: "Lip Balms/Lip Care", value: "LipBalms/LipCare" },
     { label: "Hands & Feet", value: "Hands&Feet" },
     { label: "Wellness", value: "Wellness" },
+    { label: "Sexual Wellness", value: "Sexual Wellness" },
     { label: "Oral Care", value: "Oral Care" },
     { label: "Baby Products", value: "BabyProducts" },
     { label: "Creams & Moisturizers", value: "Creams&Moisturizers" },
@@ -79,12 +88,16 @@ const AddProduct = () => {
     { label: "Oil", value: "Oil" },
     { label: "Powder", value: "Powder" },
     { label: "Wipes", value: "Wipes" },
+    { label: "Loofahs & Sponges", value: "Loofahs & Sponges" },
     { label: "Bath Time", value: "Bath Time" },
     { label: "Sunscreen", value: "Sunscreen" },
     { label: "Baby care", value: "Baby care" },
     { label: "Bath & body", value: "Bath&body" },
     { label: "Hair Care", value: "HairCare" },
     { label: "Shaving", value: "Shaving" },
+    { label: "Shaving and Hair Removal", value: "Shaving and Hair Removal" },
+    { label: "Shaving Cream", value: "Shaving Cream" },
+    { label: "Foam & gel", value: "Foam & gel" },
     { label: "Skin Care", value: "SkinCare" },
     { label: "Shampoo", value: "Shampoo" },
     { label: "Soap & Body wash", value: "Soap & Body wash" },
@@ -139,6 +152,7 @@ const AddProduct = () => {
     { label: "Color protection", value: "Color protection" },
   ];
   const [postProduct, { isLoading, isError, error }] = usePostProductMutation();
+  const { refetch } = useGetProductQuery();
   const {
     register,
     reset,
@@ -198,11 +212,13 @@ const AddProduct = () => {
       made,
       size,
     };
-    const result = await postProduct(product);
-    alert(result?.data?.message);
-    reset();
-    if (isError) {
-      alert(error);
+    try {
+      const result = await postProduct(product);
+      alert(result?.data?.message);
+      refetch();
+      reset();
+    } catch (error) {
+      alert(error.message);
     }
   };
   return (

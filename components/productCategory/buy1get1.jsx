@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useGetProductQuery } from "@/redux/feature/counter/api";
+import Image from "next/image";
 const Buy1Get1 = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const buy1get1Products = products?.filter((p) =>
@@ -18,10 +19,12 @@ const Buy1Get1 = () => {
               {buy1get1Products?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <img
+                    <Image
                       className="rounded-t-lg lg:h-44 w-full"
                       src={p?.images[0]}
                       alt={p?.name}
+                      width={400}
+                      height={400}
                     />
                     <div className="p-2">
                       <h2 className="mb-2 text-center h-12 text-xl font-bold tracking-tight text-dark-900 dark:text-white">

@@ -4,7 +4,7 @@ import { useGetProductQuery } from "@/redux/feature/counter/api";
 const Pore = () => {
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const poreProducts = products?.filter((p) =>
-    p.concern.some((sub) => sub === "pore")
+    p.concern.some((sub) => sub === "Pore")
   );
   return (
     <div>
