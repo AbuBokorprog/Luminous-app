@@ -31,7 +31,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         }
       })
       .catch((error) => {
-        console.error("Error during logout:", error);
+        console.error("Error during logout:", error?.message);
       });
   };
   const {
@@ -170,7 +170,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
               <p className="absolute z-50 text-center">Loading...</p>
             )}
             {searchQuery.trim !== "" && searchError && (
-              <p>Error: {searchErrorMessage}</p>
+              <p>Error: {error?.message}</p>
             )}
             {searchQuery.trim() !== "" && filteredProducts && (
               <div className=" absolute z-50 text-center bg-white mx-1 left-1 p-2">
