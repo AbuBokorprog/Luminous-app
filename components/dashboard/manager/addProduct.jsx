@@ -54,18 +54,25 @@ const AddProduct = () => {
   ];
 
   const subcategories = [
+    // makeup
     { label: "Face", value: "face" },
     { label: "Eyes", value: "eyes" },
     { label: "Lips", value: "lips" },
     { label: "Nails", value: "nails" },
+    { label: "Makeup", value: "Makeup" },
     { label: "Tools & Brushes", value: "tools&Brush" },
-    { label: "Top Brands", value: "topBrands" },
-    { label: "K-beauty", value: "kBeauty" },
     { label: "Makeup kits", value: "makeupKits" },
+    // skin
+    { label: "Skin Care", value: "SkinCare" },
     { label: "Body", value: "body" },
     { label: "Sun Care", value: "sunCare" },
+    { label: "K-beauty", value: "kBeauty" },
+    { label: "Lip Balms/Lip Care", value: "LipBalms/LipCare" },
+    { label: "Hands & Feet", value: "Hands&Feet" },
+    { label: "Hair Care", value: "HairCare" },
     { label: "Eye Care", value: "eyeCare" },
-    { label: "Hair care", value: "haircare" },
+
+    { label: "Top Brands", value: "Top Brands" },
     { label: "Hair Styling", value: "Hairstyling" },
     { label: "Tools & accessories", value: "Tools_&_accessories" },
     { label: "Bath & shower", value: "bath&shower" },
@@ -77,8 +84,7 @@ const AddProduct = () => {
     { label: "Face wash", value: "FaceWash" },
     { label: "Bra", value: "Bra" },
     { label: "Panty", value: "Panty" },
-    { label: "Lip Balms/Lip Care", value: "LipBalms/LipCare" },
-    { label: "Hands & Feet", value: "Hands&Feet" },
+
     { label: "Wellness", value: "Wellness" },
     { label: "Sexual Wellness", value: "Sexual Wellness" },
     { label: "Oral Care", value: "Oral Care" },
@@ -93,12 +99,11 @@ const AddProduct = () => {
     { label: "Sunscreen", value: "Sunscreen" },
     { label: "Baby care", value: "Baby care" },
     { label: "Bath & body", value: "Bath&body" },
-    { label: "Hair Care", value: "HairCare" },
+
     { label: "Shaving", value: "Shaving" },
     { label: "Shaving and Hair Removal", value: "Shaving and Hair Removal" },
     { label: "Shaving Cream", value: "Shaving Cream" },
     { label: "Foam & gel", value: "Foam & gel" },
-    { label: "Skin Care", value: "SkinCare" },
     { label: "Shampoo", value: "Shampoo" },
     { label: "Soap & Body wash", value: "Soap & Body wash" },
     { label: "Deodorants/Roll-Ons", value: "Deodorants/Roll-Ons" },
