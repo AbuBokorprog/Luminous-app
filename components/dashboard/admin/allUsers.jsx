@@ -7,14 +7,10 @@ import Image from "next/image";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext, useState } from "react";
 import { FaTrash } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 const AllUsers = () => {
   const { data, isError, isLoading, refetch } = useGetUserQuery();
   const { userDelete, currentUser } = useContext(authContext);
-  const router = useRouter();
-  if (currentUser?.role !== "admin") {
-    router.push("/");
-  }
+
   const [deleteUser, { error }] = useDeleteUserMutation();
   const deleteHandler = async (id) => {
     console.log(id);

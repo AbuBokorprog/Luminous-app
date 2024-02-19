@@ -4,16 +4,11 @@ import {
   usePostProductMutation,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
-import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 const AddProduct = () => {
   const { currentUser } = useContext(authContext);
 
-  const router = useRouter();
-  if (currentUser?.role !== "manager") {
-    router.push("/");
-  }
   const categories = [
     {
       label: "Makeup",
@@ -65,70 +60,87 @@ const AddProduct = () => {
     // skin
     { label: "Skin Care", value: "SkinCare" },
     { label: "Body", value: "body" },
+    { label: "Face wash", value: "FaceWash" },
     { label: "Sun Care", value: "sunCare" },
     { label: "K-beauty", value: "kBeauty" },
     { label: "Lip Balms/Lip Care", value: "LipBalms/LipCare" },
     { label: "Hands & Feet", value: "Hands&Feet" },
     { label: "Hair Care", value: "HairCare" },
     { label: "Eye Care", value: "eyeCare" },
-
+    { label: "Serums", value: "Serums" },
+    { label: "cleansing Oils / cleanser", value: "cleansing Oils / cleanser" },
+    // hair
+    { label: "Hair", value: "Hair" },
     { label: "Top Brands", value: "Top Brands" },
+    { label: "Shop By Hair Type", value: "Shop By Hair Type" },
     { label: "Hair Styling", value: "Hairstyling" },
     { label: "Tools & accessories", value: "Tools_&_accessories" },
+    { label: "Hair Oils", value: "HairOils" },
+    { label: "Shampoo & Conditioner", value: "Shampoo & Conditioner" },
+    { label: "Hair Mask", value: "Hair Mask" },
+
+    //personal care
+    { label: "Personal Care", value: "Personal Care" },
     { label: "Bath & shower", value: "bath&shower" },
     { label: "Bath & Body", value: "Bath & Body" },
+    { label: "Shower Gels & Body Wash", value: "Shower Gels & Body Wash" },
     { label: "Feminine Hygience", value: "FeminineHygience" },
     { label: "Feminine Care", value: "FeminineCare" },
     { label: "Home Care", value: "HomeCare" },
-    { label: "Moisturizers", value: "Moisturizers" },
-    { label: "Face wash", value: "FaceWash" },
+    { label: "Wellness", value: "Wellness" },
+    { label: "Sexual Wellness", value: "Sexual Wellness" },
+
+    // undergarments
     { label: "Bra", value: "Bra" },
     { label: "Panty", value: "Panty" },
 
-    { label: "Wellness", value: "Wellness" },
-    { label: "Sexual Wellness", value: "Sexual Wellness" },
+    //mom & baby
+    { label: "Mom & Baby", value: "Mom & Baby" },
     { label: "Oral Care", value: "Oral Care" },
     { label: "Baby Products", value: "BabyProducts" },
+    { label: "Baby care", value: "Baby care" },
+    { label: "Bath Time", value: "Bath Time" },
     { label: "Creams & Moisturizers", value: "Creams&Moisturizers" },
+    { label: "Moisturizers", value: "Moisturizers" },
+    { label: "Shampoo", value: "Shampoo" },
     { label: "Lotion", value: "Lotion" },
     { label: "Oil", value: "Oil" },
     { label: "Powder", value: "Powder" },
     { label: "Wipes", value: "Wipes" },
-    { label: "Loofahs & Sponges", value: "Loofahs & Sponges" },
-    { label: "Bath Time", value: "Bath Time" },
     { label: "Sunscreen", value: "Sunscreen" },
-    { label: "Baby care", value: "Baby care" },
     { label: "Bath & body", value: "Bath&body" },
+    { label: "Soap & Body wash", value: "Soap & Body wash" },
+    { label: "Creams, lotion and oils", value: "Creams, lotion and oils" },
 
+    //tools & accessories
+    { label: "Tools & Accessories", value: "Tools & Accessories" },
+    { label: "Loofahs & Sponges", value: "Loofahs & Sponges" },
+
+    //men
     { label: "Shaving", value: "Shaving" },
     { label: "Shaving and Hair Removal", value: "Shaving and Hair Removal" },
     { label: "Shaving Cream", value: "Shaving Cream" },
     { label: "Foam & gel", value: "Foam & gel" },
-    { label: "Shampoo", value: "Shampoo" },
-    { label: "Soap & Body wash", value: "Soap & Body wash" },
+
+    // fragrance
     { label: "Deodorants/Roll-Ons", value: "Deodorants/Roll-Ons" },
     { label: "Body mist/Spray", value: "BodyMist/Spray" },
     { label: "Perfumes", value: "Perfumes" },
+    { label: "Fragrance", value: "Fragrance" },
+
     { label: "Masks & Peels", value: "masks&peels" },
-    { label: "Hair Oils", value: "HairOils" },
-    { label: "Serums", value: "Serums" },
-    { label: "cleansing Oils / cleanser", value: "cleansing Oils / cleanser" },
-    { label: "Shower Gels & Body Wash", value: "Shower Gels & Body Wash" },
-    { label: "Shampoo & Conditioner", value: "Shampoo & Conditioner" },
+
     { label: "Scrubs & Exfoliators", value: "Scrubs & Exfoliators" },
-    { label: "Hair Mask", value: "Hair Mask" },
+
     { label: "Toner & astringents", value: "Toner & astringents" },
     { label: "Sheet Mask", value: "Sheet Mask" },
     { label: "Body Butter", value: "Body Butter" },
     { label: "Sleeping Mask", value: "Sleeping Mask" },
     { label: "Essence", value: "Essence" },
-    { label: "Shop By Hair Type", value: "Shop By Hair Type" },
+
     { label: "Shop By Concern", value: "Shop By Concern" },
-    { label: "Creams, lotion and oils", value: "Creams, lotion and oils" },
-    { label: "Oils", value: "Oils" },
     { label: "Leggings", value: "Leggings" },
     { label: "Trousers", value: "Trousers" },
-    { label: "Fragrance", value: "Fragrance" },
   ];
 
   const concerns = [

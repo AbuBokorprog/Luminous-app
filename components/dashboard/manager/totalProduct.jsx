@@ -4,12 +4,10 @@ import {
   useGetProductByUserIdQuery,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
-import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { FaTrash } from "react-icons/fa";
 import Image from "next/image";
 const TotalProduct = () => {
-  const router = useRouter();
   const { currentUser } = useContext(authContext);
   const {
     data: product,
@@ -21,9 +19,7 @@ const TotalProduct = () => {
     deleteProduct,
     { isLoading: deleteIsLoading, isError: deleteIsError, error: deleteError },
   ] = useDeleteProductMutation();
-  if (currentUser?.role !== "manager") {
-    router.push("/");
-  }
+
   const deleteHandler = async (id) => {
     console.log(id);
     try {

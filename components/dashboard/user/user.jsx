@@ -1,15 +1,9 @@
 "use client";
 import React, { useContext } from "react";
-import { useRouter } from "next/navigation";
 import { authContext } from "@/utils/provider/auth_provider";
 
 const UserDashboard = () => {
-  const router = useRouter();
   const { currentUser, isLoading } = useContext(authContext);
-
-  if (currentUser?.role !== "user") {
-    router.push("/");
-  }
 
   return (
     <div>

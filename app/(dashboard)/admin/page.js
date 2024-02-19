@@ -1,8 +1,4 @@
 import React from "react";
-export const metadata = {
-  title: "Admin | Luminous",
-  description: "This is a Cosmetics E-Commerce",
-};
 export default function Admin() {
   return (
     <div>

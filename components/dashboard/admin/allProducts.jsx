@@ -4,18 +4,12 @@ import {
   useUpdateProductMutation,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
-import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import Image from "next/image";
 
 const AllProducts = () => {
-  const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data: product, isLoading, refetch, error } = useGetProductQuery();
-
-  if (currentUser?.role !== "admin") {
-    router.push("/");
-  }
 
   const [updateProduct, { isError }] = useUpdateProductMutation();
 
