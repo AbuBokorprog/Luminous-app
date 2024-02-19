@@ -38,6 +38,11 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
   const [cartDelete, { isLoading: deleteIsLoading }] = useCartDeleteMutation();
   const totalQuantity = cart?.reduce((total, item) => total + item.quantity, 0);
 
+  const totalPrice = cart?.reduce((total, item) => {
+    const itemPrice = (item.discountPrice || item.price) * item.quantity;
+    return total + itemPrice;
+  }, 0);
+
   const [cartUpdate, { isLoading }] = useCartUpdateMutation();
 
   const increaseQuantity = async (id, quantity) => {
@@ -116,7 +121,7 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
                       <h2 className="text-2xl text-center">
                         Your Cart {cart?.length}
                       </h2>
-                      <div className="overflow-y-scroll">
+                      <div className="">
                         {cart?.map((item) => (
                           <div
                             key={item?._id}
@@ -165,6 +170,11 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
                             </div>
                           </div>
                         ))}
+                        <div className="bg-dark-100 py-4 ">
+                          <p className="text-center text-xl text-Red">
+                            Total Price: ${totalPrice}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   ) : (
@@ -179,8 +189,9 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
 
           <div className="flex justify-end items-center lg:mt-36">
             <Link
-              href={"/proceed"}
-              className="px-6 rounded-lg text-xl py-3 hover:bg-primary-400 shadow-xl text-white bg-green"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              href={"/check_out"}
+              className=" text-center w-full rounded-lg text-xl py-3 hover:bg-primary-400 shadow-xl text-white bg-green"
             >
               Proceed
             </Link>

@@ -23,6 +23,7 @@ const billingAddressSchema = mongoose.Schema({
   country: {
     type: String,
     required: true,
+    default: "Bangladesh",
   },
   street: {
     type: String,
