@@ -34,7 +34,12 @@ const Banner = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <Image className="min-h-fit w-screen" src={banner1} alt="Banner 1" />
+          <Image
+            className="min-h-fit w-screen"
+            src={banner1}
+            alt="Banner 1"
+            priority
+          />
         </SwiperSlide>
         <SwiperSlide>
           <Image src={banner2} className="min-h-fit w-screen" alt="Banner 1" />

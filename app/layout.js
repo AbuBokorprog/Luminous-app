@@ -1,10 +1,8 @@
 import { Playfair_Display } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import AuthProvider from "@/utils/provider/auth_provider";
 import ReduxProvider from "@/utils/provider/reduxProvider";
-import CartButton from "@/components/shared/cartButton";
 import Header from "@/components/shared/header";
 
 const inter = Playfair_Display({ subsets: ["latin"], style: ["normal"] });

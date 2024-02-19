@@ -1,5 +1,10 @@
 import Sidebar from "@/components/dashboard/sidebar";
 
+export const metadata = {
+  title: "Dashboard | Luminous",
+  description: "This is a Cosmetics E-Commerce",
+};
+
 const DashboardLayout = ({ children }) => {
   return (
     <div className="dashboard-layout my-10 lg:flex gap-5 items-start">
