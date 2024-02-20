@@ -54,50 +54,12 @@ const Makeup = () => {
       {isLoading ? (
         <p>loading...</p>
       ) : (
-        <div className="flex gap-10 my-6">
-          <div className="w-1/4">
-            <div>
-              <h3 className="text-3xl font-semibold mb-4">
-                Product Categories
-              </h3>
-              <hr />
-              <div className="my-2 text-xl  text-gray-500">
-                <button onClick={() => setSelectedCategory("Makeup")}>
-                  Makeup
-                </button>
-                <div className="ps-5 flex flex-col justify-start items-start">
-                  <button onClick={() => setSelectedCategory("face")}>
-                    Face
-                  </button>
-                  <button onClick={() => setSelectedCategory("lips")}>
-                    Lips
-                  </button>
-                  <button onClick={() => setSelectedCategory("eyes")}>
-                    Eyes
-                  </button>
-                  <button onClick={() => setSelectedCategory("nails")}>
-                    Nails
-                  </button>
-                  <button
-                    onClick={() => setSelectedCategory("Tools_&_accessories")}
-                  >
-                    Tools & Accessories
-                  </button>
-                  <button onClick={() => setSelectedCategory("Top Brands")}>
-                    Top Brands
-                  </button>
-                  <button onClick={() => setSelectedCategory("makeupKits")}>
-                    Makeup Kits
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <>
           {filteredProducts?.length > 0 ? (
-            <div className=" w-2/3 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center lg:gap-8">
+            <div className=" grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center lg:gap-8">
               {filteredProducts?.map((p) => (
                 <div key={p._id}>
-                  <div className="w-full text-center lg:w-64 my-2 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div className="w-full text-center lg:w-72 my-2 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <Image
                       className="rounded-t-lg lg:h-44 w-full"
                       src={p?.images[0]}
@@ -129,7 +91,7 @@ const Makeup = () => {
               <p>Empty</p>
             </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );

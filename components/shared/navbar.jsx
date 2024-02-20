@@ -95,10 +95,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           </button>
         </div>
         {isOpen && (
-          <aside
-            id="default-sidebar"
-            className="fixed top-0 bg-white left-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right"
-          >
+          <aside className="fixed top-0 bg-white left-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right">
             <div className="h-full flex justify-between px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
               <div className="space-y-2 flex-col dark:text-white text-black font-medium">
                 <div>

@@ -54,57 +54,12 @@ const PersonalCare = () => {
       {isLoading ? (
         <p>loading...</p>
       ) : (
-        <div className="flex gap-10 my-6">
-          <div className="w-1/4">
-            <div>
-              <h3 className="text-3xl font-semibold mb-4">
-                Product Categories
-              </h3>
-              <hr />
-              <div className="my-2 text-xl  text-gray-500">
-                <button onClick={() => setSelectedCategory("Personal Care")}>
-                  Personal Care
-                </button>
-                <div className="ps-5 flex flex-col justify-start items-start">
-                  <button onClick={() => setSelectedCategory("bath&shower")}>
-                    Bath & Shower
-                  </button>
-                  <button onClick={() => setSelectedCategory("Bath & Body")}>
-                    Bath & Body
-                  </button>
-                  <button
-                    onClick={() => setSelectedCategory("FeminineHygience")}
-                  >
-                    Feminine Hygiene
-                  </button>
-                  <button onClick={() => setSelectedCategory("FeminineCare")}>
-                    Feminine Care
-                  </button>
-                  <button onClick={() => setSelectedCategory("HomeCare")}>
-                    Home Care
-                  </button>
-                  <button onClick={() => setSelectedCategory("Wellness")}>
-                    Wellness
-                  </button>
-                  <button
-                    onClick={() => setSelectedCategory("Sexual Wellness")}
-                  >
-                    Sexual Wellness
-                  </button>
-                  <button
-                    onClick={() => setSelectedCategory("Shop By Concern")}
-                  >
-                    Shop By Concern
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <>
           {filteredProducts?.length > 0 ? (
-            <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 w-2/3 mx-auto items-center md:gap-4 lg:gap-2">
+            <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center md:gap-4 lg:gap-2">
               {filteredProducts?.map((p) => (
                 <div key={p._id}>
-                  <div className="w-full text-center lg:w-64 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <Image
                       className="rounded-t-lg lg:h-44 w-full"
                       src={p?.images[0]}
@@ -136,7 +91,7 @@ const PersonalCare = () => {
               <p>Empty</p>
             </div>
           )}
-        </div>
+        </>
       )}
     </div>
   );
