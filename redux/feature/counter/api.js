@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const Api = createApi({
   reducerPath: "Api",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://luminous-app.vercel.app/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
   endpoints: (builder) => ({
     getUser: builder.query({
       query: () => "/users",

@@ -126,6 +126,8 @@ const AddProduct = () => {
     { label: "Deodorants/Roll-Ons", value: "Deodorants/Roll-Ons" },
     { label: "Body mist/Spray", value: "BodyMist/Spray" },
     { label: "Perfumes", value: "Perfumes" },
+    { label: "Perfumes (EDT/EDP)", value: "Perfumes (EDT/EDP)" },
+    { label: "High-end Perfume", value: "High-end Perfume" },
     { label: "Fragrance", value: "Fragrance" },
 
     { label: "Masks & Peels", value: "masks&peels" },
