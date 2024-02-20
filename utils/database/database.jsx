@@ -1,5 +1,4 @@
 import { mongoose } from "mongoose";
-import cors from "cors";
 export async function database() {
   try {
     const { connection } = await mongoose.connect(
