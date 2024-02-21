@@ -20,12 +20,15 @@ const Login = () => {
   const onSubmit = async (data) => {
     const email = data.email;
     const password = data.password;
+    console.log(data);
     try {
       const login = await loginUser({ email, password });
+      console.log(login);
       if (login?.data?.message === "Login success") {
         signIn(email, password)
           .then((result) => {
             const loggedIn = result.user;
+            console.log(loggedIn);
             swal("Login successful", "", "success");
             router.push("/");
             reset();
