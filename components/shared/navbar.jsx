@@ -58,6 +58,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  console.log(currentUser);
   return (
     <div className="relative">
       {/* mobile */}

@@ -42,6 +42,7 @@ const Makeup = () => {
     }
   };
   const filteredProducts = filterProductsByCategory(selectedCategory);
+  console.log(error);
   return (
     <div>
       <Image

@@ -1,6 +1,7 @@
 import Cart from "@/models/cart";
 import Products from "@/models/products";
 import { database } from "@/utils/database/database";
+
 import { NextResponse } from "next/server";
 
 database();

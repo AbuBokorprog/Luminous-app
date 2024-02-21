@@ -1,8 +1,9 @@
 import Products from "@/models/products";
 import { database } from "@/utils/database/database";
-import { NextResponse } from "next/server";
-database();
 
+import { NextResponse } from "next/server";
+
+database();
 export async function GET(req, { params }) {
   const { userId } = params;
   try {
