@@ -16,6 +16,7 @@ const ProductSidebar = () => {
   const [activeMen, setActiveMen] = useState(false);
   const [activeClothes, setActiveClothes] = useState(false);
   const [activeNatural, setActiveNatural] = useState(false);
+
   return (
     <div className="relative">
       {/* Mobile menu button */}
@@ -91,8 +92,8 @@ const ProductSidebar = () => {
                     : ""
                 }`}
                 onClick={() => {
-                  setActiveMakeup(!activeMakeup),
-                    setActiveClothes(false),
+                  setActiveMakeup(!activeMakeup);
+                  setActiveClothes(false),
                     setActiveFragrance(false),
                     setActiveHair(false),
                     setActiveMen(false),
@@ -397,6 +398,18 @@ const ProductSidebar = () => {
             </li>
             <li>
               <Link
+                onClick={() => {
+                  setActiveMakeup(false);
+                  setActiveClothes(false),
+                    setActiveFragrance(false),
+                    setActiveHair(false),
+                    setActiveMen(false),
+                    setActiveMom(!activeMom),
+                    setActiveNatural(false),
+                    setActivePersonal(false),
+                    setActiveSkin(false),
+                    setActiveUndergarments(false);
+                }}
                 className={`link ${
                   pathname === "/product_category/mom_baby"
                     ? "text-primary-500"
@@ -406,65 +419,73 @@ const ProductSidebar = () => {
               >
                 Mom & Baby
               </Link>
-              <ul className="ml-4 space-y-2">
-                <li>
-                  <Link href={"/product_category/mom_baby/baby_products"}>
-                    Baby Products
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/baby_care"}>
-                    Baby Care
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/bath_time"}>
-                    Bath Time
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/creams_lotion_oils"}>
-                    Creams, Lotions & Oils
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/soap_bodywash"}>
-                    Soap & Bodywash
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/cream_moisturizer"}>
-                    Creams & Moisturizers
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/lotion"}>Lotion</Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/shampoo"}>
-                    Shampoo
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/powder"}>Powder</Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/oil"}>Oil</Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/moisturizer"}>
-                    Moisturizer
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/sun_screen"}>
-                    Sunscreen
-                  </Link>
-                </li>
-                <li>
-                  <Link href={"/product_category/mom_baby/wipes"}>Wipes</Link>
-                </li>
-              </ul>
+              {activeMom && (
+                <ul className="ml-4 space-y-2">
+                  <li>
+                    <Link href={"/product_category/mom_baby/baby_products"}>
+                      Baby Products
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/baby_care"}>
+                      Baby Care
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/bath_time"}>
+                      Bath Time
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={"/product_category/mom_baby/creams_lotion_oils"}
+                    >
+                      Creams, Lotions & Oils
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/soap_bodywash"}>
+                      Soap & Bodywash
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/cream_moisturizer"}>
+                      Creams & Moisturizers
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/lotion"}>
+                      Lotion
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/shampoo"}>
+                      Shampoo
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/powder"}>
+                      Powder
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/oil"}>Oil</Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/moisturizer"}>
+                      Moisturizer
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/sun_screen"}>
+                      Sunscreen
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/product_category/mom_baby/wipes"}>Wipes</Link>
+                  </li>
+                </ul>
+              )}
             </li>
             <li>
               <Link
@@ -492,12 +513,26 @@ const ProductSidebar = () => {
               {activeUndergarments && (
                 <ul className="ml-4 space-y-2">
                   <li>
-                    <Link href={"/product_category/undergarments/bra"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/undergarments/bra"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/undergarments/bra"}
+                    >
                       Bra
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/undergarments/panty"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/undergarments/panty"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/undergarments/panty"}
+                    >
                       Panty
                     </Link>
                   </li>
@@ -528,35 +563,86 @@ const ProductSidebar = () => {
               {activeMen && (
                 <ul className="ml-4 space-y-2">
                   <li>
-                    <Link href={"/product_category/men/top-brands"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/men/top_brands`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/men/top_brands"}
+                    >
                       Top Brands
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/men/fragrance"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/men/fragrance`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/men/fragrance"}
+                    >
                       Fragrance
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/men/hair_care"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/men/hair_care`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/men/hair_care"}
+                    >
                       Hair Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/men/skin_care"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/men/skin_care`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/men/skin_care"}
+                    >
                       Skin Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/men/shaving"}>Shaving</Link>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/men/shaving`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/men/shaving"}
+                    >
+                      Shaving
+                    </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/men/bath_body"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/men/bath_body`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/men/bath_body"}
+                    >
                       Bath & Body
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/men/shop_concern"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/men/shop_concern`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/men/shop_concern"}
+                    >
                       Shop by Concern
                     </Link>
                   </li>

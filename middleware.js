@@ -25,7 +25,7 @@ export function middleware(request) {
     request.nextUrl.pathname === "/admin/:path*" ||
     request.nextUrl.pathname === "/users/:path*" ||
     request.nextUrl.pathname === "/manager/:path*" ||
-    request.nextUrl.pathname === "/product_category/:path*" ||
+    // request.nextUrl.pathname === "/product_category/:path*" ||
     request.nextUrl.pathname === "/shop_by_concern/:path*" ||
     request.nextUrl.pathname === "/brand/:path*"
   ) {
@@ -42,7 +42,7 @@ export const config = {
     "/login",
     "/sign_up",
     "/view_cart",
-    "/product_category/:path*",
+    // "/product_category/:path*",
     "/shop_by_concern/:path*",
     "/users/:path*",
     "/manager/:path*",
