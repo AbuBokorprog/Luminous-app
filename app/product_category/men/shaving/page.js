@@ -1,10 +1,10 @@
-import Shaving from "@/components/productCategory/men/shaving";
+import SubCategory from "@/components/productCategory/skin/sub_category";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <Shaving />
+      <SubCategory category={"Men"} SubCategory={"Shaving"} title={"Shaving"} />
     </div>
   );
 }

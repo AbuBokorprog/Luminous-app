@@ -29,7 +29,7 @@ const Category = () => {
         <Link href={"/product_category/hair"}>
           <Image src={image4} alt="Hair" />
         </Link>
-        <Link href={"/product_category/kbeauty"}>
+        <Link href={"/product_category/skin/k_beauty"}>
           <Image src={image5} alt="K-beauty" />
         </Link>
         <Link href={"/product_category/mom_baby"}>

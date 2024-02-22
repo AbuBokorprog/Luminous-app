@@ -19,34 +19,34 @@ const Concern = () => {
         SHOP by concern
       </h2>
       <div className="grid md:grid-cols-1 lg:grid-cols-5 mx-auto gap-4 my-16">
-        <Link href={"/shop_by_concern/acne"}>
+        <Link href={"/product_category/shop_by_concern/acne"}>
           <Image src={image1} alt="Acne" />
         </Link>
-        <Link href={"/shop_by_concern/anti_aging"}>
+        <Link href={"/product_category/shop_by_concern/anti_aging"}>
           <Image src={image2} alt="Anti Aging" />
         </Link>
-        <Link href={"/shop_by_concern/dandruff"}>
+        <Link href={"/product_category/shop_by_concern/dandruff"}>
           <Image src={image3} alt="Dandruff" />
         </Link>
-        <Link href={"/shop_by_concern/dry_skin"}>
+        <Link href={"/product_category/shop_by_concern/dry_skin"}>
           <Image src={image4} alt="Dry Skin" />
         </Link>
-        <Link href={"/shop_by_concern/hair_fall"}>
+        <Link href={"/product_category/shop_by_concern/hair_fall"}>
           <Image src={image5} alt="Hair Fall" />
         </Link>
-        <Link href={"/shop_by_concern/hair_thinning"}>
+        <Link href={"/product_category/shop_by_concern/hair_thinning"}>
           <Image src={image6} alt="Hair Thinning" />
         </Link>
-        <Link href={"/shop_by_concern/oil_control"}>
+        <Link href={"/product_category/shop_by_concern/oil_control"}>
           <Image src={image7} alt="Oil Control" />
         </Link>
-        <Link href={"/shop_by_concern/pore"}>
+        <Link href={"/product_category/shop_by_concern/pore"}>
           <Image src={image8} alt="Pore" />
         </Link>
-        <Link href={"/shop_by_concern/sun_burn"}>
+        <Link href={"/product_category/shop_by_concern/sun_burn"}>
           <Image src={image9} alt="Sun Burn" />
         </Link>
-        <Link href={"/shop_by_concern/spot"}>
+        <Link href={"/product_category/shop_by_concern/spot"}>
           <Image src={image10} alt="Spot" />
         </Link>
       </div>

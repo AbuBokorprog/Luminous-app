@@ -1,10 +1,14 @@
-import Fragrance from "@/components/productCategory/men/fragrance";
+import SubCategory from "@/components/productCategory/skin/sub_category";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <Fragrance />
+      <SubCategory
+        category={"Men"}
+        SubCategory={"Fragrance"}
+        title={"Fragrance"}
+      />
     </div>
   );
 }

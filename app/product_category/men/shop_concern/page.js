@@ -1,10 +1,14 @@
-import ShopConcern from "@/components/productCategory/men/shop_concern";
+import SubCategory from "@/components/productCategory/skin/sub_category";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <ShopConcern />
+      <SubCategory
+        category={"Men"}
+        SubCategory={"Shop By Concern"}
+        title={"Shop By Concern"}
+      />
     </div>
   );
 }

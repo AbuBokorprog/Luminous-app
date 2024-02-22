@@ -70,7 +70,7 @@ const AddProduct = () => {
     { label: "Serums", value: "Serums" },
     { label: "cleansing Oils / cleanser", value: "cleansing Oils / cleanser" },
     // hair
-    { label: "Hair", value: "Hair" },
+    { label: "Hair Care", value: "Hair Care" },
     { label: "Top Brands", value: "Top Brands" },
     { label: "Shop By Hair Type", value: "Shop By Hair Type" },
     { label: "Hair Styling", value: "Hairstyling" },
@@ -84,7 +84,7 @@ const AddProduct = () => {
     { label: "Bath & shower", value: "bath&shower" },
     { label: "Bath & Body", value: "Bath & Body" },
     { label: "Shower Gels & Body Wash", value: "Shower Gels & Body Wash" },
-    { label: "Feminine Hygience", value: "FeminineHygience" },
+    { label: "Feminine Hygiene", value: "FeminineHygiene" },
     { label: "Feminine Care", value: "FeminineCare" },
     { label: "Home Care", value: "HomeCare" },
     { label: "Wellness", value: "Wellness" },
@@ -113,7 +113,7 @@ const AddProduct = () => {
     { label: "Creams, lotion and oils", value: "Creams, lotion and oils" },
 
     //tools & accessories
-    { label: "Tools & Accessories", value: "Tools & Accessories" },
+    { label: "Tools & Accessories", value: "Tools_&_accessories" },
     { label: "Loofahs & Sponges", value: "Loofahs & Sponges" },
 
     //men
@@ -125,10 +125,8 @@ const AddProduct = () => {
     // fragrance
     { label: "Deodorants/Roll-Ons", value: "Deodorants/Roll-Ons" },
     { label: "Body mist/Spray", value: "BodyMist/Spray" },
-    { label: "Perfumes", value: "Perfumes" },
     { label: "Perfumes (EDT/EDP)", value: "Perfumes (EDT/EDP)" },
     { label: "High-end Perfume", value: "High-end Perfume" },
-    { label: "Fragrance", value: "Fragrance" },
 
     { label: "Masks & Peels", value: "masks&peels" },
 

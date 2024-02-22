@@ -16,17 +16,10 @@ const Makeup = () => {
     { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
   ] = useCartPostMutation();
   const { refetch } = useCartGetByUserQuery(currentUser?._id);
-  const makeupProducts = products?.filter((p) =>
+  const categoriesProducts = products?.filter((p) =>
     p.category.some((sub) => sub === "Makeup")
   );
-  const [selectedCategory, setSelectedCategory] = useState("Makeup");
 
-  // Function to filter products by category
-  const filterProductsByCategory = (category) => {
-    return makeupProducts?.filter((p) =>
-      p.sub_category.some((sub) => sub === category)
-    );
-  };
   const addToCart = async (id) => {
     const userId = currentUser?._id;
     const productId = id;
@@ -41,8 +34,7 @@ const Makeup = () => {
       alert(error.message);
     }
   };
-  const filteredProducts = filterProductsByCategory(selectedCategory);
-  console.log(error);
+
   return (
     <div>
       <Image
@@ -56,9 +48,9 @@ const Makeup = () => {
         <p>loading...</p>
       ) : (
         <>
-          {filteredProducts?.length > 0 ? (
+          {categoriesProducts?.length > 0 ? (
             <div className=" grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center lg:gap-8">
-              {filteredProducts?.map((p) => (
+              {categoriesProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <Image

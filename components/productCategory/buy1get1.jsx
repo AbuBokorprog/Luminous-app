@@ -1,12 +1,37 @@
 "use client";
-import React from "react";
-import { useGetProductQuery } from "@/redux/feature/counter/api";
+import React, { useContext, useState } from "react";
+import {
+  useCartGetByUserQuery,
+  useCartPostMutation,
+  useGetProductQuery,
+} from "@/redux/feature/counter/api";
 import Image from "next/image";
+import { authContext } from "@/utils/provider/auth_provider";
 const Buy1Get1 = () => {
+  const { currentUser } = useContext(authContext);
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const buy1get1Products = products?.filter((p) =>
     p.offer.some((sub) => sub === "Buy1GET1")
   );
+  const [
+    postCart,
+    { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
+  ] = useCartPostMutation();
+  const { refetch } = useCartGetByUserQuery(currentUser?._id);
+  const addToCart = async (id) => {
+    const userId = currentUser?._id;
+    const productId = id;
+    const cart = { userId, productId };
+    try {
+      const response = await postCart(cart);
+      if (response?.data?.success) {
+        refetch();
+        alert(response?.data?.success);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <div>
       <h4 className="text-lg py-8 bg-dark-200 text-center">Buy 1 Get 1</h4>
@@ -35,7 +60,10 @@ const Buy1Get1 = () => {
                         ${p?.price}
                       </p>
                     </div>
-                    <button className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-violet hover:bg-primary-400">
+                    <button
+                      onClick={() => addToCart(p?._id)}
+                      className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-violet hover:bg-primary-400"
+                    >
                       Add To Card
                     </button>
                   </div>

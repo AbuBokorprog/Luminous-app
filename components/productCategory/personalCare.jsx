@@ -14,15 +14,7 @@ const PersonalCare = () => {
   const personalCareProducts = products?.filter((p) =>
     p.category.some((sub) => sub === "Personal Care")
   );
-  const [selectedCategory, setSelectedCategory] = useState("Personal Care");
 
-  const filterProductsByCategory = (category) => {
-    return personalCareProducts?.filter((p) =>
-      p.sub_category.some((sub) => sub === category)
-    );
-  };
-
-  const filteredProducts = filterProductsByCategory(selectedCategory);
   const [
     postCart,
     { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
@@ -55,9 +47,9 @@ const PersonalCare = () => {
         <p>loading...</p>
       ) : (
         <>
-          {filteredProducts?.length > 0 ? (
+          {personalCareProducts?.length > 0 ? (
             <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center md:gap-4 lg:gap-2">
-              {filteredProducts?.map((p) => (
+              {personalCareProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <Image

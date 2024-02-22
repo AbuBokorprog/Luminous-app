@@ -15,15 +15,6 @@ const Skin = () => {
     p.category.some((sub) => sub === "Skin")
   );
 
-  const [selectedCategory, setSelectedCategory] = useState("SkinCare");
-
-  const filterProductsByCategory = (category) => {
-    return skinProducts?.filter((p) =>
-      p.sub_category.some((sub) => sub === category)
-    );
-  };
-
-  const filteredProducts = filterProductsByCategory(selectedCategory);
   const [
     postCart,
     { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
@@ -56,9 +47,9 @@ const Skin = () => {
         <p>loading...</p>
       ) : (
         <>
-          {filteredProducts.length > 0 ? (
+          {skinProducts?.length > 0 ? (
             <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center md:gap-4 lg:gap-2">
-              {filteredProducts?.map((p) => (
+              {skinProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <Image

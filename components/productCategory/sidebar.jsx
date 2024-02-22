@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 const ProductSidebar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState(false);
+  const [activeConcern, setActiveConcern] = useState(false);
   const [activeMakeup, setActiveMakeup] = useState(false);
   const [activeSkin, setActiveSkin] = useState(false);
   const [activeHair, setActiveHair] = useState(false);
@@ -53,7 +53,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(false),
                     setActiveSkin(false),
-                    setActiveUndergarments(false);
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
                 }}
                 href={"/product_category/buy1get1"}
               >
@@ -77,7 +78,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(false),
                     setActiveSkin(false),
-                    setActiveUndergarments(false);
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
                 }}
                 href={"/product_category/clearance_sell"}
               >
@@ -101,7 +103,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(false),
                     setActiveSkin(false),
-                    setActiveUndergarments(false);
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
                 }}
                 href={"/product_category/makeup"}
               >
@@ -122,7 +125,7 @@ const ProductSidebar = () => {
                     <Link href={"/product_category/makeup/nails"}>Nails</Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/makeup/tools_brushes"}>
+                    <Link href={"/product_category/makeup/tools_brush"}>
                       Tools & Brushes
                     </Link>
                   </li>
@@ -156,7 +159,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(false),
                     setActiveSkin(!activeSkin),
-                    setActiveUndergarments(false);
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
                 }}
                 href={"/product_category/skin"}
               >
@@ -186,7 +190,9 @@ const ProductSidebar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/eye"}>Eye Care</Link>
+                    <Link href={"/product_category/skin/eye_care"}>
+                      Eye Care
+                    </Link>
                   </li>
                   <li>
                     <Link href={"/product_category/skin/hand_feet"}>
@@ -194,7 +200,9 @@ const ProductSidebar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/hair"}>Hair Care</Link>
+                    <Link href={"/product_category/skin/hair_care"}>
+                      Hair Care
+                    </Link>
                   </li>
                   <li>
                     <Link href={"/product_category/skin/shop_concern"}>
@@ -221,7 +229,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(!activePersonal),
                     setActiveSkin(false),
-                    setActiveUndergarments(false);
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
                 }}
                 href={"/product_category/personal_care"}
               >
@@ -273,7 +282,7 @@ const ProductSidebar = () => {
                   </li>
                   <li>
                     <Link
-                      href={"/product_category/personal_care/Sexual_wellness"}
+                      href={"/product_category/personal_care/sexual_wellness"}
                     >
                       Sexual Wellness
                     </Link>
@@ -287,7 +296,7 @@ const ProductSidebar = () => {
                   </li>
                   <li>
                     <Link
-                      href={"/product_category/personal_care/Feminine_care"}
+                      href={"/product_category/personal_care/feminine_care"}
                     >
                       Feminine Care
                     </Link>
@@ -312,7 +321,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(false),
                     setActiveSkin(false),
-                    setActiveUndergarments(false);
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
                 }}
                 href={"/product_category/hair"}
               >
@@ -365,7 +375,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(false),
                     setActiveSkin(false),
-                    setActiveUndergarments(false);
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
                 }}
                 href={"/product_category/fragrance"}
               >
@@ -408,7 +419,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(false),
                     setActiveSkin(false),
-                    setActiveUndergarments(false);
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
                 }}
                 className={`link ${
                   pathname === "/product_category/mom_baby"
@@ -504,7 +516,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(false),
                     setActiveSkin(false),
-                    setActiveUndergarments(!activeUndergarments);
+                    setActiveUndergarments(!activeUndergarments),
+                    setActiveConcern(false);
                 }}
                 href={"/product_category/undergarments"}
               >
@@ -554,7 +567,8 @@ const ProductSidebar = () => {
                     setActiveNatural(false),
                     setActivePersonal(false),
                     setActiveSkin(false),
-                    setActiveUndergarments(false);
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
                 }}
                 href={"/product_category/men"}
               >
@@ -648,6 +662,268 @@ const ProductSidebar = () => {
                   </li>
                 </ul>
               )}
+            </li>
+            <li>
+              <Link
+                className={`link ${
+                  pathname === `/product_category/shop_by_concern`
+                    ? "text-primary-500"
+                    : ""
+                }`}
+                onClick={() => {
+                  setActiveMakeup(false),
+                    setActiveClothes(false),
+                    setActiveFragrance(false),
+                    setActiveHair(false),
+                    setActiveMen(false),
+                    setActiveMom(false),
+                    setActiveNatural(false),
+                    setActivePersonal(false),
+                    setActiveSkin(false),
+                    setActiveUndergarments(false),
+                    setActiveConcern(!activeConcern);
+                }}
+                href={"/product_category/shop_by_concern"}
+              >
+                Shop By Concern
+              </Link>
+              {activeConcern && (
+                <ul className="ml-4 space-y-2">
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/shop_by_concern/acne`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/shop_by_concern/acne"}
+                    >
+                      Acne
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/shop_by_concern/anti_aging`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/shop_by_concern/anti_aging"}
+                    >
+                      Anti Aging
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/shop_by_concern/dandruff`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/shop_by_concern/dandruff"}
+                    >
+                      Dandruff
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/shop_by_concern/dry_skin`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/shop_by_concern/dry_skin"}
+                    >
+                      Dry Skin
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/shop_by_concern/hair_fall`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/shop_by_concern/hair_fall"}
+                    >
+                      Hair Fall
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/shop_by_concern/hair_thinning`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/shop_by_concern/hair_thinning"}
+                    >
+                      Hair Thinning
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/shop_by_concern/oil_control`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/shop_by_concern/oil_control"}
+                    >
+                      Oil Control
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/shop_by_concern/sun_burn`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/shop_by_concern/sun_burn"}
+                    >
+                      Sun Burn
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/shop_by_concern/pore`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/shop_by_concern/pore"}
+                    >
+                      Pore
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === `//product_category/shop_by_concern/spot`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"//product_category/shop_by_concern/spot"}
+                    >
+                      Spot
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li>
+              <Link
+                className={`link ${
+                  pathname === "/product_category/cloth_more"
+                    ? "text-primary-500"
+                    : ""
+                }`}
+                onClick={() => {
+                  setActiveMakeup(false),
+                    setActiveClothes(!activeClothes),
+                    setActiveFragrance(false),
+                    setActiveHair(false),
+                    setActiveMen(false),
+                    setActiveMom(false),
+                    setActiveNatural(false),
+                    setActivePersonal(false),
+                    setActiveSkin(false),
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
+                }}
+                href={"/product_category/cloth_more"}
+              >
+                Clothing & More
+              </Link>
+              {activeClothes && (
+                <ul className="ml-4 space-y-2">
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/cloth_more/leggings"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/cloth_more/leggings"}
+                    >
+                      Leggings
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/cloth_more/trousers"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/cloth_more/trousers"}
+                    >
+                      Trousers
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li>
+              <Link
+                className={`link ${
+                  pathname === "/product_category/natural"
+                    ? "text-primary-500"
+                    : ""
+                }`}
+                onClick={() => {
+                  setActiveMakeup(false),
+                    setActiveClothes(false),
+                    setActiveFragrance(false),
+                    setActiveHair(false),
+                    setActiveMen(false),
+                    setActiveMom(false),
+                    setActiveNatural(!activeNatural),
+                    setActivePersonal(false),
+                    setActiveSkin(false),
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
+                }}
+                href={"/product_category/natural"}
+              >
+                Natural
+              </Link>
+              {/* {activeNatural && (
+                <ul className="ml-4 space-y-2">
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/cloth_more/leggings"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/cloth_more/leggings"}
+                    >
+                      Leggings
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/cloth_more/trousers"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/cloth_more/trousers"}
+                    >
+                      Trousers
+                    </Link>
+                  </li>
+                </ul>
+              )} */}
             </li>
           </ul>
         </div>

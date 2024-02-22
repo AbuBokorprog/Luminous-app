@@ -58,7 +58,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-  console.log(currentUser);
+
   return (
     <div className="relative">
       {/* mobile */}
@@ -318,7 +318,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             </div>
           </div>
         </div>
-        <div className="py-4 bg-white dark:bg-gray-900 gap-8 justify-center flex items-center uppercase font-medium dark:text-white text-black">
+        <div className="py-4 bg-white dark:bg-gray-900 md:gap-2 xl:gap-8 justify-center flex items-center uppercase font-medium dark:text-white text-black">
           <Link href={"/product_category/makeup"}>Makeup</Link>
           <Link href={"/product_category/skin"}>Skin</Link>
           <Link href={"/product_category/hair"}>Hair</Link>
@@ -327,25 +327,25 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <Link href={"/product_category/fragrance"}>Fragrance</Link>
           <Link
             href={"/product_category/undergarments"}
-            className="px-4 py-1 rounded-full text-white bg-SubBlue"
+            className="xl:px-4 py-1 rounded-full text-white bg-SubBlue"
           >
             Undergarments
           </Link>
           <Link
             href={"/product_category/buy1get1"}
-            className="px-4 py-1 rounded-full text-white bg-Coral"
+            className="xl:px-4 py-1 rounded-full text-white bg-Coral"
           >
             Buy 1 GET 1
           </Link>
           <Link
             href={"/product_category/clearance_sell"}
-            className="px-4 py-1 rounded-full text-white bg-green"
+            className=" xl:px-4 py-1 rounded-full text-white bg-green"
           >
-            Clearance Sell
+            Clearance
           </Link>
           <Link
             href={"/product_category/men"}
-            className="px-4 py-1 rounded-full text-white bg-Gold"
+            className=" xl:px-4 py-1 rounded-full text-white bg-Gold"
           >
             Men
           </Link>

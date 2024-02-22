@@ -1,10 +1,14 @@
-import HairCare from "@/components/productCategory/men/hair_care";
+import SubCategory from "@/components/productCategory/skin/sub_category";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <HairCare />
+      <SubCategory
+        category={"Men"}
+        SubCategory={"HairCare"}
+        title={"Hair Care"}
+      />
     </div>
   );
 }

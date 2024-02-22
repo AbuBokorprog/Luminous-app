@@ -1,12 +1,38 @@
 "use client";
-import React from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
-import { useGetProductQuery } from "@/redux/feature/counter/api";
+import {
+  useCartGetByUserQuery,
+  useCartPostMutation,
+  useGetProductQuery,
+} from "@/redux/feature/counter/api";
+import { authContext } from "@/utils/provider/auth_provider";
 const Clearance = () => {
+  const { currentUser } = useContext(authContext);
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const clearanceProducts = products?.filter((p) =>
     p.offer.some((sub) => sub === "ClearanceSale")
   );
+
+  const [
+    postCart,
+    { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
+  ] = useCartPostMutation();
+  const { refetch } = useCartGetByUserQuery(currentUser?._id);
+  const addToCart = async (id) => {
+    const userId = currentUser?._id;
+    const productId = id;
+    const cart = { userId, productId };
+    try {
+      const response = await postCart(cart);
+      if (response?.data?.success) {
+        refetch();
+        alert(response?.data?.success);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div>
@@ -36,7 +62,10 @@ const Clearance = () => {
                         ${p?.price}
                       </p>
                     </div>
-                    <button className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-violet hover:bg-primary-400">
+                    <button
+                      onClick={() => addToCart(p?._id)}
+                      className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-violet hover:bg-primary-400"
+                    >
                       Add To Card
                     </button>
                   </div>
