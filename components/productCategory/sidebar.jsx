@@ -113,29 +113,86 @@ const ProductSidebar = () => {
               {activeMakeup && (
                 <ul className="ml-4 space-y-2">
                   <li>
-                    <Link href={"/product_category/makeup/face"}>Face</Link>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/makeup/face"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/makeup/face"}
+                    >
+                      Face
+                    </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/makeup/lips"}>Lips</Link>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/makeup/lips"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/makeup/lips"}
+                    >
+                      Lips
+                    </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/makeup/eyes"}>Eyes</Link>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/makeup/eyes"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/makeup/eyes"}
+                    >
+                      Eyes
+                    </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/makeup/nails"}>Nails</Link>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/makeup/nails"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/makeup/nails"}
+                    >
+                      Nails
+                    </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/makeup/tools_brush"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/makeup/tools_brush"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/makeup/tools_brush"}
+                    >
                       Tools & Brushes
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/makeup/top_brands"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/skin"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/makeup/top_brands"}
+                    >
                       Top Brands
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/makeup/makeup_kits"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/skin"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/makeup/makeup_kits"}
+                    >
                       Makeup Kits
                     </Link>
                   </li>
@@ -169,43 +226,110 @@ const ProductSidebar = () => {
               {activeSkin && (
                 <ul className="ml-4 space-y-2">
                   <li>
-                    <Link href={"/product_category/skin/face"}>Face</Link>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/skin/face"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/skin/face"}
+                    >
+                      Face
+                    </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/body"}>Body</Link>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/skin/body"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/skin/body"}
+                    >
+                      Body
+                    </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/k_beauty"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/skin/sun_care"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/skin/sun_care"}
+                    >
                       K-Beauty
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/sun_care"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/skin/sun_care"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/skin/sun_care"}
+                    >
                       Sun Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/lip_balms"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/skin/lip_balms"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/skin/lip_balms"}
+                    >
                       Lip balms/Lip Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/eye_care"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/skin/eye_care"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/skin/eye_care"}
+                    >
                       Eye Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/hand_feet"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/personal_care"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/skin/hand_feet"}
+                    >
                       Hand & Feet
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/hair_care"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/personal_care"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/skin/hair_care"}
+                    >
                       Hair Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/skin/shop_concern"}>
+                    <Link
+                      className={`link ${
+                        pathname === "/product_category/personal_care"
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/skin/shop_concern"}
+                    >
                       Shop By Concern
                     </Link>
                   </li>
@@ -239,49 +363,111 @@ const ProductSidebar = () => {
               {activePersonal && (
                 <ul className="ml-4 space-y-2">
                   <li>
-                    <Link href={"/product_category/personal_care/face"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/personal_care/face`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/personal_care/face"}
+                    >
                       Face
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/personal_care/body"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/personal_care/body`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/personal_care/body"}
+                    >
                       Body
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href={"/product_category/personal_care/feminine_hygiene"}
+                      className={`link ${
+                        pathname ===
+                        `/product_category/personal_care/bath_shower`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/personal_care/bath_shower"}
                     >
                       Feminine Hygiene
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/personal_care/bath_shower"}>
+                    <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/personal_care/bath_shower`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/personal_care/bath_shower"}
+                    >
                       Bath & Shower
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/personal_care/oral_care"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/personal_care/oral_care`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/personal_care/oral_care"}
+                    >
                       Oral Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/personal_care/home_care"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/personal_care/home_care`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/personal_care/home_care"}
+                    >
                       Home Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/personal_care/hand_feet"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/personal_care/hand_feet`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/personal_care/hand_feet"}
+                    >
                       Hand & Feet
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/personal_care/wellness"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/personal_care/wellness`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/personal_care/wellness"}
+                    >
                       Wellness
                     </Link>
                   </li>
                   <li>
                     <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/personal_care/sexual_wellness`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
                       href={"/product_category/personal_care/sexual_wellness"}
                     >
                       Sexual Wellness
@@ -289,6 +475,12 @@ const ProductSidebar = () => {
                   </li>
                   <li>
                     <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/personal_care/tools_accessories`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
                       href={"/product_category/personal_care/tools_accessories"}
                     >
                       Tools & Accessories
@@ -296,6 +488,12 @@ const ProductSidebar = () => {
                   </li>
                   <li>
                     <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/personal_care/feminine_care`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
                       href={"/product_category/personal_care/feminine_care"}
                     >
                       Feminine Care
@@ -331,27 +529,62 @@ const ProductSidebar = () => {
               {activeHair && (
                 <ul className="ml-4 space-y-2">
                   <li>
-                    <Link href={"/product_category/hair/hair_care"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/hair/hair_care`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/hair/hair_care"}
+                    >
                       Hair Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/hair/shop_concern"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/hair/shop_concern`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/hair/shop_concern"}
+                    >
                       Shop By Concern
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/hair/hair_styling"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/hair/hair_styling`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/hair/hair_styling"}
+                    >
                       Hair Styling
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/hair/shop_hair_type"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/hair/shop_hair_type`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/hair/shop_hair_type"}
+                    >
                       Shop By Hair Type
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/hair/tools_accessories"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/hair/tools_accessories`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/hair/tools_accessories"}
+                    >
                       Tools & Accessories
                     </Link>
                   </li>
@@ -385,22 +618,50 @@ const ProductSidebar = () => {
               {activeFragrance && (
                 <ul className="ml-4 space-y-2">
                   <li>
-                    <Link href={"/product_category/fragrance/perfumes"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/fragrance/perfumes`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/fragrance/perfumes"}
+                    >
                       Perfumes (EDT/EDP)
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/fragrance/body_mist"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/fragrance/body_mist`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/fragrance/body_mist"}
+                    >
                       Body Mist/Spray
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/fragrance/deodorants"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/fragrance/deodorants`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/fragrance/deodorants"}
+                    >
                       Deodorants/Roll-Ons
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/fragrance/high_perfume"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/fragrance/high_perfume`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/fragrance/high_perfume"}
+                    >
                       High-end Perfume
                     </Link>
                   </li>
@@ -434,67 +695,162 @@ const ProductSidebar = () => {
               {activeMom && (
                 <ul className="ml-4 space-y-2">
                   <li>
-                    <Link href={"/product_category/mom_baby/baby_products"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/baby_products`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/baby_products"}
+                    >
                       Baby Products
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/baby_care"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/baby_care`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/baby_care"}
+                    >
                       Baby Care
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/bath_time"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/bath_time`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/bath_time"}
+                    >
                       Bath Time
                     </Link>
                   </li>
                   <li>
                     <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/mom_baby/creams_lotion_oils`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
                       href={"/product_category/mom_baby/creams_lotion_oils"}
                     >
                       Creams, Lotions & Oils
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/soap_bodywash"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/soap_bodywash`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/soap_bodywash"}
+                    >
                       Soap & Bodywash
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/cream_moisturizer"}>
+                    <Link
+                      className={`link ${
+                        pathname ===
+                        `/product_category/mom_baby/cream_moisturizer`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/cream_moisturizer"}
+                    >
                       Creams & Moisturizers
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/lotion"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/lotion`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/lotion"}
+                    >
                       Lotion
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/shampoo"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/shampoo`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/shampoo"}
+                    >
                       Shampoo
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/powder"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/powder`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/powder"}
+                    >
                       Powder
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/oil"}>Oil</Link>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/oil`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/oil"}
+                    >
+                      Oil
+                    </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/moisturizer"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/moisturizer`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/moisturizer"}
+                    >
                       Moisturizer
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/sun_screen"}>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/sun_screen`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/sun_screen"}
+                    >
                       Sunscreen
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/product_category/mom_baby/wipes"}>Wipes</Link>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/mom_baby/wipes`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/mom_baby/wipes"}
+                    >
+                      Wipes
+                    </Link>
                   </li>
                 </ul>
               )}
@@ -811,7 +1167,7 @@ const ProductSidebar = () => {
                           ? "text-primary-500"
                           : ""
                       }`}
-                      href={"//product_category/shop_by_concern/spot"}
+                      href={"/product_category/shop_by_concern/spot"}
                     >
                       Spot
                     </Link>

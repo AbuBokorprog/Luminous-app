@@ -1,6 +1,5 @@
 import ShippingAddress from "@/models/shippingAddress";
 import { database } from "@/utils/database/database";
-
 import { NextResponse } from "next/server";
 
 database();
@@ -10,11 +9,10 @@ export async function POST(req, res) {
     lastName,
     userId,
     companyName,
-    country,
     street,
     state,
     town,
-    postCode,
+    postcode,
     phone,
     email,
   } = await req.json();
@@ -25,11 +23,10 @@ export async function POST(req, res) {
       lastName,
       userId,
       companyName,
-      country,
       street,
       state,
       town,
-      postCode,
+      postcode,
       phone,
       email,
     });

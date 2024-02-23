@@ -1,10 +1,10 @@
-import Dandruff from "@/components/shopByConcern/dandruff";
+import Concern from "@/components/shopByConcern/acne";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <Dandruff />
+      <Concern concern={"Dandruff"} title={"Dandruff"} />
     </div>
   );
 }

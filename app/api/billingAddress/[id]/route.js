@@ -23,11 +23,10 @@ export async function PUT(req, { params }) {
     lastName,
     userId,
     companyName,
-    country,
     street,
     state,
     town,
-    postCode,
+    postcode,
     phone,
     email,
   } = await req.json();
@@ -35,18 +34,18 @@ export async function PUT(req, { params }) {
     const updateBillingAddress = await BillingAddress.findOneAndUpdate(
       { _id: id },
       {
-        firstName,
-        lastName,
-        userId,
-        companyName,
-        country,
-        street,
-        state,
-        town,
-        postCode,
-        phone,
-        email,
-      }
+        firstName: firstName,
+        lastName: lastName,
+        userId: userId,
+        companyName: companyName,
+        street: street,
+        state: state,
+        town: town,
+        postcode: postcode,
+        phone: phone,
+        email: email,
+      },
+      { new: true, runValidators: true }
     );
     if (!updateBillingAddress) {
       return NextResponse.json({

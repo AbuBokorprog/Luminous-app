@@ -1,10 +1,10 @@
-import OilControl from "@/components/shopByConcern/oilControl";
+import Concern from "@/components/shopByConcern/acne";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <OilControl />
+      <Concern concern={"Oil Control"} title={"Oil Control"} />
     </div>
   );
 }

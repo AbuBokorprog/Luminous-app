@@ -1,10 +1,10 @@
-import Acne from "@/components/shopByConcern/acne";
+import Concern from "@/components/shopByConcern/acne";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <Acne />
+      <Concern concern={"Acne"} title={"Acne"} />
     </div>
   );
 }

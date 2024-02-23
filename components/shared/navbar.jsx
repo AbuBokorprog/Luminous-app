@@ -154,7 +154,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         )}
 
         {/* Search bar centered */}
-        <div className="bg-white dark:bg-gray-900 border-b lg:hidden block border-gray-200 dark:border-gray-600 p-2">
+        <div className="bg-white relative dark:bg-gray-900 border-b lg:hidden block border-gray-200 dark:border-gray-600 p-2">
           <div className="flex justify-center items-center">
             <input
               type="search"
@@ -202,7 +202,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             >
               Luminous
             </Link>
-            <div className="flex items-center gap-6">
+            <div className="flex relative items-center gap-6">
               <div>
                 <input
                   type="search"

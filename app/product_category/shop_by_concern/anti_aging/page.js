@@ -1,10 +1,10 @@
-import AntiAging from "@/components/shopByConcern/antiAging";
+import Concern from "@/components/shopByConcern/acne";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <AntiAging />
+      <Concern concern={"Anti aging"} title={"Anti aging"} />
     </div>
   );
 }

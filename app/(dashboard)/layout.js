@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }) => {
       <div className="lg:w-1/4">
         <Sidebar />
       </div>
-      <main className="lg:w-3/4 bg-dark-100 lg:h-screen rounded-lg p-2 overflow-y-scroll">
+      <main className="lg:w-3/4 bg-gray-100 lg:h-screen rounded-lg p-2 overflow-y-scroll">
         {children}
       </main>
     </div>

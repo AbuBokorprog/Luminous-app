@@ -79,6 +79,52 @@ export const Api = createApi({
         method: "DELETE",
       }),
     }),
+    getBillingAddress: builder.query({
+      query: () => "/billingAddress",
+    }),
+    getBillingAddressById: builder.query({
+      query: (id) => `/billingAddress/${id}`,
+    }),
+    getBillingAddressByUserId: builder.query({
+      query: (userId) => `/billingAddress/userId/${userId}`,
+    }),
+    postBillingAddress: builder.mutation({
+      query: (data) => ({
+        url: "/billingAddress",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    updateBillingAddress: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/billingAddress/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
+    getShippingAddress: builder.query({
+      query: () => "/shippingAddress",
+    }),
+    getShippingAddressById: builder.query({
+      query: (id) => `/shippingAddress/${id}`,
+    }),
+    getShippingAddressByUserId: builder.query({
+      query: (userId) => `/shippingAddress/userId/${userId}`,
+    }),
+    postShippingAddress: builder.mutation({
+      query: (data) => ({
+        url: `/shippingAddress`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+    updateShippingAddress: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/shippingAddress/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -97,4 +143,14 @@ export const {
   useCartGetByUserQuery,
   useCartUpdateMutation,
   useCartDeleteMutation,
+  useGetBillingAddressQuery,
+  useGetBillingAddressByIdQuery,
+  useGetBillingAddressByUserIdQuery,
+  usePostBillingAddressMutation,
+  useUpdateBillingAddressMutation,
+  useGetShippingAddressQuery,
+  useGetShippingAddressByIdQuery,
+  useGetShippingAddressByUserIdQuery,
+  usePostShippingAddressMutation,
+  useUpdateShippingAddressMutation,
 } = Api;

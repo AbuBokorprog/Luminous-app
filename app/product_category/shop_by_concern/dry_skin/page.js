@@ -1,10 +1,10 @@
-import DrySkin from "@/components/shopByConcern/drySkin";
+import Concern from "@/components/shopByConcern/acne";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <DrySkin />
+      <Concern concern={"Dry Skin"} title={"Dry Skin"} />
     </div>
   );
 }

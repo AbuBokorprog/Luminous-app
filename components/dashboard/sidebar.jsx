@@ -4,8 +4,27 @@ import Link from "next/link";
 import { useContext } from "react";
 
 const Sidebar = () => {
-  const { user, currentUser } = useContext(authContext);
-
+  const { user, currentUser, logout } = useContext(authContext);
+  const logoutHandler = () => {
+    fetch("/api/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          logout()
+            .then(() => {})
+            .catch((error) => {});
+        } else {
+          console.error("Logout request failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error during logout:", error?.message);
+      });
+  };
   return (
     <>
       <div
@@ -89,17 +108,21 @@ const Sidebar = () => {
             {/* common */}
             <hr className="border-2 mt-44" />
             <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-              <Link className="lg:text-lg mx-auto" href="/dashboard/profile">
+              {/* <Link className="lg:text-lg mx-auto" href="/dashboard/profile">
                 Profile
-              </Link>
+              </Link> */}
             </li>
             <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-              <Link className="lg:text-lg mx-auto" href="/settings">
-                Settings
+              <Link className="lg:text-lg mx-auto" href="/">
+                Home
               </Link>
             </li>
             <li className="py-2 px-4 my-4 text-center hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full">
-              <Link className="lg:text-lg mx-auto" href="/profile">
+              <Link
+                onClick={logoutHandler}
+                className="lg:text-lg mx-auto"
+                href="/profile"
+              >
                 Logout
               </Link>
             </li>

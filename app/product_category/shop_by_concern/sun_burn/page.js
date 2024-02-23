@@ -1,10 +1,10 @@
-import SunBurn from "@/components/shopByConcern/sunBurn";
+import Concern from "@/components/shopByConcern/acne";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <SunBurn />
+      <Concern concern={"Sun Burn"} title={"Sun Burn"} />
     </div>
   );
 }
