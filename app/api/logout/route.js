@@ -6,6 +6,8 @@ export async function POST(req) {
     message: "logout successfully",
     status: 200,
   });
-  response.cookies.delete("authToken");
+  response.cookies.set("authToken", "", {
+    expiresIn: new Date(0),
+  });
   return response;
 }

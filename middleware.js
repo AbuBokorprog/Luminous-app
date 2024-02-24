@@ -8,6 +8,12 @@ export function middleware(request) {
     });
   }
   if (
+    request.nextUrl.pathname === "/api/login" ||
+    request.nextUrl.pathname === "/api/sign_up"
+  ) {
+    return;
+  }
+  if (
     request.nextUrl.pathname === "/login" ||
     request.nextUrl.pathname === "/sign_up"
   ) {
