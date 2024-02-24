@@ -3,21 +3,41 @@ import {
   useDeleteUserMutation,
   useGetUserQuery,
 } from "@/redux/feature/counter/api";
+import swal from "sweetalert";
 import Image from "next/image";
 import { authContext } from "@/utils/provider/auth_provider";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { FaTrash } from "react-icons/fa";
 const AllUsers = () => {
   const { data, isError, isLoading, refetch } = useGetUserQuery();
-  const { userDelete, currentUser } = useContext(authContext);
+  const { currentUser } = useContext(authContext);
 
   const [deleteUser, { error }] = useDeleteUserMutation();
   const deleteHandler = async (id) => {
-    console.log(id);
-    const result = await deleteUser(id);
-    alert(result?.data?.message);
-    if (result.data?.message === "User deleted successfully") {
-      refetch();
+    try {
+      const willDelete = await swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this user!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+
+      if (willDelete) {
+        swal("successfully! This User has been deleted!", {
+          icon: "success",
+        });
+
+        const result = await deleteUser(id);
+
+        if (result.data?.message === "User deleted successfully") {
+          refetch();
+        }
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
   return (

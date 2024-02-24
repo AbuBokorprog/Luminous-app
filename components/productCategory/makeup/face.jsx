@@ -8,7 +8,9 @@ import {
   useGetProductQuery,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useRouter } from "next/navigation";
 const Face = ({ face, title }) => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const [
@@ -29,10 +31,14 @@ const Face = ({ face, title }) => {
     const productId = id;
     const cart = { userId, productId };
     try {
-      const response = await postCart(cart);
-      if (response?.data?.success) {
-        refetch();
-        alert(response?.data?.success);
+      if (currentUser?.email) {
+        const response = await postCart(cart);
+        if (response?.data?.success) {
+          refetch();
+          alert(response?.data?.success);
+        }
+      } else {
+        router.push("/login");
       }
     } catch (error) {
       alert(error.message);

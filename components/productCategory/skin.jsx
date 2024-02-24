@@ -7,8 +7,11 @@ import {
 import React, { useContext, useState } from "react";
 import Image from "next/image";
 import banner from "@/public/images/pageBanner/SkinCafe-Category-Banner.webp";
+import toast, { Toaster } from "react-hot-toast";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useRouter } from "next/navigation";
 const Skin = () => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const skinProducts = products?.filter((p) =>
@@ -25,17 +28,22 @@ const Skin = () => {
     const productId = id;
     const cart = { userId, productId };
     try {
-      const response = await postCart(cart);
-      if (response?.data?.success) {
-        refetch();
-        alert(response?.data?.success);
+      if (currentUser?.email) {
+        const response = await postCart(cart);
+        if (response?.data?.success) {
+          refetch();
+          toast.success(response?.data?.success);
+        }
+      } else {
+        router.push("/login");
       }
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
   return (
     <div>
+      <Toaster />
       <Image
         className="w-full h-28"
         src={banner}

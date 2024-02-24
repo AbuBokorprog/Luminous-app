@@ -3,6 +3,7 @@ import {
   useGetProductQuery,
   useUpdateProductMutation,
 } from "@/redux/feature/counter/api";
+import swal from "sweetalert";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
 import Image from "next/image";

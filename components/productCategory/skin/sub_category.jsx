@@ -1,4 +1,5 @@
 "use client";
+import toast, { Toaster } from "react-hot-toast";
 import {
   useCartGetByUserQuery,
   useCartPostMutation,
@@ -7,7 +8,9 @@ import {
 import React, { useContext } from "react";
 import Image from "next/image";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useRouter } from "next/navigation";
 const SubCategory = ({ category, SubCategory, title }) => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const categoriesProducts = products?.filter((p) =>
@@ -27,10 +30,14 @@ const SubCategory = ({ category, SubCategory, title }) => {
     const productId = id;
     const cart = { userId, productId };
     try {
-      const response = await postCart(cart);
-      if (response?.data?.success) {
-        refetch();
-        alert(response?.data?.success);
+      if (currentUser?.email) {
+        const response = await postCart(cart);
+        if (response?.data?.success) {
+          refetch();
+          toast.success(`${response?.data?.success}`);
+        }
+      } else {
+        router.push("/login");
       }
     } catch (error) {
       alert(error.message);
@@ -38,6 +45,7 @@ const SubCategory = ({ category, SubCategory, title }) => {
   };
   return (
     <div>
+      <Toaster />
       <h4 className="text-lg py-8 bg-dark-200 text-center">{title}</h4>
       {isLoading ? (
         <p>loading...</p>

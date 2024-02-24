@@ -1,6 +1,7 @@
 "use client";
 import React, { useContext } from "react";
 import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
 import undergarments from "@/public/images/pageBanner/undergarments-catagory-banner.webp";
 import {
   useCartGetByUserQuery,
@@ -8,7 +9,9 @@ import {
   useGetProductQuery,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useRouter } from "next/navigation";
 const Undergarments = () => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const undergarmentsProducts = products?.filter((p) =>
@@ -25,18 +28,23 @@ const Undergarments = () => {
     const productId = id;
     const cart = { userId, productId };
     try {
-      const response = await postCart(cart);
-      if (response?.data?.success) {
-        refetch();
-        alert(response?.data?.success);
+      if (currentUser?.email) {
+        const response = await postCart(cart);
+        if (response?.data?.success) {
+          refetch();
+          toast.success(`${response?.data?.success}`);
+        }
+      } else {
+        router.push("/login");
       }
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 
   return (
     <div>
+      <Toaster />
       <Image
         className="w-full h-28"
         src={undergarments}

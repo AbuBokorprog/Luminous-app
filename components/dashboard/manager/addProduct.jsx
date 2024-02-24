@@ -6,6 +6,7 @@ import {
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 const AddProduct = () => {
   const { currentUser } = useContext(authContext);
 
@@ -230,15 +231,16 @@ const AddProduct = () => {
     };
     try {
       const result = await postProduct(product);
-      alert(result?.data?.message);
+      toast.success(result?.data?.message);
       refetch();
       reset();
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
   return (
     <div className="py-4 px-2">
+      <Toaster />
       <div>
         <h2 className="text-3xl font-medium text-center">Add Product Form</h2>
       </div>

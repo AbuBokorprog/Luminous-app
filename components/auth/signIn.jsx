@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { authContext } from "@/utils/provider/auth_provider";
 import { usePostUserMutation } from "@/redux/feature/counter/api";
 import { useRouter } from "next/navigation";
-import swal from "sweetalert";
+import toast, { Toaster } from "react-hot-toast";
 
 const SignIn = () => {
   const { createUser, updateUser } = useContext(authContext);
@@ -42,14 +42,14 @@ const SignIn = () => {
             const loggedUser = result.user;
             updateUser(displayName, photoURL)
               .then(() => {
-                swal("Registered successful", "", "success");
+                toast.success("Registered successful");
                 router.push("/");
                 reset();
               })
               .catch((error) => {});
           })
           .catch((error) => {
-            swal(`${error.message}`, "", "error");
+            toast.error(error.message);
           });
       }
     } catch (err) {
@@ -59,6 +59,7 @@ const SignIn = () => {
 
   return (
     <div className="mx-auto flex justify-center my-10 lg:my-20 ">
+      <Toaster />
       <div className="w-full max-w-lg p-4 border bg-primary-100 border-dark-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-dark-800 dark:border-dark-700">
         <h5 className="text-3xl text-center font-medium text-dark-900 dark:text-white">
           Registered

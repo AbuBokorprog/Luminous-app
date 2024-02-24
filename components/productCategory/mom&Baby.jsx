@@ -7,7 +7,10 @@ import {
   useGetProductQuery,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 const Mom_Baby = () => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data: products, isLoading, isError, error } = useGetProductQuery();
   const momBabyProducts = products?.filter((p) =>
@@ -23,17 +26,22 @@ const Mom_Baby = () => {
     const productId = id;
     const cart = { userId, productId };
     try {
-      const response = await postCart(cart);
-      if (response?.data?.success) {
-        refetch();
-        alert(response?.data?.success);
+      if (currentUser?.email) {
+        const response = await postCart(cart);
+        if (response?.data?.success) {
+          refetch();
+          toast.success(response?.data?.success);
+        }
+      } else {
+        router.push("/login");
       }
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
   return (
     <div>
+      <Toaster />
       <h4 className="text-center text-xl py-8 bg-dark-200">Mom & Baby</h4>
       {isLoading ? (
         <p>loading...</p>

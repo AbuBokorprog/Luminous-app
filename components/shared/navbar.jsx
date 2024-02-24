@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
+import toast, { Toaster } from "react-hot-toast";
 import { authContext } from "@/utils/provider/auth_provider";
 import {
   useCartGetByUserQuery,
@@ -27,14 +28,16 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         if (response.ok) {
           refetch();
           logout()
-            .then(() => {})
+            .then(() => {
+              toast.success("Logged out");
+            })
             .catch((error) => {});
         } else {
-          console.error("Logout request failed");
+          toast.error("Logout request failed");
         }
       })
       .catch((error) => {
-        console.error("Error during logout:", error?.message);
+        toast.error("Error during logout:", error?.message);
       });
   };
   const {
@@ -64,6 +67,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
   return (
     <div className="relative">
+      <Toaster />
       {/* mobile */}
       <div>
         <div className="bg-white lg:hidden sm:block dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600 flex justify-between items-center p-2">

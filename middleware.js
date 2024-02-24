@@ -24,9 +24,7 @@ export function middleware(request) {
   if (
     request.nextUrl.pathname === "/admin/:path*" ||
     request.nextUrl.pathname === "/users/:path*" ||
-    request.nextUrl.pathname === "/manager/:path*" ||
-    request.nextUrl.pathname === "/product_category/:path*" ||
-    request.nextUrl.pathname === "/brand/:path*"
+    request.nextUrl.pathname === "/manager/:path*"
   ) {
     if (!authToken) {
       return NextResponse.redirect(new URL("/login", request.url));
@@ -41,10 +39,8 @@ export const config = {
     "/login",
     "/sign_up",
     "/view_cart",
-    "/product_category/:path*",
     "/users/:path*",
     "/manager/:path*",
     "/admin/:path*",
-    "/brand/:path*",
   ],
 };

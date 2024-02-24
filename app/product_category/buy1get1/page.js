@@ -1,10 +1,13 @@
-import Buy1Get1 from "@/components/productCategory/buy1get1";
+import Offer from "@/components/productCategory/offer";
 import React from "react";
-
+export const metadata = {
+  title: "Buy 1 Get 1 | Products",
+  description: "This is a Products category",
+};
 export default function page() {
   return (
     <div>
-      <Buy1Get1 />
+      <Offer title={"Buy 1 Get 1"} offer={"Buy1GET1"} />
     </div>
   );
 }

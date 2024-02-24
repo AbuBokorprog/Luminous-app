@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useLoginUserMutation } from "@/redux/feature/counter/api";
 import { useRouter } from "next/navigation";
-import swal from "sweetalert";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const router = useRouter();
@@ -29,12 +29,12 @@ const Login = () => {
           .then((result) => {
             const loggedIn = result.user;
 
-            swal("Login successful", "", "success");
+            toast.success("Login successful");
             router.push("/");
             reset();
           })
           .catch((error) => {
-            swal(`${error.message}`, "", "error");
+            toast.error(error.message);
           });
       }
     } catch (error) {
@@ -43,6 +43,7 @@ const Login = () => {
   };
   return (
     <div className="mx-auto flex justify-center my-10 lg:my-20 ">
+      <Toaster />
       <div className="w-full max-w-lg p-4 border bg-primary-100 border-dark-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-dark-800 dark:border-dark-700">
         <h5 className="text-3xl text-center font-medium text-dark-900 dark:text-white">
           Login

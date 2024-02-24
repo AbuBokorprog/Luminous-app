@@ -1,10 +1,13 @@
-import Clearance from "@/components/productCategory/clearance";
+import Offer from "@/components/productCategory/offer";
 import React from "react";
-
+export const metadata = {
+  title: "Clearance Sell | Products",
+  description: "This is a Products category",
+};
 export default function page() {
   return (
     <div>
-      <Clearance />
+      <Offer title={"Clearance Sell"} offer={"ClearanceSale"} />
     </div>
   );
 }

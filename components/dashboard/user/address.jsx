@@ -2,6 +2,7 @@
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddressForm = ({ post, update, addressData, refetch }) => {
   const { currentUser } = useContext(authContext);
@@ -41,25 +42,26 @@ const AddressForm = ({ post, update, addressData, refetch }) => {
           data: address,
         });
         console.log(updateResult.data);
-        alert("update");
+        toast.success("update");
         refetch();
       } catch (error) {
-        console.log(error.message);
+        toast.error(error.message);
       }
     } else {
       try {
         const result = await post(address);
         console.log(result);
-        alert("save!");
+        toast.success("save!");
         refetch();
       } catch (error) {
-        console.log(error.message);
+        toast.error(error.message);
       }
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmitForm)} className="w-full">
+      <Toaster />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="mb-6">
           <label

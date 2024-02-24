@@ -7,6 +7,7 @@ import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
 import { FaTrash } from "react-icons/fa";
 import Image from "next/image";
+import swal from "sweetalert";
 const TotalProduct = () => {
   const { currentUser } = useContext(authContext);
   const {
@@ -21,13 +22,30 @@ const TotalProduct = () => {
   ] = useDeleteProductMutation();
 
   const deleteHandler = async (id) => {
-    console.log(id);
     try {
-      const result = await deleteProduct({ id });
-      refetch();
-      alert(result?.data?.message);
+      const willDelete = await swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this product!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+
+      if (willDelete) {
+        const result = await deleteProduct({ id });
+        if (result.data?.message === "Product deleted") {
+          refetch();
+          swal(`${result?.data?.message}`, {
+            icon: "success",
+          });
+        }
+      } else {
+        swal("Your product is safe!");
+      }
     } catch (error) {
-      alert(error?.message);
+      swal("Error:", error.message, {
+        icon: "error",
+      });
     }
   };
   return (

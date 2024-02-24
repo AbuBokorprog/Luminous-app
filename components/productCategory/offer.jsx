@@ -1,18 +1,22 @@
 "use client";
 import React, { useContext, useState } from "react";
+import Image from "next/image";
 import {
   useCartGetByUserQuery,
   useCartPostMutation,
   useGetProductQuery,
 } from "@/redux/feature/counter/api";
-import Image from "next/image";
 import { authContext } from "@/utils/provider/auth_provider";
-const Buy1Get1 = () => {
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+const Offer = ({ offer, title }) => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data: products, isLoading, isError, error } = useGetProductQuery();
-  const buy1get1Products = products?.filter((p) =>
-    p.offer.some((sub) => sub === "Buy1GET1")
+  const offerProducts = products?.filter((p) =>
+    p.offer.some((sub) => sub === `${offer}`)
   );
+
   const [
     postCart,
     { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
@@ -23,25 +27,31 @@ const Buy1Get1 = () => {
     const productId = id;
     const cart = { userId, productId };
     try {
-      const response = await postCart(cart);
-      if (response?.data?.success) {
-        refetch();
-        alert(response?.data?.success);
+      if (currentUser?.email) {
+        const response = await postCart(cart);
+        if (response?.data?.success) {
+          refetch();
+          toast.success(response?.data?.success);
+        }
+      } else {
+        router.push("/login");
       }
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
+
   return (
     <div>
-      <h4 className="text-lg py-8 bg-dark-200 text-center">Buy 1 Get 1</h4>
+      <Toaster />
+      <h4 className="text-lg py-8 bg-dark-200 text-center">{title}</h4>
       {isLoading ? (
         <p>loading...</p>
       ) : (
         <>
-          {buy1get1Products?.length > 0 ? (
+          {offerProducts?.length > 0 ? (
             <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center md:gap-4 lg:gap-2">
-              {buy1get1Products?.map((p) => (
+              {offerProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <Image
@@ -81,4 +91,4 @@ const Buy1Get1 = () => {
   );
 };
 
-export default Buy1Get1;
+export default Offer;
