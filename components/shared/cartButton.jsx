@@ -187,11 +187,11 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
             </div>
           </div>
 
-          <div className="flex justify-end items-center lg:mt-36">
+          <div className="flex justify-center items-center">
             <Link
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               href={"/check_out"}
-              className=" text-center w-full rounded-lg text-xl py-3 hover:bg-primary-400 shadow-xl text-white bg-green"
+              className=" text-center bottom-2 absolute w-full lg:w-96 rounded-lg text-xl py-3 hover:bg-primary-400 shadow-lg text-white bg-green"
             >
               Proceed
             </Link>

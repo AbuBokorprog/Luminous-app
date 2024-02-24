@@ -1,6 +1,7 @@
 "use client";
 import React, { useContext, useState } from "react";
 import Link from "next/link";
+import { FaRegUserCircle } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
 import { authContext } from "@/utils/provider/auth_provider";
 import {
@@ -10,7 +11,8 @@ import {
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const { user, currentUser, logout, isLoading } = useContext(authContext);
+  const { user, currentUser, logout, isLoading, refetch } =
+    useContext(authContext);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
@@ -23,6 +25,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     })
       .then((response) => {
         if (response.ok) {
+          refetch();
           logout()
             .then(() => {})
             .catch((error) => {});
@@ -64,10 +67,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
       {/* mobile */}
       <div>
         <div className="bg-white lg:hidden sm:block dark:bg-gray-900 border-b border-gray-200 dark:border-gray-600 flex justify-between items-center p-2">
-          <div></div>
-          <h2 className="text-xl font-bold dark:text-white text-black">
-            Luminous
-          </h2>
           <button className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? (
               <svg
@@ -94,11 +93,92 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
               </svg>
             )}
           </button>
+          <Link
+            href={"/"}
+            className="text-xl font-bold dark:text-white text-black"
+          >
+            Luminous
+          </Link>
+          <div></div>
         </div>
         {isOpen && (
-          <aside className="fixed top-0 bg-white left-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right">
+          <aside className="fixed top-0  bg-white left-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right">
             <div className="h-full flex justify-between px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
               <div className="space-y-2 flex-col dark:text-white text-black font-medium">
+                <div className="relative mt-10">
+                  <button
+                    onClick={() => setIsOpenDropdown(!isOpenDropdown)}
+                    className=" px-4 py-2 rounded-full"
+                  >
+                    <FaRegUserCircle className="w-6 h-6" />
+                  </button>
+                  {isOpenDropdown && (
+                    <div
+                      onClick={() => setIsOpenDropdown(false)}
+                      className=" lg:hidden absolute right-0 w-28 top-10 block bg-primary-50 divide-y divide-gray-100 rounded-lg shadow dark:bg-dark-700"
+                    >
+                      <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+                        {isLoading ? (
+                          <p className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white">
+                            Loading....
+                          </p>
+                        ) : (
+                          <>
+                            {currentUser?.role === "admin" ? (
+                              <li>
+                                <Link
+                                  href={"/admin"}
+                                  className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                                >
+                                  Dashboard
+                                </Link>
+                              </li>
+                            ) : currentUser?.role === "manager" ? (
+                              <li>
+                                <Link
+                                  href={"/manager"}
+                                  className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                                >
+                                  Dashboard
+                                </Link>
+                              </li>
+                            ) : currentUser?.role === "user" ? (
+                              <li>
+                                <Link
+                                  href={"/users"}
+                                  className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                                >
+                                  Dashboard
+                                </Link>
+                              </li>
+                            ) : (
+                              <></>
+                            )}
+                          </>
+                        )}
+                        {user?.email ? (
+                          <li>
+                            <button
+                              onClick={logoutHandler}
+                              className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                            >
+                              Logout
+                            </button>
+                          </li>
+                        ) : (
+                          <li>
+                            <Link
+                              href="/login"
+                              className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                            >
+                              Login
+                            </Link>
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
                 <div>
                   <Link href={"/product_category/makeup"}>Makeup</Link>
                 </div>

@@ -31,3 +31,15 @@ body {
     text-wrap: balance;
   }
 }
+
+.loader {
+  border-top-color: #fe6e87;
+  border-left-color: #f83b60;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -70,7 +70,6 @@ const AddProduct = () => {
     { label: "Serums", value: "Serums" },
     { label: "cleansing Oils / cleanser", value: "cleansing Oils / cleanser" },
     // hair
-    { label: "Hair Care", value: "Hair Care" },
     { label: "Top Brands", value: "Top Brands" },
     { label: "Shop By Hair Type", value: "Shop By Hair Type" },
     { label: "Hair Styling", value: "Hairstyling" },

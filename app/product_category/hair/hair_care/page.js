@@ -6,7 +6,7 @@ export default function page() {
     <div>
       <SubCategory
         category={"Hair"}
-        SubCategory={"Hair Care"}
+        SubCategory={"HairCare"}
         title={"Hair Care"}
       />
     </div>
