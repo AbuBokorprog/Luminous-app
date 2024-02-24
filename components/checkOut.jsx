@@ -1,5 +1,8 @@
 "use client";
-import { useCartGetByUserQuery } from "@/redux/feature/counter/api";
+import {
+  useCartGetByUserQuery,
+  useGetShippingAddressByUserIdQuery,
+} from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -10,7 +13,7 @@ const CheckOut = () => {
     data: cart,
     isLoading: cartLoading,
     isError,
-    refetch,
+    refetch: cartRefetch,
     error: cartError,
   } = useCartGetByUserQuery(currentUser?._id);
 
@@ -18,6 +21,10 @@ const CheckOut = () => {
     const itemPrice = (item.discountPrice || item.price) * item.quantity;
     return total + itemPrice;
   }, 0);
+
+  const { data: shippingAddressData } = useGetShippingAddressByUserIdQuery(
+    currentUser?._id
+  );
 
   const {
     register,
@@ -45,6 +52,11 @@ const CheckOut = () => {
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Type your name"
+              defaultValue={
+                shippingAddressData?.firstName +
+                " " +
+                shippingAddressData?.lastName
+              }
               {...register("displayName", { required: true })}
               aria-invalid={errors.displayName ? "true" : "false"}
             />
@@ -63,6 +75,7 @@ const CheckOut = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Type your phone"
               type="number"
+              defaultValue={shippingAddressData?.phone}
               {...register("phone", { required: true })}
               aria-invalid={errors.phone ? "true" : "false"}
             />
@@ -81,6 +94,7 @@ const CheckOut = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Type your email"
               type="email"
+              defaultValue={shippingAddressData?.email}
               {...register("email")}
             />
           </div>
@@ -126,6 +140,7 @@ const CheckOut = () => {
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Type your email"
+              defaultValue={shippingAddressData?.street}
               {...register("address", { required: true })}
               aria-invalid={errors.district ? "true" : "false"}
             />

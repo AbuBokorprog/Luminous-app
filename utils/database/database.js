@@ -1,4 +1,4 @@
-import { mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 export async function database() {
   try {
@@ -8,6 +8,6 @@ export async function database() {
     console.log("database connection", connection);
   } catch (error) {
     console.log("Failed to connect");
-    console.log(error);
+    console.log(error.message);
   }
 }

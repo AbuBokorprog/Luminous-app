@@ -57,6 +57,9 @@ const productsSchema = mongoose.Schema({
   size: {
     type: Array,
   },
+  lowStockMessage: {
+    type: String,
+  },
   status: {
     type: String,
     enum: ["pending", "approved", "declined"],

@@ -37,6 +37,13 @@ export async function PUT(req, { params }) {
         status: false,
       });
     }
+    if (quantity < 10) {
+      product.lowStockMessage = `Your product "${product.name}" is going out of stock. You need to restock.`;
+    } else {
+      product.lowStockMessage = null;
+    }
+
+    await product.save();
     return NextResponse.json(product);
   } catch (error) {
     return NextResponse.json({
