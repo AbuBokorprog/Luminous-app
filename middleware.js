@@ -1,12 +1,8 @@
 import { NextResponse } from "next/server";
 
 export function middleware(request) {
-  const authToken = request.cookies.get("authToken")?.value;
-  if (!authToken) {
-    return NextResponse.json({
-      message: "user not logged in",
-    });
-  }
+  const authToken = request.cookies.get("authToken")?.value || "";
+
   if (
     request.nextUrl.pathname === "/api/login" ||
     request.nextUrl.pathname === "/api/sign_up"
@@ -29,8 +25,7 @@ export function middleware(request) {
     request.nextUrl.pathname === "/admin/:path*" ||
     request.nextUrl.pathname === "/users/:path*" ||
     request.nextUrl.pathname === "/manager/:path*" ||
-    // request.nextUrl.pathname === "/product_category/:path*" ||
-    request.nextUrl.pathname === "/shop_by_concern/:path*" ||
+    request.nextUrl.pathname === "/product_category/:path*" ||
     request.nextUrl.pathname === "/brand/:path*"
   ) {
     if (!authToken) {
@@ -46,8 +41,7 @@ export const config = {
     "/login",
     "/sign_up",
     "/view_cart",
-    // "/product_category/:path*",
-    "/shop_by_concern/:path*",
+    "/product_category/:path*",
     "/users/:path*",
     "/manager/:path*",
     "/admin/:path*",
