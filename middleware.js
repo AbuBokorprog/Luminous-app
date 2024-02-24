@@ -2,13 +2,11 @@ import { NextResponse } from "next/server";
 
 export function middleware(request) {
   const authToken = request.cookies.get("authToken")?.value;
-
-  // if (
-  //   request.nextUrl.pathname === "/api/login" ||
-  //   request.nextUrl.pathname === "/api/sign_up"
-  // ) {
-  //   return;
-  // }
+  if (!authToken) {
+    return NextResponse.json({
+      message: "user not logged in",
+    });
+  }
   if (
     request.nextUrl.pathname === "/login" ||
     request.nextUrl.pathname === "/sign_up"
