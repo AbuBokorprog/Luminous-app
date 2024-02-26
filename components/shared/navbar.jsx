@@ -47,7 +47,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     error,
   } = useGetProductQuery();
   const searchHandler = (event) => {
-    console.log(event.target.value);
     setSearchQuery(event.target.value);
   };
 
@@ -248,9 +247,6 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             />
           </div>
           <div className="">
-            {searchQuery.trim !== "" && searchLoading && (
-              <p className="absolute z-50 text-center">Loading...</p>
-            )}
             {searchQuery.trim !== "" && searchError && (
               <p>Error: {error?.message}</p>
             )}

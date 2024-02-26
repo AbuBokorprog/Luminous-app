@@ -84,7 +84,9 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
 
   return (
     <div
-      className={`relative ${isSidebarOpen ? "shadow-xl shadow-dark-500" : ""}`}
+      className={`relative  ${
+        isSidebarOpen ? "shadow-xl shadow-dark-500" : ""
+      }`}
     >
       <div className="bg-black w-14 md:w-16 text-center p-1 rounded-xl">
         <button
@@ -108,7 +110,7 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
           >
             <MdOutlineCancel className="w-8 h-8" />
           </button>
-          <div className="min-h-96">
+          <div className="">
             <div>
               {cartLoading ? (
                 <div>
@@ -121,7 +123,7 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
                       <h2 className="text-2xl text-center">
                         Your Cart {cart?.length}
                       </h2>
-                      <div className="">
+                      <div className="overflow-y-scroll">
                         {cart?.map((item) => (
                           <div
                             key={item?._id}

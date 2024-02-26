@@ -4,10 +4,11 @@ import {
   useGetProductByUserIdQuery,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import Image from "next/image";
 import swal from "sweetalert";
+import Modal from "@/components/modal";
 const TotalProduct = () => {
   const { currentUser } = useContext(authContext);
   const {
@@ -21,6 +22,8 @@ const TotalProduct = () => {
     { isLoading: deleteIsLoading, isError: deleteIsError, error: deleteError },
   ] = useDeleteProductMutation();
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState("");
   const deleteHandler = async (id) => {
     try {
       const willDelete = await swal({
@@ -48,6 +51,7 @@ const TotalProduct = () => {
       });
     }
   };
+
   return (
     <>
       {isLoading ? (
@@ -78,7 +82,21 @@ const TotalProduct = () => {
                     </p>
                     <p>Status: {p?.status}</p>
                     <div className="flex justify-between items-center">
-                      <button>Edit</button>
+                      <button
+                        onClick={() => {
+                          setIsOpen(true); // Open the modal
+                          setSelectedProductId(p?._id); // Corrected
+                        }}
+                      >
+                        Edit
+                      </button>
+                      {isOpen && (
+                        <Modal
+                          isOpen={isOpen}
+                          setIsOpen={setIsOpen}
+                          id={selectedProductId}
+                        />
+                      )}
                       <button
                         className="p-2"
                         onClick={() => deleteHandler(p?._id)}

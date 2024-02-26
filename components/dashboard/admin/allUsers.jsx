@@ -2,9 +2,10 @@
 import {
   useDeleteUserMutation,
   useGetUserQuery,
+  useUpdateUserMutation,
 } from "@/redux/feature/counter/api";
 import swal from "sweetalert";
-import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
 import { FaTrash } from "react-icons/fa";
@@ -13,6 +14,8 @@ const AllUsers = () => {
   const { currentUser } = useContext(authContext);
 
   const [deleteUser, { error }] = useDeleteUserMutation();
+  const [updateUser, {}] = useUpdateUserMutation();
+
   const deleteHandler = async (id) => {
     try {
       const willDelete = await swal({
@@ -40,8 +43,39 @@ const AllUsers = () => {
       console.error("Error:", error);
     }
   };
+
+  const updateRole = async (id, role) => {
+    console.log(id, role);
+    try {
+      if (role === "user") {
+        const data = { role: "manager" };
+        const result = await updateUser({ id, data: data });
+        if (result?.data?.message === "User updated successfully") {
+          refetch();
+          toast.success(result?.data?.message);
+        }
+      } else if (role === "manager") {
+        const data = { role: "admin" };
+        const result = await updateUser({ id, data: data });
+        if (result?.data?.message === "User updated successfully") {
+          refetch();
+          toast.success(result?.data?.message);
+        }
+      } else {
+        const data = { role: "user" };
+        const result = await updateUser({ id, data: data });
+        if (result?.data?.message === "User updated successfully") {
+          refetch();
+          toast.success(result?.data?.message);
+        }
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <>
+      <Toaster />
       {isLoading ? (
         <p className="h-screen text-center">Loading....</p>
       ) : (
@@ -99,11 +133,17 @@ const AllUsers = () => {
                     <td className="px-6 py-4">{u?.role}</td>
                     <td className="px-6 py-4">
                       {u?.role === "user" ? (
-                        <button>Make Manager</button>
+                        <button onClick={() => updateRole(u?._id, u?.role)}>
+                          Make Manager
+                        </button>
                       ) : u?.role === "manager" ? (
-                        <button>Make Admin</button>
+                        <button onClick={() => updateRole(u?._id, u?.role)}>
+                          Make Admin
+                        </button>
                       ) : (
-                        <button>Make Manager</button>
+                        <button onClick={() => updateRole(u?._id, u?.role)}>
+                          Make User
+                        </button>
                       )}
                     </td>
                     <td className="px-6 py-4">

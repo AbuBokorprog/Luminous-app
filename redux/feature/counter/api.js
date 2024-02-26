@@ -10,22 +10,29 @@ export const Api = createApi({
     getCurrentUser: builder.query({
       query: (email) => `/users/email/${email}`,
     }),
+    updateUser: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/users/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
     deleteUser: builder.mutation({
       query: (id) => ({
         url: `/users/${id}`,
         method: "DELETE",
       }),
     }),
-    postUser: builder.mutation({
+    loginUser: builder.mutation({
       query: (data) => ({
-        url: "/users",
+        url: "/login",
         method: "POST",
         body: data,
       }),
     }),
-    loginUser: builder.mutation({
+    postUser: builder.mutation({
       query: (data) => ({
-        url: "/login",
+        url: "/users",
         method: "POST",
         body: data,
       }),
@@ -39,6 +46,9 @@ export const Api = createApi({
     }),
     getProduct: builder.query({
       query: () => "/products",
+    }),
+    getProductById: builder.query({
+      query: (id) => `/products/${id}`,
     }),
     getProductByUserId: builder.query({
       query: (id) => `/products/userId/${id}`,
@@ -125,18 +135,37 @@ export const Api = createApi({
         body: data,
       }),
     }),
+    postPayment: builder.mutation({
+      query: (data) => ({
+        url: "/payment",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    postOrder: builder.mutation({
+      query: (data) => ({
+        url: "/order_history",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getOrderByUserId: builder.query({
+      query: (userId) => `/order_history/userId/${userId}`,
+    }),
   }),
 });
 
 export const {
   useGetUserQuery,
   useGetCurrentUserQuery,
+  useUpdateUserMutation,
   useGetProductQuery,
   useGetProductByUserIdQuery,
   useDeleteUserMutation,
   usePostUserMutation,
   useLoginUserMutation,
   usePostProductMutation,
+  useGetProductByIdQuery,
   useUpdateProductMutation,
   useDeleteProductMutation,
   useCartPostMutation,
@@ -153,4 +182,7 @@ export const {
   useGetShippingAddressByUserIdQuery,
   usePostShippingAddressMutation,
   useUpdateShippingAddressMutation,
+  usePostPaymentMutation,
+  usePostOrderMutation,
+  useGetOrderByUserIdQuery,
 } = Api;

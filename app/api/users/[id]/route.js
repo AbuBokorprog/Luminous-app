@@ -46,7 +46,7 @@ export async function PUT(req, { params }) {
     });
   } catch (error) {
     return NextResponse.json({
-      message: "Error updating user",
+      error: `Error: ${error.message}`,
       status: false,
     });
   }

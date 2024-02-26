@@ -43,7 +43,6 @@ export async function PUT(req, { params }) {
       product.lowStockMessage = null;
     }
 
-    await product.save();
     return NextResponse.json(product);
   } catch (error) {
     return NextResponse.json({
