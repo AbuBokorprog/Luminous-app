@@ -13,7 +13,10 @@ const Miss = () => {
         Deals you cannot miss
       </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 mx-auto gap-4 my-16">
-        <Image src={image1} alt="Image1" />
+        <Link href={"/product_category/brand/veet"}>
+          {" "}
+          <Image src={image1} alt="Image1" />
+        </Link>
         <Image src={image2} alt="Image2" />
         <Link href={"/product_category/buy1get1"}>
           <Image src={image3} alt="buy 1 get 1" />

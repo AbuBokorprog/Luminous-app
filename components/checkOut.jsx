@@ -30,8 +30,8 @@ const CheckOut = () => {
 
   const { data: shippingAddressData, isLoading: shippingLoading } =
     useGetShippingAddressByUserIdQuery(currentUser?._id);
-  // const [postPayment, { error }] = usePostPaymentMutation();
-  const [orderPost, {}] = usePostOrderMutation();
+  const [postPayment, { error }] = usePostPaymentMutation();
+  // const [orderPost, {}] = usePostOrderMutation();
   const {
     register,
     handleSubmit,
@@ -40,6 +40,9 @@ const CheckOut = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    if (currentUser?.email) {
+      router.push("/login");
+    }
     const displayName = data.displayName;
     const phone = data.phone;
     const email = data.email;
@@ -51,10 +54,6 @@ const CheckOut = () => {
     const onlinePayment = data.onlinePayment;
     const district = data.district;
     const userId = currentUser?._id;
-    const totalPrice = cart?.reduce((total, item) => {
-      const itemPrice = (item.discountPrice || item.price) * item.quantity;
-      return total + itemPrice;
-    }, 0);
     const tran_id = Math.floor(100000 + Math.random() * 900000).toString();
 
     const paymentData = {
@@ -65,34 +64,21 @@ const CheckOut = () => {
       district,
       address,
       notes,
-      totalPrice,
       userId,
       delivery,
       tran_id,
     };
 
-    // try {
-    //   const result = await postPayment(paymentData);
-    //   if (result.data.SSLResJSON.GatewayPageURL) {
-    //     window.location.href = result.data.SSLResJSON.GatewayPageURL;
-    //   } else {
-    //     console.error("Gateway URL not found in the response");
-    //     // Handle the error or display a message to the user
-    //   }
-    // } catch (error) {
-    //   console.error("Error processing payment:", error.message);
-    //   // Handle the error or display a message to the user
-    // }
     try {
-      const order = await orderPost(paymentData);
-      // console.log(order);
-      if (order?.data.success) {
-        cartRefetch();
-        orderRefetch();
-        router.push("/users/orders");
+      const result = await postPayment(paymentData);
+      if (result.data.SSLResJSON.GatewayPageURL) {
+        window.location.href = result.data.SSLResJSON.GatewayPageURL;
+      } else {
+        console.error("Gateway URL not found in the response");
+        // Handle the error or display a message to the user
       }
     } catch (error) {
-      console.error("Error posting order:", error.message);
+      console.error("Error processing payment:", error.message);
       // Handle the error or display a message to the user
     }
   };
@@ -135,7 +121,7 @@ const CheckOut = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="Type your phone"
                   type="number"
-                  defaultValue={shippingAddressData?.phone}
+                  value={shippingAddressData?.phone}
                   {...register("phone", { required: true })}
                   aria-invalid={errors.phone ? "true" : "false"}
                 />
@@ -154,7 +140,7 @@ const CheckOut = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="Type your email"
                   type="email"
-                  defaultValue={shippingAddressData?.email}
+                  value={shippingAddressData?.email}
                   {...register("email")}
                 />
               </div>
@@ -169,7 +155,7 @@ const CheckOut = () => {
                 </label>
                 <input
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  defaultValue={shippingAddressData?.state}
+                  value={shippingAddressData?.state}
                   placeholder="Type your district"
                   {...register("district", { required: true })}
                   aria-invalid={errors.district ? "true" : "false"}
@@ -187,7 +173,7 @@ const CheckOut = () => {
                 </label>
                 <input
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  defaultValue={shippingAddressData?.town}
+                  value={shippingAddressData?.town}
                   placeholder="Type your area"
                   {...register("area", { required: true })}
                 />
@@ -205,7 +191,7 @@ const CheckOut = () => {
                 <input
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="Type your email"
-                  defaultValue={shippingAddressData?.street}
+                  value={shippingAddressData?.street}
                   {...register("address", { required: true })}
                   aria-invalid={errors.district ? "true" : "false"}
                 />

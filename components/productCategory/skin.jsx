@@ -5,6 +5,7 @@ import {
   useGetProductQuery,
 } from "@/redux/feature/counter/api";
 import React, { useContext, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import banner from "@/public/images/pageBanner/SkinCafe-Category-Banner.webp";
 import toast, { Toaster } from "react-hot-toast";
@@ -60,22 +61,25 @@ const Skin = () => {
               {skinProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Image
-                      className="rounded-t-lg lg:h-44 w-full"
-                      src={p?.images[0]}
-                      alt={p?.name}
-                      width={300}
-                      height={300}
-                    />
-                    <div className="p-2">
-                      <h2 className="mb-2 h-12 text-center text-xl font-bold tracking-tight text-dark-900 dark:text-white">
-                        {p?.name.slice(0, 30)}
-                      </h2>
+                    <Link href={`/product/${p?._id}`}>
+                      <Image
+                        className="rounded-t-lg lg:h-44 w-full"
+                        src={p?.images[0]}
+                        alt={p?.name}
+                        width={300}
+                        height={300}
+                      />
+                      <div className="p-2">
+                        <h2 className="mb-2 h-12 text-center text-xl font-bold tracking-tight text-dark-900 dark:text-white">
+                          {p?.name.slice(0, 30)}
+                        </h2>
 
-                      <p className="text-lg font-normal text-primary-500 ">
-                        ${p?.price}
-                      </p>
-                    </div>
+                        <p className="text-lg font-normal text-primary-500 ">
+                          ${p?.price}
+                        </p>
+                      </div>
+                    </Link>
+
                     <button
                       onClick={() => addToCart(p?._id)}
                       className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-violet hover:bg-primary-400"

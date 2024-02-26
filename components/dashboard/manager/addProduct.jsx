@@ -373,6 +373,7 @@ const AddProduct = () => {
               <option value="">Select Offer</option>
               <option value="Top Selling">Top Selling</option>
               <option value="Top Brands">Top Brands</option>
+              <option value="Bogo Offer">Bogo Offer</option>
               <option value="Free Delivery">Free Delivery</option>
               <option value="Buy1GET1">Buy 1 GET 1</option>
               <option value="ClearanceSale">Clearance sale</option>

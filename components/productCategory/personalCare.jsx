@@ -9,6 +9,7 @@ import {
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 const PersonalCare = () => {
   const router = useRouter();
@@ -60,22 +61,24 @@ const PersonalCare = () => {
               {personalCareProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Image
-                      className="rounded-t-lg lg:h-44 w-full"
-                      src={p?.images[0]}
-                      alt={p?.name}
-                      width={400}
-                      height={400}
-                    />
-                    <div className="p-2">
-                      <h2 className="mb-2 h-12 text-center text-xl font-bold tracking-tight text-dark-900 dark:text-white">
-                        {p?.name.slice(0, 30)}
-                      </h2>
+                    <Link href={`/product/${p?._id}`}>
+                      <Image
+                        className="rounded-t-lg lg:h-44 w-full"
+                        src={p?.images[0]}
+                        alt={p?.name}
+                        width={300}
+                        height={300}
+                      />
+                      <div className="p-2">
+                        <h2 className="mb-2 h-12 text-center text-xl font-bold tracking-tight text-dark-900 dark:text-white">
+                          {p?.name.slice(0, 30)}
+                        </h2>
 
-                      <p className="text-lg font-normal text-primary-500 ">
-                        ${p?.price}
-                      </p>
-                    </div>
+                        <p className="text-lg font-normal text-primary-500 ">
+                          ${p?.price}
+                        </p>
+                      </div>
+                    </Link>
                     <button
                       onClick={() => addToCart(p?._id)}
                       className="uppercase text-xl rounded-b-lg py-4 text-white w-full bg-violet hover:bg-primary-400"

@@ -21,7 +21,7 @@ const Order = () => {
           <h2 className="text-4xl font-medium text-center mx-auto">
             ALL Orders
           </h2>
-          {orderHistory.length > 0 ? (
+          {orderHistory?.length > 0 ? (
             <>
               {orderHistory?.map((order) => (
                 <div className="my-6">

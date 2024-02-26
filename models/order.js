@@ -6,6 +6,11 @@ const OrderSchema = mongoose.Schema({
   productDetails: { type: Object, required: true },
   customerName: { type: String, required: true },
   customerEmail: { type: String, required: true },
+  status: {
+    type: String,
+    enum: ["Unpaid", "Paid"],
+    default: "Unpaid",
+  },
   shippingAddress: {
     address: { type: String, required: true },
     city: { type: String, required: true },
