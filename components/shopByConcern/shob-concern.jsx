@@ -10,10 +10,12 @@ import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import LoadingSpinner from "../loadingSpinner";
 const ShopByConcern = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
-  const { data: products, isLoading, isError, error } = useGetProductQuery();
+  const { data, isLoading, isError, error } = useGetProductQuery();
+  const products = data?.filter((p) => p.status === "approved");
   const acneProducts = products?.filter((p) =>
     p.concern.some((sub) => sub === "shopByConcern")
   );
@@ -45,7 +47,7 @@ const ShopByConcern = () => {
       <Toaster />
       <h4 className="text-lg py-8 bg-dark-200 text-center">Shop By Concern</h4>
       {isLoading ? (
-        <p>loading...</p>
+        <LoadingSpinner />
       ) : (
         <>
           {acneProducts?.length > 0 ? (

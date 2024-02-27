@@ -9,6 +9,7 @@ import { FaTrash } from "react-icons/fa";
 import Image from "next/image";
 import swal from "sweetalert";
 import Modal from "@/components/modal";
+import LoadingSpinner from "@/components/loadingSpinner";
 const TotalProduct = () => {
   const { currentUser } = useContext(authContext);
   const {
@@ -55,7 +56,7 @@ const TotalProduct = () => {
   return (
     <>
       {isLoading ? (
-        <p>Loading...</p>
+        <LoadingSpinner />
       ) : (
         <div>
           <h2 className="text-4xl font-medium text-center mx-auto">

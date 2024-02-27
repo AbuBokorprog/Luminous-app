@@ -11,10 +11,12 @@ import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
+import LoadingSpinner from "../loadingSpinner";
 const PersonalCare = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
-  const { data: products, isLoading, isError, error } = useGetProductQuery();
+  const { data, isLoading, isError, error } = useGetProductQuery();
+  const products = data?.filter((p) => p.status === "approved");
   const personalCareProducts = products?.filter((p) =>
     p.category.some((sub) => sub === "Personal Care")
   );
@@ -53,7 +55,7 @@ const PersonalCare = () => {
         height={500}
       />
       {isLoading ? (
-        <p>loading...</p>
+        <LoadingSpinner />
       ) : (
         <>
           {personalCareProducts?.length > 0 ? (

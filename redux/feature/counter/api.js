@@ -152,6 +152,26 @@ export const Api = createApi({
     getOrderByUserId: builder.query({
       query: (userId) => `/order_history/userId/${userId}`,
     }),
+    postReview: builder.mutation({
+      query: (data) => ({
+        url: "/reviews",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getReviewByProductId: builder.query({
+      query: (id) => `/reviews/productId/${id}`,
+    }),
+    getWishlistByUserId: builder.query({
+      query: (userId) => `/wishlist/userId/${userId}`,
+    }),
+    postWishlist: builder.mutation({
+      query: (data) => ({
+        url: "/wishlist",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -185,4 +205,8 @@ export const {
   usePostPaymentMutation,
   usePostOrderMutation,
   useGetOrderByUserIdQuery,
+  usePostReviewMutation,
+  useGetReviewByProductIdQuery,
+  useGetWishlistByUserIdQuery,
+  usePostWishlistMutation,
 } = Api;

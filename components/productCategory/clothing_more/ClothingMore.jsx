@@ -9,10 +9,12 @@ import Image from "next/image";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import LoadingSpinner from "@/components/loadingSpinner";
 const ClothingMore = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
-  const { data: products, isLoading, isError, error } = useGetProductQuery();
+  const { data, isLoading, isError, error } = useGetProductQuery();
+  const products = data?.filter((p) => p.status === "approved");
   const buy1get1Products = products?.filter((p) =>
     p.category.some((sub) => sub === "Clothing & More")
   );
@@ -44,7 +46,7 @@ const ClothingMore = () => {
     <div>
       <h4 className="text-lg py-8 bg-dark-200 text-center">Clothing & More</h4>
       {isLoading ? (
-        <p>loading...</p>
+        <LoadingSpinner />
       ) : (
         <>
           {buy1get1Products?.length > 0 ? (

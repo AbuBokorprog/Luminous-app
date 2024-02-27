@@ -26,6 +26,10 @@ const reviewsSchema = mongoose.Schema({
     required: true,
     maxLength: 300,
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Reviews =

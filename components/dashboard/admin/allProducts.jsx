@@ -7,6 +7,7 @@ import swal from "sweetalert";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
 import Image from "next/image";
+import LoadingSpinner from "@/components/loadingSpinner";
 
 const AllProducts = () => {
   const { currentUser } = useContext(authContext);
@@ -58,7 +59,7 @@ const AllProducts = () => {
   return (
     <>
       {isLoading ? (
-        <p>Loading...</p>
+        <LoadingSpinner />
       ) : (
         <div>
           <h2 className="text-4xl font-medium text-center mx-auto">

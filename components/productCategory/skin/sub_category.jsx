@@ -10,10 +10,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
+import LoadingSpinner from "@/components/loadingSpinner";
 const SubCategory = ({ category, SubCategory, title }) => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
-  const { data: products, isLoading, isError, error } = useGetProductQuery();
+  const { data, isLoading, isError, error } = useGetProductQuery();
+  const products = data?.filter((p) => p.status === "approved");
   const categoriesProducts = products?.filter((p) =>
     p.category.some((sub) => sub === `${category}`)
   );
@@ -49,7 +51,7 @@ const SubCategory = ({ category, SubCategory, title }) => {
       <Toaster />
       <h4 className="text-lg py-8 bg-dark-200 text-center">{title}</h4>
       {isLoading ? (
-        <p>loading...</p>
+        <LoadingSpinner />
       ) : (
         <>
           {subCategoriesProducts?.length > 0 ? (

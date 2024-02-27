@@ -1,15 +1,14 @@
 "use client";
 import {
   useCartGetByUserQuery,
-  useGetOrderByUserIdQuery,
   useGetShippingAddressByUserIdQuery,
-  usePostOrderMutation,
   usePostPaymentMutation,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import LoadingSpinner from "./loadingSpinner";
 
 const CheckOut = () => {
   const router = useRouter();
@@ -21,8 +20,6 @@ const CheckOut = () => {
     refetch: cartRefetch,
     error: cartError,
   } = useCartGetByUserQuery(currentUser?._id);
-  const { data: orderHistory, refetch: orderRefetch } =
-    useGetOrderByUserIdQuery(currentUser?._id);
   const totalPrice = cart?.reduce((total, item) => {
     const itemPrice = (item.discountPrice || item.price) * item.quantity;
     return total + itemPrice;
@@ -31,7 +28,6 @@ const CheckOut = () => {
   const { data: shippingAddressData, isLoading: shippingLoading } =
     useGetShippingAddressByUserIdQuery(currentUser?._id);
   const [postPayment, { error }] = usePostPaymentMutation();
-  // const [orderPost, {}] = usePostOrderMutation();
   const {
     register,
     handleSubmit,
@@ -86,7 +82,7 @@ const CheckOut = () => {
     <>
       {cartLoading && shippingLoading ? (
         <div>
-          <p>Loading...</p>
+          <LoadingSpinner />
         </div>
       ) : (
         <div className="px-2 lg:px-0">

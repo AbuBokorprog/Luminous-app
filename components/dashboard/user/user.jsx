@@ -1,6 +1,7 @@
 "use client";
 import React, { useContext } from "react";
 import { authContext } from "@/utils/provider/auth_provider";
+import LoadingSpinner from "@/components/loadingSpinner";
 
 const UserDashboard = () => {
   const { currentUser, isLoading } = useContext(authContext);
@@ -8,7 +9,7 @@ const UserDashboard = () => {
   return (
     <div>
       {isLoading ? (
-        <p>loading...</p>
+        <LoadingSpinner />
       ) : (
         <div className="bg-dark-100 lg:h-96 p-2">
           <h2 className="text-2xl font-md">

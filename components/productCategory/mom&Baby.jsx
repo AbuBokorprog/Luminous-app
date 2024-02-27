@@ -10,10 +10,12 @@ import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
+import LoadingSpinner from "../loadingSpinner";
 const Mom_Baby = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
-  const { data: products, isLoading, isError, error } = useGetProductQuery();
+  const { data, isLoading, isError, error } = useGetProductQuery();
+  const products = data?.filter((p) => p.status === "approved");
   const momBabyProducts = products?.filter((p) =>
     p.category.some((sub) => sub === "Mom & Baby")
   );
@@ -45,7 +47,7 @@ const Mom_Baby = () => {
       <Toaster />
       <h4 className="text-center text-xl py-8 bg-dark-200">Mom & Baby</h4>
       {isLoading ? (
-        <p>loading...</p>
+        <LoadingSpinner />
       ) : (
         <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
           {momBabyProducts?.map((p) => (

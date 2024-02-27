@@ -9,10 +9,12 @@ import {
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import LoadingSpinner from "@/components/loadingSpinner";
 const Face = ({ face, title }) => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
-  const { data: products, isLoading, isError, error } = useGetProductQuery();
+  const { data, isLoading, isError, error } = useGetProductQuery();
+  const products = data?.filter((p) => p.status === "approved");
   const [
     postCart,
     { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
@@ -49,7 +51,7 @@ const Face = ({ face, title }) => {
     <div>
       <h4 className="text-lg py-8 bg-dark-200 text-center">{title}</h4>
       {isLoading ? (
-        <p>loading...</p>
+        <LoadingSpinner />
       ) : (
         <>
           {faceProducts?.length > 0 ? (

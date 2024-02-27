@@ -10,10 +10,12 @@ import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
+import LoadingSpinner from "../loadingSpinner";
 const Natural = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
-  const { data: products, isLoading, isError, error } = useGetProductQuery();
+  const { data, isLoading, isError, error } = useGetProductQuery();
+  const products = data?.filter((p) => p.status === "approved");
   const skinProducts = products?.filter((p) =>
     p.category.some((sub) => sub === "Natural")
   );
@@ -46,7 +48,7 @@ const Natural = () => {
       <Toaster />
       <h4 className="text-lg py-8 bg-dark-200 text-center">Natural</h4>
       {isLoading ? (
-        <p>loading...</p>
+        <LoadingSpinner />
       ) : (
         <>
           {skinProducts?.length > 0 ? (

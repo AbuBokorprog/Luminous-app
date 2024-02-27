@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 const Footer = () => {
   return (
     <div>
@@ -12,9 +12,9 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="#" className=" hover:underline">
+                  <Link href="/about_us/about" className=" hover:underline">
                     About
-                  </a>
+                  </Link>
                 </li>
                 <li className="mb-4">
                   <a href="#" className="hover:underline">
@@ -27,9 +27,9 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="mb-4">
-                  <a href="#" className="hover:underline">
+                  <Link href="blog" className="hover:underline">
                     Blog
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -66,19 +66,25 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="#" className="hover:underline">
+                  <Link
+                    href="/about_us/privacy_policy"
+                    className="hover:underline"
+                  >
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li className="mb-4">
-                  <a href="#" className="hover:underline">
+                  <Link href="/about_us/licensing" className="hover:underline">
                     Licensing
-                  </a>
+                  </Link>
                 </li>
                 <li className="mb-4">
-                  <a href="#" className="hover:underline">
+                  <Link
+                    href="/about_us/terms&condition"
+                    className="hover:underline"
+                  >
                     Terms &amp; Conditions
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

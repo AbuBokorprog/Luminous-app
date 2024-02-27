@@ -9,6 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
 import { FaTrash } from "react-icons/fa";
+import LoadingSpinner from "@/components/loadingSpinner";
 const AllUsers = () => {
   const { data, isError, isLoading, refetch } = useGetUserQuery();
   const { currentUser } = useContext(authContext);
@@ -77,7 +78,7 @@ const AllUsers = () => {
     <>
       <Toaster />
       {isLoading ? (
-        <p className="h-screen text-center">Loading....</p>
+        <LoadingSpinner />
       ) : (
         <div>
           <h2 className="text-4xl font-medium text-center mx-auto">

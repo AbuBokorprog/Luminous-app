@@ -2,8 +2,11 @@
 import { authContext } from "@/utils/provider/auth_provider";
 import Link from "next/link";
 import { useContext } from "react";
+import LoadingSpinner from "../loadingSpinner";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
+  const pathname = usePathname();
   const { user, currentUser, logout } = useContext(authContext);
   const logoutHandler = () => {
     fetch("/api/logout", {
@@ -37,13 +40,22 @@ const Sidebar = () => {
                 {/* manager */}
                 <h2 className="text-xl font-bold p-4">Manager dashboard</h2>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-                  <Link className="lg:text-lg mx-auto" href="/manager">
+                  <Link
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/manager" ? "text-primary-500" : ""
+                    }`}
+                    href="/manager"
+                  >
                     Dashboard Home
                   </Link>
                 </li>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link
-                    className="lg:text-lg mx-auto"
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/manager/addProduct"
+                        ? "text-primary-500"
+                        : ""
+                    }`}
                     href="/manager/addProduct"
                   >
                     Add Product
@@ -51,7 +63,11 @@ const Sidebar = () => {
                 </li>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link
-                    className="lg:text-lg mx-auto"
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/manager/totalProduct"
+                        ? "text-primary-500"
+                        : ""
+                    }`}
                     href="/manager/totalProduct"
                   >
                     Total Product
@@ -63,17 +79,32 @@ const Sidebar = () => {
                 {/* Admin */}
                 <h2 className="text-xl font-bold p-4">Admin dashboard</h2>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-                  <Link className="lg:text-lg mx-auto" href="/admin">
+                  <Link
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/admin" ? "text-primary-500" : ""
+                    }`}
+                    href="/admin"
+                  >
                     Dashboard Home
                   </Link>
                 </li>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-                  <Link className="lg:text-lg mx-auto" href="/admin/allUsers">
+                  <Link
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/admin/allUsers" ? "text-primary-500" : ""
+                    }`}
+                    href="/admin/allUsers"
+                  >
                     All Users
                   </Link>
                 </li>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-                  <Link className="lg:text-lg mx-auto" href="/admin/product">
+                  <Link
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/admin/product" ? "text-primary-500" : ""
+                    }`}
+                    href="/admin/product"
+                  >
                     Products
                   </Link>
                 </li>
@@ -83,18 +114,42 @@ const Sidebar = () => {
                 {/* users */}
                 <h2 className="text-xl font-bold p-4">User dashboard</h2>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-                  <Link href="/users" className="lg:text-lg mx-auto">
+                  <Link
+                    href="/users"
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/users" ? "text-primary-500" : ""
+                    }`}
+                  >
                     Dashboard Home
                   </Link>
                 </li>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-                  <Link className="lg:text-lg mx-auto" href="/users/orders">
+                  <Link
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/users/orders" ? "text-primary-500" : ""
+                    }`}
+                    href="/users/orders"
+                  >
                     Orders
                   </Link>
                 </li>
                 <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
                   <Link
-                    className="lg:text-lg mx-auto"
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/users/wishlist" ? "text-primary-500" : ""
+                    }`}
+                    href="/users/wishlist"
+                  >
+                    Wishlist
+                  </Link>
+                </li>
+                <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
+                  <Link
+                    className={`link lg:text-lg mx-auto${
+                      pathname === "/users/address/editAddress"
+                        ? "text-primary-500"
+                        : ""
+                    }`}
                     href="/users/address/editAddress"
                   >
                     Address
@@ -102,7 +157,7 @@ const Sidebar = () => {
                 </li>
               </>
             ) : (
-              <p>Loading.....</p>
+              <LoadingSpinner />
             )}
 
             {/* common */}

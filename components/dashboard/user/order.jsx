@@ -1,4 +1,5 @@
 "use client";
+import LoadingSpinner from "@/components/loadingSpinner";
 import { useGetOrderByUserIdQuery } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext } from "react";
@@ -14,7 +15,7 @@ const Order = () => {
     <>
       {isLoading ? (
         <div>
-          <p>Loading...</p>
+          <LoadingSpinner />
         </div>
       ) : (
         <div>

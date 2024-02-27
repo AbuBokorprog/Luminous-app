@@ -4,14 +4,14 @@ import { NextResponse } from "next/server";
 
 database();
 export async function POST(req, res) {
-  const { name, productId, userId, email, rating, review } = await req.json();
+  const { name, productId, userId, email, rate, review } = await req.json();
   try {
     const reviews = new Reviews({
       name,
       email,
       userId,
-      productId,
-      rating,
+      productId: productId,
+      rating: rate,
       review,
     });
     const result = await reviews.save();

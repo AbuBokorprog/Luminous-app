@@ -17,11 +17,15 @@ const Miss = () => {
           {" "}
           <Image src={image1} alt="Image1" />
         </Link>
-        <Image src={image2} alt="Image2" />
+        <Link href={"/product_category/brand/lux"}>
+          <Image src={image2} alt="Image2" />
+        </Link>
         <Link href={"/product_category/buy1get1"}>
           <Image src={image3} alt="buy 1 get 1" />
         </Link>
-        <Image src={image4} alt="Image4" />
+        <Link href={"/product_category/offer/bogo_offer"}>
+          <Image src={image4} alt="Image4" />
+        </Link>
       </div>
     </div>
   );

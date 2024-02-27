@@ -41,6 +41,56 @@ const ProductSidebar = () => {
             <li>
               <Link
                 className={`link ${
+                  pathname === "/product_category/offer/bogo_offer"
+                    ? "text-primary-500"
+                    : ""
+                }`}
+                onClick={() => {
+                  setActiveMakeup(false),
+                    setActiveClothes(false),
+                    setActiveFragrance(false),
+                    setActiveHair(false),
+                    setActiveMen(false),
+                    setActiveMom(false),
+                    setActiveNatural(false),
+                    setActivePersonal(false),
+                    setActiveSkin(false),
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
+                }}
+                href={"/product_category/offer/bogo_offer"}
+              >
+                Bogo Offer
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={`link ${
+                  pathname === "/product_category/offer/free_delivery"
+                    ? "text-primary-500"
+                    : ""
+                }`}
+                onClick={() => {
+                  setActiveMakeup(false),
+                    setActiveClothes(false),
+                    setActiveFragrance(false),
+                    setActiveHair(false),
+                    setActiveMen(false),
+                    setActiveMom(false),
+                    setActiveNatural(false),
+                    setActivePersonal(false),
+                    setActiveSkin(false),
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
+                }}
+                href={"/product_category/offer/free_delivery"}
+              >
+                Free Delivery
+              </Link>
+            </li>
+            <li>
+              <Link
+                className={`link ${
                   pathname === "/product_category/buy1get1"
                     ? "text-primary-500"
                     : ""
@@ -1383,23 +1433,21 @@ const ProductSidebar = () => {
                       Tresemme
                     </Link>
                   </li>
-                  {/* <li>
+                  <li>
                     <Link
                       className={`link ${
-                        pathname === `/product_category/men/shop_concern`
+                        pathname === `/product_category/brand/lux`
                           ? "text-primary-500"
                           : ""
                       }`}
-                      href={"/product_category/men/shop_concern"}
+                      href={"/product_category/brand/lux"}
                     >
-
+                      Lux
                     </Link>
-                  </li> */}
+                  </li>
                 </ul>
               )}
             </li>
-
-            {/* TODO offer*/}
           </ul>
         </div>
       </aside>

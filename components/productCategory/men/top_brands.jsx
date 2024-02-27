@@ -9,10 +9,12 @@ import {
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import LoadingSpinner from "@/components/loadingSpinner";
 const TopBrands = ({ category }) => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
-  const { data: products, isLoading, isError, error } = useGetProductQuery();
+  const { data, isLoading, isError, error } = useGetProductQuery();
+  const products = data?.filter((p) => p.status === "approved");
   const menProducts = products?.filter((p) =>
     p.category.some((sub) => sub === `${category}`)
   );
@@ -49,7 +51,7 @@ const TopBrands = ({ category }) => {
     <div>
       <h4 className="text-lg py-8 bg-dark-200 text-center">Top Brands</h4>
       {isLoading ? (
-        <p>loading...</p>
+        <LoadingSpinner />
       ) : (
         <>
           {topBrands?.length > 0 ? (
