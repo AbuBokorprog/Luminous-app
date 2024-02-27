@@ -1,10 +1,10 @@
-import Tresseme from "@/components/productCategory/brand/tresemme";
+import Brands from "@/components/productCategory/brand/brands";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <Tresseme />
+      <Brands brand={"Tresemme"} title={"Tresemme"} />
     </div>
   );
 }

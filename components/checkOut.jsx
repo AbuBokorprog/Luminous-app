@@ -120,8 +120,8 @@ const CheckOut = () => {
                 <input
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="Type your phone"
-                  type="number"
-                  value={shippingAddressData?.phone}
+                  type="tel"
+                  defaultValue={shippingAddressData?.phone}
                   {...register("phone", { required: true })}
                   aria-invalid={errors.phone ? "true" : "false"}
                 />
@@ -140,7 +140,7 @@ const CheckOut = () => {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="Type your email"
                   type="email"
-                  value={shippingAddressData?.email}
+                  defaultValue={shippingAddressData?.email}
                   {...register("email")}
                 />
               </div>
@@ -155,7 +155,7 @@ const CheckOut = () => {
                 </label>
                 <input
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  value={shippingAddressData?.state}
+                  defaultValue={shippingAddressData?.state}
                   placeholder="Type your district"
                   {...register("district", { required: true })}
                   aria-invalid={errors.district ? "true" : "false"}
@@ -173,7 +173,7 @@ const CheckOut = () => {
                 </label>
                 <input
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  value={shippingAddressData?.town}
+                  defaultValue={shippingAddressData?.town}
                   placeholder="Type your area"
                   {...register("area", { required: true })}
                 />
@@ -191,7 +191,7 @@ const CheckOut = () => {
                 <input
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   placeholder="Type your email"
-                  value={shippingAddressData?.street}
+                  defaultValue={shippingAddressData?.street}
                   {...register("address", { required: true })}
                   aria-invalid={errors.district ? "true" : "false"}
                 />
@@ -225,7 +225,7 @@ const CheckOut = () => {
                       <input
                         type="radio"
                         id="Delivery outside Dhaka"
-                        value="Delivery outside Dhaka"
+                        defaultValue="Delivery outside Dhaka"
                         {...register("delivery")}
                       />
                       <label className="ps-2" htmlFor="delivery">
@@ -239,7 +239,7 @@ const CheckOut = () => {
                       <input
                         type="radio"
                         id="Delivery inside Dhaka"
-                        value="Delivery inside Dhaka"
+                        defaultValue="Delivery inside Dhaka"
                         {...register("delivery")}
                       />
                       <label className="ps-2" htmlFor="delivery">
@@ -269,7 +269,7 @@ const CheckOut = () => {
                     <input
                       type="radio"
                       id="Online Payment"
-                      value="Online Payment"
+                      defaultValue="Online Payment"
                       {...register("onlinePay")}
                     />
                     <label className="ps-2" htmlFor="Online Payment">
@@ -280,7 +280,7 @@ const CheckOut = () => {
                     <input
                       type="checkbox"
                       id="terms"
-                      value="terms"
+                      defaultValue="terms"
                       {...register("terms", { required: true })}
                     />
                     <label htmlFor="terms" className="text-xl ps-2">

@@ -3,6 +3,8 @@ import {
   useCartDeleteMutation,
   useCartGetByUserQuery,
   useCartUpdateMutation,
+  useGetBillingAddressByUserIdQuery,
+  useGetShippingAddressByUserIdQuery,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useState, useEffect, useRef, useContext } from "react";
@@ -82,13 +84,20 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
     }
   };
 
+  const { data: shippingAddressData } = useGetShippingAddressByUserIdQuery(
+    currentUser?._id
+  );
+  const { data: billingAddressData } = useGetBillingAddressByUserIdQuery(
+    currentUser?._id
+  );
+
   return (
     <div
       className={`relative  ${
         isSidebarOpen ? "shadow-xl shadow-dark-500" : ""
       }`}
     >
-      <div className="bg-black w-14 md:w-16 text-center p-1 rounded-xl">
+      <div className="bg-primary-500 dark:bg-black w-14 md:w-16 text-center p-1 rounded-xl">
         <button
           className="text-white mx-auto "
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -192,7 +201,13 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
           <div className="flex justify-center items-center">
             <Link
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              href={currentUser?.email ? "/check_out" : "login"}
+              href={
+                currentUser?.email
+                  ? billingAddressData && shippingAddressData
+                    ? "/check_out"
+                    : "/users/address/editAddress"
+                  : "/login"
+              }
               className=" text-center bottom-2 absolute w-full lg:w-96 rounded-lg text-xl py-3 hover:bg-primary-400 shadow-lg text-white bg-green"
             >
               Proceed

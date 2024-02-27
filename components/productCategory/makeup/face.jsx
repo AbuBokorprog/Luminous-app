@@ -53,10 +53,10 @@ const Face = ({ face, title }) => {
       ) : (
         <>
           {faceProducts?.length > 0 ? (
-            <div className=" grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center lg:gap-8">
+            <div className=" grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
               {faceProducts?.map((p) => (
                 <div key={p._id}>
-                  <div className="w-full text-center lg:w-72 my-2 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div className="w-full text-center my-2 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <Link href={`/product/${p?._id}`}>
                       <Image
                         className="rounded-t-lg lg:h-44 w-full"

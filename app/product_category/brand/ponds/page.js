@@ -1,10 +1,10 @@
-import Ponds from "@/components/productCategory/brand/ponds";
+import Brands from "@/components/productCategory/brand/brands";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <Ponds />
+      <Brands brand={"Ponds"} title={"Ponds"} />
     </div>
   );
 }

@@ -49,10 +49,10 @@ const Concern = ({ concern, title }) => {
       ) : (
         <>
           {acneProducts?.length > 0 ? (
-            <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center md:gap-4 lg:gap-2">
+            <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
               {acneProducts?.map((p) => (
                 <div key={p._id}>
-                  <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div className="w-full text-center my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <Link href={`/product/${p?._id}`}>
                       <Image
                         className="rounded-t-lg lg:h-44 w-full"

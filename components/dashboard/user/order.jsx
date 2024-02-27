@@ -28,13 +28,30 @@ const Order = () => {
                   <div className="flex flex-col items-center  bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <div className="flex flex-col justify-between p-4 leading-normal">
                       <h5 className="mb-2 text-xl tracking-tight text-gray-900 dark:text-white">
-                        Order Id {order?._id}
+                        Order Id: {order?._id}
                       </h5>
+                      {order?.status === "Paid" ? (
+                        <p className="mb-3 text-xl text-gray-700 dark:text-gray-400">
+                          Status:{" "}
+                          <span className="text-green font-semibold">
+                            {" "}
+                            {order?.status}
+                          </span>
+                        </p>
+                      ) : (
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                          Status:{" "}
+                          <span className="text-Red font-semibold">
+                            {order?.status}
+                          </span>
+                        </p>
+                      )}
+
                       <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                         total Price: {order?.price}
                       </p>
                       <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                        total Price: {order?.createdAt}
+                        Time: {order?.createdAt}
                       </p>
                       {/* <button>View Details</button> */}
                     </div>

@@ -14,7 +14,7 @@ const EditAddress = () => {
   const { data: billingAddressData } = useGetBillingAddressByUserIdQuery(
     currentUser?._id
   );
-  console.log(billingAddressData);
+
   return (
     <div className="edit-address lg:px-4">
       <h2 className="text-lg font-medium my-4 text-gray-500">

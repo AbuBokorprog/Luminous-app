@@ -5,6 +5,7 @@ import Products from "@/models/products";
 import ShippingAddress from "@/models/shippingAddress";
 import { database } from "@/utils/database/database";
 import { NextResponse } from "next/server";
+
 database();
 export async function POST(req, _) {
   const {
@@ -25,7 +26,7 @@ export async function POST(req, _) {
     const itemPrice = (item.discountPrice || item.price) * item.quantity;
     return total + itemPrice;
   }, 0);
-  let price = 0;
+  let price = totalPrice;
   if (delivery === "Delivery inside Dhaka") {
     price = totalPrice + 49;
   } else {
@@ -47,7 +48,7 @@ export async function POST(req, _) {
     const formData = new FormData();
     formData.append("store_id", `${process.env.STORE_ID}`);
     formData.append("store_passwd", `${process.env.STORE_PASS}`);
-    formData.append("total_amount", `${price}`);
+    formData.append("total_amount", price);
     formData.append("currency", "BDT");
     formData.append("userId", `${userId}`);
     formData.append("tran_id", tran_id);
@@ -67,10 +68,10 @@ export async function POST(req, _) {
     formData.append("cus_add2", `${address}`);
     formData.append("cus_city", `${area}`);
     formData.append("cus_state", `${district}`);
-    formData.append("cus_postcode", `${postcode}`);
+    formData.append("cus_postcode", postcode);
     formData.append("cus_country", `${country}`);
-    formData.append("cus_phone", `${phone}`);
-    formData.append("cus_fax", "01701063280");
+    formData.append("cus_phone", phone);
+    formData.append("cus_fax", phone);
     formData.append("shipping_method", "YES");
     formData.append("ship_name", `${displayName}`);
     formData.append("ship_add1", `${address}`);
@@ -78,10 +79,8 @@ export async function POST(req, _) {
     formData.append("ship_city", `${area}`);
     formData.append("ship_state", `${district}`);
     formData.append("ship_country", `${shippingCountry}`);
-    formData.append("ship_postcode", `${shippingPostcode}`);
-    formData.append("product_name", "product_name");
-    formData.append("product_category", "category");
-    formData.append("product_profile", "profile");
+    formData.append("ship_postcode", shippingPostcode);
+    formData.append("product_details", cart);
     formData.append("product_amount", `${totalQuantity}`);
 
     const requestOptions = { method: "POST", body: formData };
@@ -121,8 +120,6 @@ export async function POST(req, _) {
         }
       })
     );
-
-    await Cart.deleteMany({ userId: userId });
 
     return NextResponse.json({ SSLResJSON });
   } catch (e) {

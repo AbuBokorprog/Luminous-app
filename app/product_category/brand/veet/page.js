@@ -1,10 +1,10 @@
-import Veet from "@/components/productCategory/brand/veet";
+import Brands from "@/components/productCategory/brand/brands";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <Veet />
+      <Brands brand={"Veet"} title={"Veet"} />
     </div>
   );
 }

@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Luminous Beauty eCommerce Website
+
+## Overview
+
+Luminous Beauty is an eCommerce website dedicated to beauty and cosmetic products. It allows users to browse and purchase various beauty products online. The website includes features such as category-wise product listings, user authentication, role-based dashboards, and online payment processing.
+
+## Website Link
+
+[Visit Luminous Beauty eCommerce Website](https://luminous-app.vercel.app/)
+
+## Features
+
+- **User Authentication**: Users can sign up, log in, and log out securely.
+- **Role-Based Dashboards**: Admin, manager, and user roles have separate dashboards with specific functionalities.
+- **Product Listings**: Users can browse all products and view them by category.
+- **Online Payments**: Integration with a payment gateway to process online payments securely.
+- **Admin Management**: Admins can manage products, categories, and user accounts.
+- **Responsive Design**: The website is responsive and optimized for various devices.
+
+## Technologies Used
+
+- **Next.js**: Frontend framework for building React applications.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Swiper**: JavaScript library for image sliders and carousels.
+- **Redux Toolkit**: State management library for React applications.
+- **bcrypt**: Library for hashing passwords securely.
+- **JWT**: JSON Web Token for user authentication and authorization.
+- **Firebase**: Platform for building web and mobile applications, used for authentication.
+- **MongoDB**: NoSQL database for storing product and user data.
+- **Mongoose**: MongoDB object modeling library for Node.js.
+- **React Hook Form**: Library for building forms with React.
+- **React Icons**: Icon library for React components.
+- **React Hot Toast**: Toast notification library for React applications.
+- **React Redux**: Official React bindings for Redux state management.
+- **SweetAlert**: Library for beautiful, responsive, and customizable alert dialogs.
+
+## User Credentials
+
+- **Admin**
+  - Email: admin@gmail.com
+  - Password: qwertyuiop
+- **Manager**
+  - Email: manager@gmail.com
+  - Password: qwertyuiop
+- **User**
+  - Email: user@gmail.com
+  - Password: qwertyuiop
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone the repository: `git clone <repository_url>`
+2. Install dependencies: `npm install`
+3. Set up environment variables.
+4. Run the development server: `npm run dev`
+5. Access the website at `http://localhost:3000`

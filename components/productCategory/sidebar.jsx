@@ -16,6 +16,8 @@ const ProductSidebar = () => {
   const [activeMen, setActiveMen] = useState(false);
   const [activeClothes, setActiveClothes] = useState(false);
   const [activeNatural, setActiveNatural] = useState(false);
+  const [activeBrand, setActiveBrand] = useState(false);
+  const [activeOffer, setActiveOffer] = useState(false);
 
   return (
     <div className="relative">
@@ -1281,6 +1283,123 @@ const ProductSidebar = () => {
                 </ul>
               )} */}
             </li>
+            <li>
+              <Link
+                className={`link ${
+                  pathname === `/product_category/brand`
+                    ? "text-primary-500"
+                    : ""
+                }`}
+                onClick={() => {
+                  setActiveMakeup(false),
+                    setActiveClothes(false),
+                    setActiveFragrance(false),
+                    setActiveHair(false),
+                    setActiveMen(false),
+                    setActiveMom(false),
+                    setActiveNatural(false),
+                    setActivePersonal(false),
+                    setActiveSkin(false),
+                    setActiveUndergarments(false),
+                    setActiveConcern(false);
+                  setActiveBrand(!activeBrand);
+                  setActiveOffer(false);
+                }}
+                href={"/product_category/brand"}
+              >
+                Top Brands
+              </Link>
+              {activeBrand && (
+                <ul className="ml-4 space-y-2">
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/brand/veet`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/brand/veet"}
+                    >
+                      Veet
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/brand/naturale`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/brand/naturale"}
+                    >
+                      Naturale
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/brand/nirvana`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/brand/nirvana"}
+                    >
+                      Nirvana
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/brand/ponds`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/brand/ponds"}
+                    >
+                      Ponds
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/brand/simple`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/brand/simple"}
+                    >
+                      Simple
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/brand/tresemme`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/brand/tresemme"}
+                    >
+                      Tresemme
+                    </Link>
+                  </li>
+                  {/* <li>
+                    <Link
+                      className={`link ${
+                        pathname === `/product_category/men/shop_concern`
+                          ? "text-primary-500"
+                          : ""
+                      }`}
+                      href={"/product_category/men/shop_concern"}
+                    >
+
+                    </Link>
+                  </li> */}
+                </ul>
+              )}
+            </li>
+
+            {/* TODO offer*/}
           </ul>
         </div>
       </aside>

@@ -1,10 +1,10 @@
-import Nirvana from "@/components/productCategory/brand/nirvana";
+import Brands from "@/components/productCategory/brand/brands";
 import React from "react";
 
 export default function page() {
   return (
     <div>
-      <Nirvana />
+      <Brands brand={"Nirvana"} title={"Nirvana"} />
     </div>
   );
 }

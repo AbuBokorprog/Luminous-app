@@ -24,6 +24,7 @@ export function middleware(request) {
   if (
     request.nextUrl.pathname === "/admin/:path*" ||
     request.nextUrl.pathname === "/users/:path*" ||
+    request.nextUrl.pathname === "/check_out/:path*" ||
     request.nextUrl.pathname === "/manager/:path*"
   ) {
     if (!authToken) {
@@ -42,5 +43,6 @@ export const config = {
     "/users/:path*",
     "/manager/:path*",
     "/admin/:path*",
+    "/check_out/:path*",
   ],
 };
