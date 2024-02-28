@@ -9,7 +9,23 @@ export async function POST(req, res) {
   try {
     const wishlist = new Wishlist({ userId, productDetails, productId });
     const result = await wishlist.save();
-    return NextResponse.json(result);
+    return NextResponse.json({
+      success: "wishlist added successfully",
+      status: 200,
+      result,
+    });
+  } catch (error) {
+    return NextResponse.json({
+      error: error.message,
+      status: false,
+    });
+  }
+}
+
+export async function GET() {
+  try {
+    const wishlist = await Wishlist.find();
+    return NextResponse.json(wishlist);
   } catch (error) {
     return NextResponse.json({
       error: error.message,

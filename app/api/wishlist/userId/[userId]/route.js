@@ -9,12 +9,6 @@ export async function GET(req, { params }) {
   try {
     const wishlist = await Wishlist.find({ userId: userId });
 
-    if (!wishlist) {
-      return NextResponse.json({
-        error: "Wishlist not found",
-        status: 404,
-      });
-    }
     return NextResponse.json(wishlist);
   } catch (error) {
     return NextResponse.json({

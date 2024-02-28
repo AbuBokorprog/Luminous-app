@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import LoadingSpinner from "../loadingSpinner";
 import { usePathname } from "next/navigation";
-
+import toast, { Toaster } from "react-hot-toast";
 const Sidebar = () => {
   const pathname = usePathname();
   const { user, currentUser, logout } = useContext(authContext);
@@ -21,15 +21,16 @@ const Sidebar = () => {
             .then(() => {})
             .catch((error) => {});
         } else {
-          console.error("Logout request failed");
+          toast.error("Logout request failed");
         }
       })
       .catch((error) => {
-        console.error("Error during logout:", error?.message);
+        toast.error("Error during logout:", error?.message);
       });
   };
   return (
     <>
+      <Toaster />
       <div
         className={`dark:bg-gray-900 dark:text-white text-black bg-dark-50 h-screen py-4 rounded-lg px-4`}
       >
@@ -161,11 +162,11 @@ const Sidebar = () => {
             )}
 
             {/* common */}
-            <hr className="border-2 mt-44" />
+            <hr className="border-2 mt-32" />
             <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
-              {/* <Link className="lg:text-lg mx-auto" href="/dashboard/profile">
+              <Link className="lg:text-lg mx-auto" href="/profile">
                 Profile
-              </Link> */}
+              </Link>
             </li>
             <li className="py-2 px-4 my-4 hover:text-white hover:bg-dark-800 bg-primary-200 rounded-full text-center">
               <Link className="lg:text-lg mx-auto" href="/">

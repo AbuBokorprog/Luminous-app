@@ -1,9 +1,10 @@
+import Profile from "@/components/dashboard/profile/profile";
 import React from "react";
 
-export default function Profile() {
+export default function page() {
   return (
     <div>
-      <h2>Profile</h2>
+      <Profile />
     </div>
   );
 }

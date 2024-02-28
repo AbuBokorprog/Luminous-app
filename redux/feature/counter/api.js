@@ -172,6 +172,12 @@ export const Api = createApi({
         body: data,
       }),
     }),
+    deleteUserWishlistByProductId: builder.mutation({
+      query: ({ userId, id }) => ({
+        url: `/wishlist/userId/${userId}/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -209,4 +215,5 @@ export const {
   useGetReviewByProductIdQuery,
   useGetWishlistByUserIdQuery,
   usePostWishlistMutation,
+  useDeleteUserWishlistByProductIdMutation,
 } = Api;

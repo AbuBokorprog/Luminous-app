@@ -2,13 +2,15 @@
 import {
   useCartGetByUserQuery,
   useCartPostMutation,
+  useDeleteUserWishlistByProductIdMutation,
   useGetProductByIdQuery,
   useGetReviewByProductIdQuery,
+  useGetWishlistByUserIdQuery,
   usePostReviewMutation,
   usePostWishlistMutation,
 } from "@/redux/feature/counter/api";
-
-import { FaStar } from "react-icons/fa";
+import StarRatings from "react-star-ratings";
+import { FaStar, FaRegHeart, FaHeart } from "react-icons/fa";
 import React, { useContext, useState } from "react";
 import Image from "next/image";
 import toast, { Toaster } from "react-hot-toast";
@@ -16,7 +18,8 @@ import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import LoadingSpinner from "../loadingSpinner";
-
+import Link from "next/link";
+import Recommended from "./recomended";
 const SingleProduct = ({ id }) => {
   const [rating, setRating] = useState(0);
   const [ratingError, setRatingError] = useState("");
@@ -30,7 +33,18 @@ const SingleProduct = ({ id }) => {
     { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
   ] = useCartPostMutation();
   const { refetch } = useCartGetByUserQuery(currentUser?._id);
-  const [wishlistPost, {}] = usePostWishlistMutation();
+  const [wishlistPost, { isLoading: isLoadingPostWishlist }] =
+    usePostWishlistMutation();
+  const {
+    data: userWishlist,
+    refetch: wishlistRefetch,
+    isLoading: isLoadingGetWishlist,
+  } = useGetWishlistByUserIdQuery(currentUser?._id);
+
+  const isWishlist = userWishlist?.filter((w) => w.productId === data?._id);
+
+  const [deleteWishlist, { isLoading: isLoadingDeleteWishlist }] =
+    useDeleteUserWishlistByProductIdMutation();
   const addToCart = async (id) => {
     const userId = currentUser?._id;
     const productId = id;
@@ -65,6 +79,12 @@ const SingleProduct = ({ id }) => {
   } = useGetReviewByProductIdQuery(data?._id);
   const [postReview, { isLoading: isLoadingPostReview }] =
     usePostReviewMutation();
+
+  const rate = reviews?.reduce((total, review) => {
+    return total + review.rating;
+  }, 0);
+  const length = reviews?.length;
+  const averageRate = rate / length;
   const {
     register,
     reset,
@@ -92,24 +112,42 @@ const SingleProduct = ({ id }) => {
       setRatingError("Please rate ");
     }
   };
-  const wishlistHandle = async () => {
-    const userId = currentUser._id;
-    const productId = data?._id;
+  const wishlistHandle = async (id) => {
+    const userId = currentUser?._id;
+    const productId = id;
     const productDetails = data;
 
     const wishlist = { userId, productId, productDetails };
+
     try {
       const result = await wishlistPost(wishlist);
-      console.log(result);
+      if (result?.data.success) {
+        wishlistRefetch();
+      }
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
+
+  const deleteWishlistHandler = async (id) => {
+    const userId = currentUser?._id;
+    try {
+      const result = await deleteWishlist({ userId, id });
+      if (result?.data.success) {
+        wishlistRefetch();
+      }
+    } catch (error) {
+      toast.error(error?.message);
     }
   };
   return (
     <>
       <Toaster />
       <title>{data?.name}</title>
-      {isLoading ? (
+      {isLoading ||
+      isLoadingDeleteWishlist ||
+      isLoadingGetWishlist ||
+      isLoadingPostWishlist ? (
         <div>
           <LoadingSpinner />
         </div>
@@ -122,40 +160,88 @@ const SingleProduct = ({ id }) => {
               height={500}
               alt={data?.name}
             />
-            <div className="col-span-2">
+            <div className="col-span-2 px-2">
               <h2 className="text-2xl font-bold">{data?.name.slice()}</h2>
               <div className="my-2">
                 {data?.ml && <p className="my-1">({data?.ml})</p>}
                 {data?.weight && <p className="my-1">({data?.weight})</p>}
 
-                <div>
-                  {data?.discountPrice ? (
-                    <div className="flex gap-10 items-center">
-                      <p className="my-1 text-Red text-2xl font-semibold">
-                        {data?.discountPrice}Taka
-                      </p>
-                      <p className="my-1 line-through text-xl">
-                        {data?.price}Taka
-                      </p>
-                    </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    {data?.discountPrice ? (
+                      <div className="flex gap-10 items-center">
+                        <p className="my-1 text-Red text-2xl font-semibold">
+                          {data?.discountPrice}Taka
+                        </p>
+                        <p className="my-1 line-through text-xl">
+                          {data?.price}Taka
+                        </p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p className="my-1">{data?.price}Taka</p>
+                      </div>
+                    )}
+                  </div>
+                  <Link href={"#rate"}>
+                    {reviews?.length > 0 ? (
+                      <StarRatings
+                        rating={averageRate}
+                        starRatedColor="gold"
+                        starEmptyColor="gray"
+                        starDimension="20px"
+                        starSpacing="1px"
+                      />
+                    ) : (
+                      <StarRatings
+                        rating={0}
+                        starRatedColor="gold"
+                        starEmptyColor="gray"
+                        starDimension="20px"
+                        starSpacing="1px"
+                      />
+                    )}{" "}
+                    <span>Reviews {reviews?.length}</span>
+                  </Link>
+                </div>
+                <div className="flex items-center gap-5">
+                  <div>
+                    {isWishlist?.length > 0 ? (
+                      <button
+                        onClick={() =>
+                          deleteWishlistHandler(isWishlist[0]?._id)
+                        }
+                      >
+                        <FaHeart className="w-10 h-10 text-Red" />
+                      </button>
+                    ) : (
+                      <button onClick={() => wishlistHandle(data?._id)}>
+                        <FaRegHeart className="w-10 h-10 text-Red" />
+                      </button>
+                    )}
+                  </div>
+
+                  {data?.quantity > 0 ? (
+                    <>
+                      {cartIsLoading ? (
+                        <button className="uppercase text-xl my-4 rounded-lg py-4 text-white w-full lg:w-1/3 bg-violet hover:bg-primary-400">
+                          Loading...
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => addToCart(data?._id)}
+                          className="uppercase text-xl my-4 rounded-lg py-4 text-white w-full lg:w-1/3 bg-violet hover:bg-primary-400"
+                        >
+                          Add To Card
+                        </button>
+                      )}
+                    </>
                   ) : (
-                    <div>
-                      <p className="my-1">{data?.price}Taka</p>
-                    </div>
+                    <button className="uppercase text-xl my-4 rounded-lg py-4 text-white w-1/3 bg-violet hover:bg-primary-400">
+                      Out of stock
+                    </button>
                   )}
                 </div>
-                {data?.quantity > 0 ? (
-                  <button
-                    onClick={() => addToCart(data?._id)}
-                    className="uppercase text-xl my-4 rounded-lg py-4 text-white w-full lg:w-1/3 bg-violet hover:bg-primary-400"
-                  >
-                    Add To Card
-                  </button>
-                ) : (
-                  <button className="uppercase text-xl my-4 rounded-lg py-4 text-white w-1/3 bg-violet hover:bg-primary-400">
-                    Out of stock
-                  </button>
-                )}
                 <div className=" border p-2 my-4 border-gray-200 rounded-lg shadow md:flex-row bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                   {data?.description.length > 0 && <p>{data?.description}</p>}
                   <p className="mt-4">Quantity: {data?.quantity}</p>
@@ -188,10 +274,16 @@ const SingleProduct = ({ id }) => {
                 </div>
               </div>
             </div>
+            <div className="">
+              <Recommended
+                category={data?.sub_category[1]}
+                category2={data?.sub_category[0]}
+              />
+            </div>
           </div>
 
           {/* Review section */}
-          <div className="my-20 px-2 lg:px-0">
+          <div id="rate" className="my-20 px-2 lg:px-0">
             <h2 className=" text-3xl mb-8 lg:text-4xl font-semibold">
               Reviews
             </h2>
@@ -269,7 +361,7 @@ const SingleProduct = ({ id }) => {
               {[...Array(5)].map((star, index) => {
                 const ratingValue = index + 1;
                 return (
-                  <div>
+                  <div key={index}>
                     <FaStar
                       key={index}
                       className="star"

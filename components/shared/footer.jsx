@@ -17,14 +17,9 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Careers
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Brand Center
-                  </a>
+                  <Link href="/about_us/contact_us" className="hover:underline">
+                    Contact Us
+                  </Link>
                 </li>
                 <li className="mb-4">
                   <Link href="blog" className="hover:underline">
@@ -51,11 +46,6 @@ const Footer = () => {
                 <li className="mb-4">
                   <a href="#" className="hover:underline">
                     Facebook
-                  </a>
-                </li>
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Contact Us
                   </a>
                 </li>
               </ul>
