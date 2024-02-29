@@ -5,11 +5,14 @@ import {
 } from "@/redux/feature/counter/api";
 import swal from "sweetalert";
 import { authContext } from "@/utils/provider/auth_provider";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
 import LoadingSpinner from "@/components/loadingSpinner";
+import { useRouter } from "next/navigation";
 
 const AllProducts = () => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data: product, isLoading, refetch, error } = useGetProductQuery();
 
@@ -19,12 +22,12 @@ const AllProducts = () => {
     const newData = { status: "pending" };
     try {
       const response = await updateProduct({ id, data: newData });
-      if (response) {
-        alert("Product updated");
+      if (response.data.success) {
+        toast.success(response.data.success);
         refetch();
       }
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -32,12 +35,13 @@ const AllProducts = () => {
     const newData = { status: "approved" };
     try {
       const response = await updateProduct({ id, data: newData });
-      if (response) {
-        alert("Product updated");
+
+      if (response.data.success) {
+        toast.success(response.data.success);
         refetch();
       }
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -45,19 +49,26 @@ const AllProducts = () => {
     const newData = { status: "declined" };
     try {
       const response = await updateProduct({ id, data: newData });
-      if (response) {
-        alert("Product updated");
+      if (response.data.success) {
+        toast.success(response.data.success);
         refetch();
       }
     } catch (error) {
-      console.log(error.message);
+      toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    if (!currentUser && currentUser?.role !== "admin") {
+      router.push("/login");
+    }
+  }, [currentUser, router]);
 
   const pendingProducts = product?.filter((p) => p.status === "pending");
 
   return (
     <>
+      <Toaster />
       {isLoading ? (
         <LoadingSpinner />
       ) : (

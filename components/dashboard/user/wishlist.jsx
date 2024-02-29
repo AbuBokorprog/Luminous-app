@@ -1,11 +1,20 @@
 "use client";
 import { useGetWishlistByUserIdQuery } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 const Wishlist = () => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
+
+  useEffect(() => {
+    if (!currentUser && currentUser?.role !== "user") {
+      router.push("/login");
+    }
+  }, [currentUser, router]);
+
   const { data: wishlist, isLoading } = useGetWishlistByUserIdQuery(
     currentUser?._id
   );

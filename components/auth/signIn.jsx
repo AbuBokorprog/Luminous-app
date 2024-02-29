@@ -113,7 +113,10 @@ const SignIn = () => {
               type="password"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Type your password"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: true,
+                pattern: /^[A-Za-z]+$/i,
+              })}
               aria-invalid={errors.password ? "true" : "false"}
             />
             {errors.password?.type === "required" && (
@@ -131,7 +134,10 @@ const SignIn = () => {
               type="password"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
               placeholder="Type your password"
-              {...register("confirmPassword", { required: true })}
+              {...register("confirmPassword", {
+                required: true,
+                pattern: /^[A-Za-z]+$/i,
+              })}
               aria-invalid={errors.confirmPassword ? "true" : "false"}
             />
             {errors.confirmPassword?.type === "required" && (

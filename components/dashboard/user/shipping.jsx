@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AddressForm from "./address";
 import {
   useGetShippingAddressByUserIdQuery,
@@ -7,9 +7,17 @@ import {
   useUpdateBillingAddressMutation,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
+import { useRouter } from "next/navigation";
 
 const Shipping = () => {
   const { currentUser } = useContext(authContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!currentUser && currentUser?.role !== "user") {
+      router.push("/login");
+    }
+  }, [currentUser, router]);
   const [postShipping, { error }] = usePostShippingAddressMutation();
   const [updateShipping, {}] = useUpdateBillingAddressMutation();
   const { data: shippingAddressData, refetch } =

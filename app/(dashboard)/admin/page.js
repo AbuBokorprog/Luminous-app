@@ -1,8 +1,9 @@
+import Admin from "@/components/dashboard/admin/admin";
 import React from "react";
-export default function Admin() {
+export default function admin() {
   return (
     <div>
-      <h2 className="text-4xl font-medium text-center mx-auto">Admin</h2>
+      <Admin />
     </div>
   );
 }

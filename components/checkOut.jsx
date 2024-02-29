@@ -6,12 +6,13 @@ import {
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import LoadingSpinner from "./loadingSpinner";
 
 const CheckOut = () => {
   const router = useRouter();
+  const [method, setMethod] = useState(0);
   const { currentUser } = useContext(authContext);
   const {
     data: cart,
@@ -25,6 +26,8 @@ const CheckOut = () => {
     return total + itemPrice;
   }, 0);
 
+  const grandTotal = totalPrice + method;
+
   const { data: shippingAddressData, isLoading: shippingLoading } =
     useGetShippingAddressByUserIdQuery(currentUser?._id);
   const [postPayment, { error }] = usePostPaymentMutation();
@@ -34,6 +37,14 @@ const CheckOut = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const methodChange = (data) => {
+    if (data === "Delivery inside Dhaka") {
+      setMethod(49);
+    } else {
+      setMethod(100);
+    }
+  };
 
   const onSubmit = async (data) => {
     if (currentUser?.email) {
@@ -219,6 +230,7 @@ const CheckOut = () => {
                   <div className="flex justify-between items-center">
                     <div className="my-3">
                       <input
+                        onClick={() => methodChange("Delivery outside Dhaka")}
                         type="radio"
                         id="Delivery outside Dhaka"
                         defaultValue="Delivery outside Dhaka"
@@ -233,6 +245,7 @@ const CheckOut = () => {
                   <div className="flex justify-between items-center">
                     <div className="my-3">
                       <input
+                        onClick={() => methodChange("Delivery inside Dhaka")}
                         type="radio"
                         id="Delivery inside Dhaka"
                         defaultValue="Delivery inside Dhaka"
@@ -251,9 +264,7 @@ const CheckOut = () => {
                   <hr />
                   <div className="lg:flex text-primary-500 my-4 justify-between items-center mx-auto">
                     <h5 className="text-xl font-semibold">Grand Total</h5>
-                    <p className="text-xl font-semibold">
-                      ${totalPrice} + Shipping Charge
-                    </p>
+                    <p className="text-xl font-semibold">{grandTotal} BDT</p>
                   </div>
                 </div>
                 <div className="lg:w-1/2">

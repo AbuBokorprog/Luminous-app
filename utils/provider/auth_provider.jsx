@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
   updateProfile,
 } from "firebase/auth";
 import { App } from "@/firebase.config";
@@ -51,6 +52,17 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  const updateUserPassword = (newPassword) => {
+    updatePassword(auth.currentUser, newPassword)
+      .then(() => {
+        // Update successful.
+      })
+      .catch((error) => {
+        // An error ocurred
+        // ...
+      });
+  };
+
   const userDelete = () => {
     return deleteUser(auth.currentUser);
   };
@@ -65,6 +77,7 @@ const AuthProvider = ({ children }) => {
     isLoading,
     userDelete,
     refetch,
+    updateUserPassword,
   };
   return (
     <authContext.Provider value={authInfo}>{children}</authContext.Provider>

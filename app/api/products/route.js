@@ -22,6 +22,8 @@ export async function POST(req, res) {
     quantity,
     made,
     size,
+    ingredients,
+    useCase,
   } = await req.json();
   try {
     const products = new Products({
@@ -41,6 +43,8 @@ export async function POST(req, res) {
       made,
       size,
       quantity,
+      ingredients,
+      useCase,
     });
     const result = await products.save();
     return NextResponse.json({

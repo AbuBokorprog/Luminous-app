@@ -21,7 +21,7 @@ const Face = ({ face, title }) => {
   ] = useCartPostMutation();
   const { refetch } = useCartGetByUserQuery(currentUser?._id);
   const makeupProducts = products?.filter((p) =>
-    p.category.some((sub) => sub === "Face")
+    p.category.some((sub) => sub === "Makeup")
   );
 
   const faceProducts = makeupProducts?.filter((p) =>
@@ -48,17 +48,19 @@ const Face = ({ face, title }) => {
   };
 
   return (
-    <div>
-      <h4 className="text-lg py-8 bg-dark-200 text-center">{title}</h4>
+    <div className="dark:bg-gray-900">
+      <h4 className="text-lg py-8 bg-dark-100 text-black dark:text-white dark:bg-gray-800  text-center">
+        {title}
+      </h4>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <>
           {faceProducts?.length > 0 ? (
-            <div className=" grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
+            <div className=" grid grid-cols-1 dark:bg-gray-900 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
               {faceProducts?.map((p) => (
-                <div key={p._id}>
-                  <div className="w-full text-center my-2 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div key={p._id} className="">
+                  <div className="w-full text-center my-2 bg-white rounded-lg shadow dark:bg-gray-900 dark:border-gray-700">
                     <Link href={`/product/${p?._id}`}>
                       <Image
                         className="rounded-t-lg lg:h-44 w-full"

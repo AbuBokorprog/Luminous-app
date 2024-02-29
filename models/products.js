@@ -60,6 +60,12 @@ const productsSchema = mongoose.Schema({
   lowStockMessage: {
     type: String,
   },
+  ingredients: {
+    type: String,
+  },
+  useCase: {
+    type: String,
+  },
   status: {
     type: String,
     enum: ["pending", "approved", "declined"],

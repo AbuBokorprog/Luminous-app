@@ -5,21 +5,21 @@ database();
 export async function GET(req, { params }) {
   const { id } = params;
   try {
-    const product = await Products.findById({ _id: id });
-    return NextResponse.json(product);
+    const updateProduct = await Products.findById({ _id: id });
+    return NextResponse.json(updateProduct);
   } catch (error) {
     return NextResponse.json({
-      error: "Couldn't find product",
+      error: "Couldn't find updateProduct",
       status: false,
     });
   }
 }
 export async function PUT(req, { params }) {
   const { id } = params;
-  const { quantity, status, images, offer, price, discountPrice } =
+  const { quantity, images, status, offer, price, discountPrice } =
     await req.json();
   try {
-    const product = await Products.findOneAndUpdate(
+    const updateProduct = await Products.findOneAndUpdate(
       { _id: id },
       {
         quantity: quantity,
@@ -31,22 +31,26 @@ export async function PUT(req, { params }) {
       },
       { new: true, runValidators: true }
     );
-    if (!product) {
+    if (!updateProduct) {
       return NextResponse.json({
         error: "Product not found",
         status: false,
       });
     }
-    if (quantity < 10) {
-      product.lowStockMessage = `Your product "${product.name}" is going out of stock. You need to restock.`;
-    } else {
-      product.lowStockMessage = null;
-    }
 
-    return NextResponse.json(product);
+    if (updateProduct?.quantity < 9) {
+      updateProduct.lowStockMessage = `Your updateProduct ${updateProduct.name} is going out of stock. You need to restock.`;
+    } else {
+      updateProduct.lowStockMessage = null;
+    }
+    await updateProduct.save();
+    return NextResponse.json({
+      success: `Your updateProduct ${updateProduct.name} update`,
+      status: true,
+    });
   } catch (error) {
     return NextResponse.json({
-      error: "Couldn't update product",
+      error: `Couldn't update updateProduct ${error.message}`,
       status: false,
     });
   }
@@ -58,7 +62,7 @@ export async function DELETE(req, { params }) {
     const deletedProduct = await Products.findOneAndDelete({ _id: id });
     if (!deletedProduct) {
       return NextResponse.json({
-        error: "Couldn't find product",
+        error: "Couldn't find updateProduct",
         status: false,
       });
     }
@@ -68,7 +72,7 @@ export async function DELETE(req, { params }) {
     });
   } catch (error) {
     return NextResponse.json({
-      error: `Couldn't delete product ${error.message}`,
+      error: `Couldn't delete updateProduct ${error.message}`,
       status: false,
     });
   }

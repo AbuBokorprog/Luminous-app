@@ -4,14 +4,23 @@ import {
   useGetProductByUserIdQuery,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
+import { MdEditDocument } from "react-icons/md";
 import Image from "next/image";
 import swal from "sweetalert";
 import Modal from "@/components/modal";
+import Link from "next/link";
 import LoadingSpinner from "@/components/loadingSpinner";
+import { useRouter } from "next/navigation";
 const TotalProduct = () => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
+
+  // useEffect(() => {
+
+  // }, [currentUser, router]);
+
   const {
     data: product,
     isLoading,
@@ -24,7 +33,7 @@ const TotalProduct = () => {
   ] = useDeleteProductMutation();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState("");
+  const [selectedProductId, setSelectedProductId] = useState();
   const deleteHandler = async (id) => {
     try {
       const willDelete = await swal({
@@ -53,9 +62,30 @@ const TotalProduct = () => {
     }
   };
 
+  useEffect(() => {
+    const lowStockProducts = product?.filter(
+      (product) => product.lowStockMessage
+    );
+
+    lowStockProducts?.map((p) => {
+      swal("warning", p?.lowStockMessage, {
+        icon: "warning",
+      });
+    });
+
+    if (!currentUser && currentUser?.role !== "manager") {
+      router.push("/login");
+    }
+  }, [product, currentUser, router]);
+
+  const modalHandler = (id) => {
+    setIsOpen(!isOpen);
+    setSelectedProductId(id);
+  };
+
   return (
     <>
-      {isLoading ? (
+      {isLoading || deleteIsLoading ? (
         <LoadingSpinner />
       ) : (
         <div>
@@ -66,49 +96,46 @@ const TotalProduct = () => {
             {product?.map((p) => (
               <div key={p._id}>
                 <div className="w-full lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                  <Image
-                    className="rounded-t-lg lg:h-44 w-full"
-                    src={p?.images[0]}
-                    alt={p?.name}
-                    width={400}
-                    height={400}
-                  />
-                  <div className="p-2">
-                    <h2 className="mb-2 text-xl font-bold tracking-tight text-dark-900 dark:text-white">
-                      {p?.name.slice(0, 25)}
-                    </h2>
+                  <Link href={`/product/${p?._id}`}>
+                    <Image
+                      className="rounded-t-lg lg:h-44 w-full"
+                      src={p?.images[0]}
+                      alt={p?.name}
+                      width={400}
+                      height={400}
+                    />
+                    <div className="p-2">
+                      <h2 className="mb-2 text-xl font-bold tracking-tight text-dark-900 dark:text-white">
+                        {p?.name.slice(0, 25)}
+                      </h2>
 
-                    <p className=" font-normal text-primary-500 ">
-                      Price: {p?.price}
-                    </p>
-                    <p>Status: {p?.status}</p>
-                    <div className="flex justify-between items-center">
-                      <button
-                        onClick={() => {
-                          setIsOpen(true); // Open the modal
-                          setSelectedProductId(p?._id); // Corrected
-                        }}
-                      >
-                        Edit
-                      </button>
-                      {isOpen && (
-                        <Modal
-                          isOpen={isOpen}
-                          setIsOpen={setIsOpen}
-                          id={selectedProductId}
-                        />
-                      )}
-                      <button
-                        className="p-2"
-                        onClick={() => deleteHandler(p?._id)}
-                      >
-                        <FaTrash className="w-4 h-4 text-primary-500" />
-                      </button>
+                      <p className=" font-normal text-primary-500 ">
+                        Price: {p?.price}
+                      </p>
+                      <p>Status: {p?.status}</p>
                     </div>
+                  </Link>
+                  <div className="flex px-4 justify-between items-center">
+                    <button onClick={() => modalHandler(p?._id)}>
+                      <MdEditDocument className="w-4 h-4 text-primary-500" />
+                    </button>
+                    <button
+                      className="p-2"
+                      onClick={() => deleteHandler(p?._id)}
+                    >
+                      <FaTrash className="w-4 h-4 text-primary-500" />
+                    </button>
                   </div>
                 </div>
               </div>
             ))}
+            {isOpen && (
+              <Modal
+                id={selectedProductId}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+              />
+            )}
           </div>
         </div>
       )}

@@ -23,7 +23,7 @@ const ProductSidebar = () => {
     <div className="relative">
       {/* Mobile menu button */}
       <button
-        className="fixed bottom-0 z-50 w-full sm:hidden p-2 bg-gray-400 shadow-md"
+        className="fixed bottom-0 z-50 w-full sm:hidden p-2 dark:bg-gray-800 bg-gray-400 shadow-md"
         onClick={() => setIsOpen(!isOpen)}
       >
         Filter By
@@ -31,7 +31,7 @@ const ProductSidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 bg-dark-50 left-0 z-40 w-72 h-screen block transition-transform origin-right ${
+        className={`fixed top-0 text-black dark:text-white bg-dark-50 dark:bg-gray-900 left-0 z-40 w-72 h-screen block transition-transform origin-right ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } sm:static sm:translate-x-0 shadow-lg`}
       >
@@ -304,11 +304,11 @@ const ProductSidebar = () => {
                   <li>
                     <Link
                       className={`link ${
-                        pathname === "/product_category/skin/sun_care"
+                        pathname === "/product_category/skin/k_beauty"
                           ? "text-primary-500"
                           : ""
                       }`}
-                      href={"/product_category/skin/sun_care"}
+                      href={"/product_category/skin/k_beauty"}
                     >
                       K-Beauty
                     </Link>
@@ -442,11 +442,11 @@ const ProductSidebar = () => {
                     <Link
                       className={`link ${
                         pathname ===
-                        `/product_category/personal_care/bath_shower`
+                        `/product_category/personal_care/feminine_hygiene`
                           ? "text-primary-500"
                           : ""
                       }`}
-                      href={"/product_category/personal_care/bath_shower"}
+                      href={"/product_category/personal_care/feminine_hygiene"}
                     >
                       Feminine Hygiene
                     </Link>

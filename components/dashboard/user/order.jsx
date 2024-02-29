@@ -2,10 +2,18 @@
 import LoadingSpinner from "@/components/loadingSpinner";
 import { useGetOrderByUserIdQuery } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
-import React, { useContext } from "react";
+import { useRouter } from "next/navigation";
+import React, { useContext, useEffect } from "react";
 
 const Order = () => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
+
+  useEffect(() => {
+    if (!currentUser && currentUser?.role !== "user") {
+      router.push("/login");
+    }
+  }, [currentUser, router]);
 
   const { data: orderHistory, isLoading } = useGetOrderByUserIdQuery(
     currentUser?._id

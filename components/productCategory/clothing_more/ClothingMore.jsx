@@ -44,16 +44,18 @@ const ClothingMore = () => {
   };
   return (
     <div>
-      <h4 className="text-lg py-8 bg-dark-200 text-center">Clothing & More</h4>
+      <h4 className="text-lg py-8 bg-dark-200 text-black dark:text-white dark:bg-gray-800 text-center">
+        Clothing & More
+      </h4>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <>
           {buy1get1Products?.length > 0 ? (
-            <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
+            <div className="my-6 grid grid-cols-1 dark:bg-gray-900 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
               {buy1get1Products?.map((p) => (
                 <div key={p._id}>
-                  <div className="w-full text-center my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div className="w-full text-center my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700">
                     <Link href={`/product/${p?._id}`}>
                       <Image
                         className="rounded-t-lg lg:h-44 w-full"

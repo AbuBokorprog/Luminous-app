@@ -45,7 +45,7 @@ const Skin = () => {
     }
   };
   return (
-    <div>
+    <div className="dark:bg-gray-900">
       <Toaster />
       <Image
         className="w-full h-28"
@@ -59,7 +59,7 @@ const Skin = () => {
       ) : (
         <>
           {skinProducts?.length > 0 ? (
-            <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
+            <div className="my-6 grid grid-cols-1 dark:bg-gray-900 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
               {skinProducts?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

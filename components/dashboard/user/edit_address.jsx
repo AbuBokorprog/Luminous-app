@@ -1,13 +1,22 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Link from "next/link";
 import { authContext } from "@/utils/provider/auth_provider";
 import {
   useGetBillingAddressByUserIdQuery,
   useGetShippingAddressByUserIdQuery,
 } from "@/redux/feature/counter/api";
+import { useRouter } from "next/navigation";
 const EditAddress = () => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
+
+  useEffect(() => {
+    if (!currentUser && currentUser?.role !== "user") {
+      router.push("/login");
+    }
+  }, [currentUser, router]);
+
   const { data: shippingAddressData } = useGetShippingAddressByUserIdQuery(
     currentUser?._id
   );

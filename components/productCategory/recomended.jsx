@@ -53,24 +53,30 @@ const Recommended = ({ category, category2 }) => {
         <>
           {recommendedProducts?.length > 0 ? (
             <div className="my-6 justify-center mx-auto">
-              {recommendedProducts?.slice(0, 5)?.map((p) => (
+              {recommendedProducts?.slice(0, 4)?.map((p) => (
                 <div key={p._id}>
                   <div className="w-full text-center my-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <Link href={`/product/${p?._id}`}>
+                    <Link
+                      href={`/product/${p?._id}`}
+                      className="lg:flex items-center"
+                    >
                       <Image
-                        className="rounded-t-lg lg:h-44 w-full"
+                        className="rounded-t-lg lg:h-44"
                         src={p?.images[0]}
                         alt={p?.name}
-                        width={300}
-                        height={300}
+                        width={100}
+                        height={100}
                       />
                       <div className="p-2">
-                        <h2 className="mb-2 h-12 text-center text-xl font-bold tracking-tight text-dark-900 dark:text-white">
-                          {p?.name.slice(0, 30)}
+                        <h2 className="mb-2 h-10 text-center font-semibold tracking-tight text-dark-900 dark:text-white">
+                          {p?.name.slice(0, 40)}
                         </h2>
 
                         <p className="text-lg font-normal text-primary-500 ">
-                          ${p?.price}
+                          {p?.price} BDT
+                        </p>
+                        <p className="text-lg font-normal text-primary-500 ">
+                          Quantity: {p?.quantity}
                         </p>
                       </div>
                     </Link>

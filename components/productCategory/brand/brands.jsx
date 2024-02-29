@@ -39,19 +39,22 @@ const Brands = ({ brand, title }) => {
       toast.error(error.message);
     }
   };
+
   return (
     <div>
       <Toaster />
-      <h4 className="text-lg py-8 bg-dark-200 text-center">{title}</h4>
+      <h4 className="text-lg py-8 bg-dark-200 text-black dark:text-white dark:bg-gray-800 text-center">
+        {title}
+      </h4>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <>
           {brandsProducts?.length > 0 ? (
-            <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-4 mx-auto items-center gap-4">
+            <div className="my-6 grid grid-cols-1 dark:bg-gray-900 justify-center md:grid-cols-3 lg:grid-cols-4 mx-auto items-center gap-4">
               {brandsProducts?.map((p) => (
                 <div key={p._id}>
-                  <div className="w-full text-center my-2 bg-white rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div className="w-full text-center my-2 bg-white rounded-lg shadow dark:bg-gray-900 dark:border-gray-700">
                     <Image
                       className="rounded-t-lg lg:h-44 w-full"
                       src={p?.images[0]}

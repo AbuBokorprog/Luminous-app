@@ -41,7 +41,7 @@ const AddressForm = ({ post, update, addressData, refetch }) => {
           _id: addressData?._id,
           data: address,
         });
-        console.log(updateResult.data);
+
         toast.success("update");
         refetch();
       } catch (error) {
@@ -50,7 +50,7 @@ const AddressForm = ({ post, update, addressData, refetch }) => {
     } else {
       try {
         const result = await post(address);
-        console.log(result);
+
         toast.success("save!");
         refetch();
       } catch (error) {

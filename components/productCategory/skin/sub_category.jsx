@@ -47,18 +47,20 @@ const SubCategory = ({ category, SubCategory, title }) => {
     }
   };
   return (
-    <div>
+    <div className="dark:bg-gray-900">
       <Toaster />
-      <h4 className="text-lg py-8 bg-dark-200 text-center">{title}</h4>
+      <h4 className="text-lg py-8 text-black bg-dark-200 dark:text-white dark:bg-gray-800 text-center">
+        {title}
+      </h4>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <>
           {subCategoriesProducts?.length > 0 ? (
-            <div className="my-6 grid grid-cols-1 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center md:gap-4 lg:gap-2">
+            <div className="my-6 grid grid-cols-1 dark:bg-gray-900 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center md:gap-4 lg:gap-2">
               {subCategoriesProducts?.map((p) => (
                 <div key={p._id}>
-                  <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                  <div className="w-full text-center lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700">
                     <Link href={`/product/${p?._id}`}>
                       <Image
                         className="rounded-t-lg lg:h-44 w-full"

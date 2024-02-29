@@ -11,7 +11,7 @@ const ProductLayout = ({ children }) => {
       <div className="1/4">
         <ProductSidebar />
       </div>
-      <main className="w-full bg-dark-100 lg:h-screen rounded-lg p-2 overflow-y-scroll">
+      <main className="w-full bg-dark-100 dark:bg-gray-900 dark:text-white lg:h-screen rounded-lg p-2 overflow-y-scroll">
         {children}
       </main>
     </div>

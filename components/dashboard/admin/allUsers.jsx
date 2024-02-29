@@ -7,12 +7,20 @@ import {
 import swal from "sweetalert";
 import toast, { Toaster } from "react-hot-toast";
 import { authContext } from "@/utils/provider/auth_provider";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 import LoadingSpinner from "@/components/loadingSpinner";
+import { useRouter } from "next/navigation";
 const AllUsers = () => {
+  const router = useRouter();
   const { data, isError, isLoading, refetch } = useGetUserQuery();
   const { currentUser } = useContext(authContext);
+
+  useEffect(() => {
+    if (!currentUser && currentUser?.role !== "admin") {
+      router.push("/login");
+    }
+  }, [currentUser, router]);
 
   const [deleteUser, { error }] = useDeleteUserMutation();
   const [updateUser, {}] = useUpdateUserMutation();
@@ -46,7 +54,6 @@ const AllUsers = () => {
   };
 
   const updateRole = async (id, role) => {
-    console.log(id, role);
     try {
       if (role === "user") {
         const data = { role: "manager" };

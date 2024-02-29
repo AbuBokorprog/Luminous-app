@@ -1,21 +1,62 @@
 "use client";
+import LoadingSpinner from "@/components/loadingSpinner";
+import { useUpdateCurrentUserByEmailMutation } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
+import { updatePassword } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-
+import toast, { Toaster } from "react-hot-toast";
 const Profile = () => {
-  const { currentUser } = useContext(authContext);
-
+  const { currentUser, refetch, updateUser, updateUserPassword, isLoading } =
+    useContext(authContext);
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-
   const { register, handleSubmit } = useForm();
+  const [updateCurrentUser, { isLoading: updateIsLoading }] =
+    useUpdateCurrentUserByEmailMutation();
+  const onSubmit = async (data) => {
+    const displayName = data.name;
+    const email = data.email;
+    const confirmPassword = data.confirmPassword;
+    const currentPassword = data.currentPassword;
+    const newPassword = data.newPassword;
+    const photoURL = data.photoURL;
 
-  const onSubmit = (data) => {
-    setIsEditing(false);
+    const user = {
+      displayName,
+      newPassword,
+      photoURL,
+    };
+
+    // if (newPassword !== confirmPassword) {
+    //   setConfirmPasswordError("Passwords do not match");
+    // } else {
+    //   setConfirmPasswordError("");
+    //   setIsEditing(false);
+    //   try {
+    //     const result = await updateCurrentUser({ email, user: user });
+    //     console.log(result);
+    //     if (result?.data?.success) {
+    //       toast.success(result.data.success);
+    //       refetch();
+    //       updateUser(displayName, photoURL)
+    //         .then(() => {
+    //           updateUserPassword(newPassword);
+    //         })
+    //         .catch((error) => {
+    //           toast.error(error.message);
+    //         });
+    //     }
+    //   } catch (error) {
+    //     toast.error(error.message);
+    //   }
+    // }
   };
 
   return (
     <div className="px-4 lg:px-0">
+      <Toaster />
+      {isLoading && updateIsLoading && <LoadingSpinner />}
       <h2 className="lg:text-4xl my-2 text-2xl font-bold text-center">
         Profile
       </h2>
@@ -103,8 +144,10 @@ const Profile = () => {
               type="password"
               {...register("confirmPassword", { required: true })}
             />
+            {confirmPasswordError && (
+              <p className="text-Red">{confirmPasswordError}</p>
+            )}
           </div>
-
           <div className="text-center my-4">
             <button
               type="submit"
@@ -127,6 +170,7 @@ const Profile = () => {
       )}
       <div className="text-center my-6">
         <button
+          disabled
           className=" text-white bg-green hover:bg-green focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green dark:hover:bg-green dark:focus:ring-green"
           onClick={() => setIsEditing(!isEditing)}
         >

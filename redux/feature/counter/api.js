@@ -10,6 +10,13 @@ export const Api = createApi({
     getCurrentUser: builder.query({
       query: (email) => `/users/email/${email}`,
     }),
+    updateCurrentUserByEmail: builder.mutation({
+      query: ({ user, email }) => ({
+        url: `/users/email/${email}`,
+        method: "PUT",
+        body: user,
+      }),
+    }),
     updateUser: builder.mutation({
       query: ({ id, data }) => ({
         url: `/users/${id}`,
@@ -184,6 +191,7 @@ export const Api = createApi({
 export const {
   useGetUserQuery,
   useGetCurrentUserQuery,
+  useUpdateCurrentUserByEmailMutation,
   useUpdateUserMutation,
   useGetProductQuery,
   useGetProductByUserIdQuery,

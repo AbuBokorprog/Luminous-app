@@ -4,12 +4,19 @@ import {
   usePostProductMutation,
 } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
-import React, { useContext } from "react";
+import { useRouter } from "next/navigation";
+import React, { useContext, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 const AddProduct = () => {
+  const router = useRouter();
   const { currentUser } = useContext(authContext);
 
+  useEffect(() => {
+    if (!currentUser && currentUser?.role !== "manager") {
+      router.push("/login");
+    }
+  }, [currentUser, router]);
   const categories = [
     {
       label: "Makeup",
@@ -185,6 +192,7 @@ const AddProduct = () => {
     control,
     name: "benefits",
   });
+
   const {
     fields: imagesField,
     append: imagesAppend,
@@ -211,6 +219,8 @@ const AddProduct = () => {
     const quantity = data.quantity;
     const made = data.made;
     const size = data.size;
+    const ingredients = data.ingredients;
+    const useCase = data.useCase;
     const product = {
       name,
       userId,
@@ -228,6 +238,8 @@ const AddProduct = () => {
       quantity,
       made,
       size,
+      ingredients,
+      useCase,
     };
     try {
       const result = await postProduct(product);
@@ -250,7 +262,7 @@ const AddProduct = () => {
             htmlFor="name"
             className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
           >
-            Product Name
+            Product Name *:
           </label>
           <input
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -268,7 +280,7 @@ const AddProduct = () => {
               htmlFor="price"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Price
+              Price *:
             </label>
             <input
               type="number"
@@ -286,7 +298,7 @@ const AddProduct = () => {
               htmlFor="discountPrice"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Discount Price
+              Discount Price:
             </label>
             <input
               type="number"
@@ -300,7 +312,7 @@ const AddProduct = () => {
               htmlFor="weight"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Weight
+              Weight:
             </label>
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -315,7 +327,7 @@ const AddProduct = () => {
               htmlFor="category"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Category
+              Category *:
             </label>
             <select
               multiple
@@ -339,7 +351,7 @@ const AddProduct = () => {
               htmlFor="sub_category"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Sub-category
+              Sub-category *:
             </label>
             <select
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -363,7 +375,7 @@ const AddProduct = () => {
               htmlFor="offer"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Offer/Events
+              Offer/Events:
             </label>
             <select
               multiple
@@ -384,7 +396,7 @@ const AddProduct = () => {
               htmlFor="concern"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Concern
+              Concern:
             </label>
             <select
               multiple
@@ -412,7 +424,7 @@ const AddProduct = () => {
               htmlFor="brands"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Brands
+              Brands *:
             </label>
             <input
               placeholder="Type Brands name"
@@ -429,7 +441,7 @@ const AddProduct = () => {
               htmlFor="quantity"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Quantity
+              Quantity *:
             </label>
             <input
               type="number"
@@ -449,7 +461,7 @@ const AddProduct = () => {
               htmlFor="made"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Made
+              Made:
             </label>
             <input
               placeholder="Type which country made in"
@@ -462,7 +474,7 @@ const AddProduct = () => {
               htmlFor="size"
               className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
             >
-              Size
+              Size:
             </label>
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -476,7 +488,7 @@ const AddProduct = () => {
             htmlFor="benefits"
             className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
           >
-            Benefits
+            Benefits:
           </label>
           {benefitsField.map((benefitsField, index) => (
             <div key={benefitsField.id}>
@@ -508,7 +520,7 @@ const AddProduct = () => {
             htmlFor="images"
             className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
           >
-            Images
+            Images *:
           </label>
           {imagesField.map((imagesField, index) => (
             <div key={imagesField.id}>
@@ -540,7 +552,7 @@ const AddProduct = () => {
             htmlFor="description"
             className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
           >
-            Description
+            Description *:
           </label>
           <textarea
             rows={5}
@@ -551,6 +563,42 @@ const AddProduct = () => {
           />
           {errors.description?.type === "required" && (
             <p role="alert">Description is required</p>
+          )}
+        </div>
+        <div>
+          <label
+            htmlFor="ingredients"
+            className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+          >
+            Ingredients *:
+          </label>
+          <textarea
+            rows={5}
+            placeholder="Type description"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            {...register("ingredients")}
+            aria-invalid={errors.ingredients ? "true" : "false"}
+          />
+          {errors.ingredients?.type === "required" && (
+            <p role="alert">Ingredients is required</p>
+          )}
+        </div>
+        <div>
+          <label
+            htmlFor="useCase"
+            className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+          >
+            Use Case *:
+          </label>
+          <textarea
+            rows={5}
+            placeholder="Type description"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+            {...register("useCase")}
+            aria-invalid={errors.useCase ? "true" : "false"}
+          />
+          {errors.useCase?.type === "required" && (
+            <p role="alert">Use Case is required</p>
           )}
         </div>
         <div>

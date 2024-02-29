@@ -22,6 +22,7 @@ export async function GET(_, { params }) {
 export async function PUT(req, { params }) {
   const { id } = params;
   const { displayName, password, photoURL, role } = await req.json();
+
   try {
     const user = await User.findOneAndUpdate(
       { _id: id },

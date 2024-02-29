@@ -105,7 +105,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <div></div>
         </div>
         {isOpen && (
-          <aside className="fixed top-0  bg-white left-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right">
+          <aside className="fixed top-0 text-black dark:bg-gray-900 dark:text-white bg-white left-0 z-40 w-64 h-screen lg:hidden block transition-transform translate-x-0 origin-right">
             <div className="h-full flex justify-between px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
               <div className="space-y-2 flex-col dark:text-white text-black font-medium">
                 <div className="relative mt-10">
@@ -241,7 +241,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <div className="flex justify-center items-center">
             <input
               type="search"
-              className="p-2 w-72 border-2 border-primary-500 text-sm bg-gray-100 rounded-3xl"
+              className="p-2 w-72 border-2 dark:text-white border-primary-500 text-sm bg-gray-100 dark:bg-gray-700 rounded-3xl"
               onChange={searchHandler}
               placeholder="Search for products..."
             />
@@ -288,7 +288,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                   type="search"
                   name="search"
                   onChange={searchHandler}
-                  className="p-2 w-96 border-2 dark:text-black bg-gray-100 dark:bg-gray-50 text-black border-primary-500 text-sm rounded-3xl"
+                  className="p-2 w-96 border-2 dark:bg-gray-700 dark:text-white bg-gray-100  text-black border-primary-500 text-sm rounded-3xl"
                   placeholder="Search for products..."
                   id=""
                 />
@@ -324,14 +324,14 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                 </button>
                 <button
                   onClick={() => setIsOpenDropdown(!isOpenDropdown)}
-                  className="bg-Beige dark:bg-gray-50 text-black  px-4 py-2 rounded-full"
+                  className="bg-Beige dark:bg-gray-800 dark:text-white text-black  px-4 py-2 rounded-full"
                 >
                   My Account
                 </button>
                 {isOpenDropdown && (
                   <div
                     onClick={() => setIsOpenDropdown(false)}
-                    className="z-10 hidden absolute right-0 w-32 top-10 lg:block bg-primary-50 divide-y divide-gray-100 rounded-lg shadow dark:bg-dark-700"
+                    className="z-10 hidden absolute right-0 w-32 top-10 lg:block bg-primary-50 divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-900 dark:text-white"
                   >
                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
                       {isLoading ? (
@@ -344,7 +344,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                             <li>
                               <Link
                                 href={"/admin"}
-                                className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                                className="block text-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:bg-gray-800 dark:text-white"
                               >
                                 Dashboard
                               </Link>
@@ -353,7 +353,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                             <li>
                               <Link
                                 href={"/manager"}
-                                className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                                className="block text-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:bg-gray-800 dark:text-white"
                               >
                                 Dashboard
                               </Link>
@@ -362,7 +362,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                             <li>
                               <Link
                                 href={"/users"}
-                                className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                                className="block text-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:bg-gray-800 dark:text-white"
                               >
                                 Dashboard
                               </Link>
@@ -376,7 +376,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                         <li>
                           <button
                             onClick={logoutHandler}
-                            className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                            className="block text-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:bg-gray-800 dark:text-white"
                           >
                             Logout
                           </button>
@@ -385,7 +385,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                         <li>
                           <Link
                             href="/login"
-                            className="block px-4 py-2 hover:bg-gray-100 dark:bg-gray-600 dark:text-white"
+                            className="block text-center w-full py-2 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:bg-gray-800 dark:text-white"
                           >
                             Login
                           </Link>

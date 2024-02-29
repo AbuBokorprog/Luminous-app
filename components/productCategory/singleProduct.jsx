@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import LoadingSpinner from "../loadingSpinner";
 import Link from "next/link";
 import Recommended from "./recomended";
+import Tabs from "../tabs";
 const SingleProduct = ({ id }) => {
   const [rating, setRating] = useState(0);
   const [ratingError, setRatingError] = useState("");
@@ -281,169 +282,202 @@ const SingleProduct = ({ id }) => {
               />
             </div>
           </div>
-
-          {/* Review section */}
-          <div id="rate" className="my-20 px-2 lg:px-0">
-            <h2 className=" text-3xl mb-8 lg:text-4xl font-semibold">
-              Reviews
-            </h2>
-            {reviews?.length > 0 ? (
-              <div>
-                {reviews?.map((r) => (
-                  <div key={r?._id}>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <h5>{r?.name}</h5>
-                        <h5>{r?.date}</h5>
+          <Tabs
+            ingredients={
+              <>
+                {data?.ingredients ? (
+                  <div>
+                    <p>Ingredients</p>
+                  </div>
+                ) : (
+                  <div>
+                    <p>There is no Ingredients details</p>
+                  </div>
+                )}
+              </>
+            }
+            useCase={
+              <>
+                {data?.useCase ? (
+                  <div>
+                    <p>Use Case</p>
+                  </div>
+                ) : (
+                  <div>
+                    <p>There is no use case</p>
+                  </div>
+                )}
+              </>
+            }
+            review={
+              <>
+                <div id="rate" className="my-20 px-2 lg:px-0">
+                  <h2 className=" text-3xl mb-8 lg:text-4xl font-semibold">
+                    Reviews
+                  </h2>
+                  {reviews?.length > 0 ? (
+                    <div>
+                      {reviews?.map((r) => (
+                        <div key={r?._id}>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-4">
+                              <h5>{r?.name}</h5>
+                              <h5>{r?.date}</h5>
+                            </div>
+                            <div>
+                              {r?.rating === 5 ? (
+                                <p className="flex items-center gap-1">
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                </p>
+                              ) : r?.rating === 4 ? (
+                                <p className="flex items-center gap-1">
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                </p>
+                              ) : r?.rating === 3 ? (
+                                <p className="flex items-center gap-1">
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                </p>
+                              ) : r?.rating === 2 ? (
+                                <p className="flex items-center gap-1">
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                </p>
+                              ) : (
+                                <p className="flex items-center gap-1">
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                  <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                          <p>{r?.review}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p>There is no Reviews</p>
+                  )}
+                </div>
+                <div className="my-10 px-2 lg:px-0">
+                  <h3 className="text-2xl lg:text-3xl font-medium uppercase">
+                    Add a Review
+                  </h3>
+                  <p className="text-xl">
+                    Your email address will not be published. Required fields
+                    are marked *
+                  </p>
+                  <div className="flex gap-2 my-4 items-center">
+                    <p className="text-xl">Your Rating</p>
+                    {[...Array(5)].map((star, index) => {
+                      const ratingValue = index + 1;
+                      return (
+                        <div key={index}>
+                          <FaStar
+                            key={index}
+                            className="star"
+                            color={
+                              ratingValue <= (hoverRating || rating)
+                                ? "#ffc107"
+                                : "#e4e5e9"
+                            }
+                            size={25}
+                            onClick={() => handleRatingClick(ratingValue)}
+                            onMouseEnter={() => handleRatingHover(ratingValue)}
+                            onMouseLeave={() => handleRatingHover(0)}
+                          />
+                        </div>
+                      );
+                    })}
+                    {ratingError !== "" && (
+                      <p className="text-Red">{ratingError}</p>
+                    )}
+                  </div>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <div>
+                      <label
+                        htmlFor="review"
+                        className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+                      >
+                        Review:
+                      </label>
+                      <textarea
+                        id="review"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                        {...register("review", { required: true })}
+                        rows={4}
+                        cols={50}
+                        placeholder="Write your review here..."
+                      ></textarea>
+                      {errors.review && <p>This field is required</p>}
+                    </div>
+                    <div className="grid grid-cols-1 mx-auto lg:grid-cols-2 gap-4 items-center">
+                      <div>
+                        <label
+                          htmlFor="name"
+                          className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+                        >
+                          Name:
+                        </label>
+                        <input
+                          id="name"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                          {...register("name", { required: true })}
+                          type="text"
+                          defaultValue={currentUser?.displayName}
+                          placeholder="Enter your name"
+                        />
+                        {errors.name && <p>This field is required</p>}
                       </div>
                       <div>
-                        {r?.rating === 5 ? (
-                          <p className="flex items-center gap-1">
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                          </p>
-                        ) : r?.rating === 4 ? (
-                          <p className="flex items-center gap-1">
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                          </p>
-                        ) : r?.rating === 3 ? (
-                          <p className="flex items-center gap-1">
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                          </p>
-                        ) : r?.rating === 2 ? (
-                          <p className="flex items-center gap-1">
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                          </p>
-                        ) : (
-                          <p className="flex items-center gap-1">
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-Gold" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                            <FaStar className="w-4 lg:w-6 h-4 lg:h-6 text-gray-300" />
-                          </p>
-                        )}
+                        <label
+                          htmlFor="email"
+                          className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
+                        >
+                          Email:
+                        </label>
+                        <input
+                          id="email"
+                          defaultValue={currentUser?.email}
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                          {...register("email", {
+                            required: true,
+                          })}
+                          type="email"
+                          placeholder="Enter your email"
+                        />
+                        {errors.email && <p>Please enter a valid email</p>}
                       </div>
                     </div>
-                    <p>{r?.review}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <p>There is no Reviews</p>
-            )}
-          </div>
-          <div className="my-10 px-2 lg:px-0">
-            <h3 className="text-2xl lg:text-3xl font-medium uppercase">
-              Add a Review
-            </h3>
-            <p className="text-xl">
-              Your email address will not be published. Required fields are
-              marked *
-            </p>
-            <div className="flex gap-2 my-4 items-center">
-              <p className="text-xl">Your Rating</p>
-              {[...Array(5)].map((star, index) => {
-                const ratingValue = index + 1;
-                return (
-                  <div key={index}>
-                    <FaStar
-                      key={index}
-                      className="star"
-                      color={
-                        ratingValue <= (hoverRating || rating)
-                          ? "#ffc107"
-                          : "#e4e5e9"
-                      }
-                      size={25}
-                      onClick={() => handleRatingClick(ratingValue)}
-                      onMouseEnter={() => handleRatingHover(ratingValue)}
-                      onMouseLeave={() => handleRatingHover(0)}
-                    />
-                  </div>
-                );
-              })}
-              {ratingError !== "" && <p className="text-Red">{ratingError}</p>}
-            </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div>
-                <label
-                  htmlFor="review"
-                  className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
-                >
-                  Review:
-                </label>
-                <textarea
-                  id="review"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  {...register("review", { required: true })}
-                  rows={4}
-                  cols={50}
-                  placeholder="Write your review here..."
-                ></textarea>
-                {errors.review && <p>This field is required</p>}
-              </div>
-              <div className="grid grid-cols-1 mx-auto lg:grid-cols-2 gap-4 items-center">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
-                  >
-                    Name:
-                  </label>
-                  <input
-                    id="name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    {...register("name", { required: true })}
-                    type="text"
-                    defaultValue={currentUser?.displayName}
-                    placeholder="Enter your name"
-                  />
-                  {errors.name && <p>This field is required</p>}
+                    <button
+                      type="submit"
+                      className="my-4 text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    >
+                      Submit Review
+                    </button>
+                  </form>
                 </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
-                  >
-                    Email:
-                  </label>
-                  <input
-                    id="email"
-                    defaultValue={currentUser?.email}
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    {...register("email", {
-                      required: true,
-                    })}
-                    type="email"
-                    placeholder="Enter your email"
-                  />
-                  {errors.email && <p>Please enter a valid email</p>}
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="my-4 text-white bg-primary-500 hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                Submit Review
-              </button>
-            </form>
-          </div>
+              </>
+            }
+          />
+          {/* Review section */}
         </>
       )}
     </>
