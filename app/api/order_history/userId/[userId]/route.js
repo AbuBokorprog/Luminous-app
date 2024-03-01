@@ -1,6 +1,5 @@
 import Order from "@/models/order";
 import { database } from "@/utils/database/database";
-
 import { NextResponse } from "next/server";
 
 database();

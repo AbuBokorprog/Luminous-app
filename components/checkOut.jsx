@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import LoadingSpinner from "./loadingSpinner";
-
 const CheckOut = () => {
   const router = useRouter();
   const [method, setMethod] = useState(0);

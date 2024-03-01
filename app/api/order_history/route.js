@@ -3,6 +3,7 @@ import Order from "@/models/order";
 import Products from "@/models/products";
 import { database } from "@/utils/database/database";
 import { NextResponse } from "next/server";
+
 database();
 export async function POST(req, res) {
   const {

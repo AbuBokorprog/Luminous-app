@@ -159,6 +159,9 @@ export const Api = createApi({
     getOrderByUserId: builder.query({
       query: (userId) => `/order_history/userId/${userId}`,
     }),
+    getOrderById: builder.query({
+      query: (id) => `/order_history/${id}`,
+    }),
     postReview: builder.mutation({
       query: (data) => ({
         url: "/reviews",
@@ -219,6 +222,7 @@ export const {
   usePostPaymentMutation,
   usePostOrderMutation,
   useGetOrderByUserIdQuery,
+  useGetOrderByIdQuery,
   usePostReviewMutation,
   useGetReviewByProductIdQuery,
   useGetWishlistByUserIdQuery,

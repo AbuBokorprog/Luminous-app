@@ -4,7 +4,7 @@ import { useGetOrderByUserIdQuery } from "@/redux/feature/counter/api";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect } from "react";
-
+import Link from "next/link";
 const Order = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -33,8 +33,8 @@ const Order = () => {
           {orderHistory?.length > 0 ? (
             <>
               {orderHistory?.map((order) => (
-                <div className="my-6">
-                  <div className="flex flex-col items-center  bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                <Link href={`/users/orders/${order?._id}`} className="my-6">
+                  <div className="flex my-4 flex-col items-center  bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <div className="flex flex-col justify-between p-4 leading-normal">
                       <h5 className="mb-2 text-xl tracking-tight text-gray-900 dark:text-white">
                         Order Id: {order?._id}
@@ -65,7 +65,7 @@ const Order = () => {
                       {/* <button>View Details</button> */}
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </>
           ) : (
