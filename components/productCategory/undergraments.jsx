@@ -12,6 +12,7 @@ import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import LoadingSpinner from "../loadingSpinner";
+import ProductsSkeleton from "../dashboard/skeleton/products_sk";
 const Undergarments = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -56,7 +57,7 @@ const Undergarments = () => {
         height={500}
       />
       {isLoading ? (
-        <LoadingSpinner />
+        <ProductsSkeleton />
       ) : (
         <>
           {undergarmentsProducts?.length > 0 ? (

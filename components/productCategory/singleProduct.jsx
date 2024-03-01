@@ -21,6 +21,7 @@ import LoadingSpinner from "../loadingSpinner";
 import Link from "next/link";
 import Recommended from "./recomended";
 import Tabs from "../tabs";
+import SingleSkeleton from "../dashboard/skeleton/singleSkeleton";
 const SingleProduct = ({ id }) => {
   const [rating, setRating] = useState(0);
   const [ratingError, setRatingError] = useState("");
@@ -150,7 +151,7 @@ const SingleProduct = ({ id }) => {
       isLoadingGetWishlist ||
       isLoadingPostWishlist ? (
         <div>
-          <LoadingSpinner />
+          <SingleSkeleton />
         </div>
       ) : (
         <>
@@ -477,7 +478,6 @@ const SingleProduct = ({ id }) => {
               </>
             }
           />
-          {/* Review section */}
         </>
       )}
     </>

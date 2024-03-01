@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 import LoadingSpinner from "../loadingSpinner";
+import ProductsSkeleton from "../dashboard/skeleton/products_sk";
 const Natural = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -50,7 +51,7 @@ const Natural = () => {
         Natural
       </h4>
       {isLoading ? (
-        <LoadingSpinner />
+        <ProductsSkeleton />
       ) : (
         <>
           {skinProducts?.length > 0 ? (

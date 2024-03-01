@@ -3,13 +3,12 @@ import {
   useGetProductQuery,
   useUpdateProductMutation,
 } from "@/redux/feature/counter/api";
-import swal from "sweetalert";
 import { authContext } from "@/utils/provider/auth_provider";
 import React, { useContext, useEffect } from "react";
 import Image from "next/image";
 import toast, { Toaster } from "react-hot-toast";
-import LoadingSpinner from "@/components/loadingSpinner";
 import { useRouter } from "next/navigation";
+import AllProductsSk from "../skeleton/all_products_sk";
 
 const AllProducts = () => {
   const router = useRouter();
@@ -70,7 +69,7 @@ const AllProducts = () => {
     <>
       <Toaster />
       {isLoading ? (
-        <LoadingSpinner />
+        <AllProductsSk />
       ) : (
         <div>
           <h2 className="text-4xl font-medium text-center mx-auto">

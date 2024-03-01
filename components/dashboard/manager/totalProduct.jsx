@@ -13,6 +13,7 @@ import Modal from "@/components/modal";
 import Link from "next/link";
 import LoadingSpinner from "@/components/loadingSpinner";
 import { useRouter } from "next/navigation";
+import TotalProductsSkeleton from "../skeleton/totalProSkeleton";
 const TotalProduct = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -86,16 +87,16 @@ const TotalProduct = () => {
   return (
     <>
       {isLoading || deleteIsLoading ? (
-        <LoadingSpinner />
+        <TotalProductsSkeleton />
       ) : (
-        <div>
-          <h2 className="text-4xl font-medium text-center mx-auto">
+        <div className="dark:bg-gray-900">
+          <h2 className="text-4xl font-medium dark:text-white text-center mx-auto">
             All Products ({product.length})
           </h2>
           <div className="mt-4 grid grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-3 mx-auto items-center md:gap-4 lg:gap-2">
             {product?.map((p) => (
               <div key={p._id}>
-                <div className="w-full lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div className="w-full lg:w-72 my-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700">
                   <Link href={`/product/${p?._id}`}>
                     <Image
                       className="rounded-t-lg lg:h-44 w-full"

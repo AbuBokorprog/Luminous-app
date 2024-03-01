@@ -55,7 +55,7 @@ const Hair = () => {
         height={500}
       />
       {isLoading ? (
-        <LoadingSpinner />
+        <ProductsSkeleton />
       ) : (
         <>
           {hairProducts?.length > 0 ? (

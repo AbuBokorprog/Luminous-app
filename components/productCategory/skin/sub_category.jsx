@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { authContext } from "@/utils/provider/auth_provider";
 import { useRouter } from "next/navigation";
-import LoadingSpinner from "@/components/loadingSpinner";
+import ProductsSkeleton from "@/components/dashboard/skeleton/products_sk";
 const SubCategory = ({ category, SubCategory, title }) => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -53,7 +53,7 @@ const SubCategory = ({ category, SubCategory, title }) => {
         {title}
       </h4>
       {isLoading ? (
-        <LoadingSpinner />
+        <ProductsSkeleton />
       ) : (
         <>
           {subCategoriesProducts?.length > 0 ? (

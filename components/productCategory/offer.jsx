@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 import LoadingSpinner from "../loadingSpinner";
+import ProductsSkeleton from "../dashboard/skeleton/products_sk";
 const Offer = ({ offer, title }) => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -51,7 +52,7 @@ const Offer = ({ offer, title }) => {
         {title}
       </h4>
       {isLoading ? (
-        <LoadingSpinner />
+        <ProductsSkeleton />
       ) : (
         <>
           {offerProducts?.length > 0 ? (

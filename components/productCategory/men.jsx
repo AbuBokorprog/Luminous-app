@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 import LoadingSpinner from "../loadingSpinner";
+import ProductsSkeleton from "../dashboard/skeleton/products_sk";
 const Men = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -56,7 +57,7 @@ const Men = () => {
         height={500}
       />
       {isLoading ? (
-        <LoadingSpinner />
+        <ProductsSkeleton />
       ) : (
         <>
           {menProducts?.length > 0 ? (

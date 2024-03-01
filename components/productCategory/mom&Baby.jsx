@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
 import LoadingSpinner from "../loadingSpinner";
+import ProductsSkeleton from "../dashboard/skeleton/products_sk";
 const Mom_Baby = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -49,7 +50,7 @@ const Mom_Baby = () => {
         Mom & Baby
       </h4>
       {isLoading ? (
-        <LoadingSpinner />
+        <ProductsSkeleton />
       ) : (
         <div className="my-6 grid grid-cols-1 dark:bg-gray-900 justify-center md:grid-cols-3 lg:grid-cols-3 mx-auto items-center gap-4">
           {momBabyProducts?.map((p) => (

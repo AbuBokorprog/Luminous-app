@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import LoadingSpinner from "../loadingSpinner";
+import ProductsSkeleton from "../dashboard/skeleton/products_sk";
 const Concern = ({ concern, title }) => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
@@ -49,7 +50,7 @@ const Concern = ({ concern, title }) => {
         {title}
       </h4>
       {isLoading ? (
-        <LoadingSpinner />
+        <ProductsSkeleton />
       ) : (
         <>
           {acneProducts?.length > 0 ? (
