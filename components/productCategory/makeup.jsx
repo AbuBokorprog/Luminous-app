@@ -22,6 +22,7 @@ const Makeup = () => {
     postCart,
     { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
   ] = useCartPostMutation();
+  console.log(data);
   const { refetch } = useCartGetByUserQuery(currentUser?._id);
   const categoriesProducts = products?.filter((p) =>
     p.category.some((sub) => sub === "Makeup")
@@ -95,7 +96,7 @@ const Makeup = () => {
             </div>
           ) : (
             <div className=" text-center py-10">
-              <p>Empty</p>
+              <p>Makeup Empty</p>
             </div>
           )}
         </>
