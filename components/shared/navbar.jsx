@@ -60,10 +60,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     error: cartError,
   } = useCartGetByUserQuery(currentUser?._id);
 
-  const totalQuantity = cart?.cart?.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  const totalQuantity = cart?.reduce((total, item) => total + item.quantity, 0);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
