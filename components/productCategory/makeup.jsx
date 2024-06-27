@@ -33,6 +33,7 @@ const Makeup = () => {
     const productId = id;
     const cart = { userId, productId };
     try {
+      console.log(currentUser?.email);
       if (currentUser?.email) {
         const response = await postCart(cart);
         if (response?.data?.success) {
