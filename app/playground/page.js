@@ -17,7 +17,6 @@ const ReviewInput = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Submit the review data (rating and review text) to the server
-    console.log("Rating:", rating);
 
     // You can send the review data to your backend or handle it as needed
   };

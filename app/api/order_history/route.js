@@ -66,7 +66,10 @@ export async function POST(req, res) {
       message: "Order placed successfully",
     });
   } catch (error) {
-    console.log(error.message);
+    return NextResponse.json({
+      success: true,
+      message: `${error.message}`,
+    });
   }
 }
 

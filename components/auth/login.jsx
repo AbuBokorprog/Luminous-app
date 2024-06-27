@@ -23,7 +23,7 @@ const Login = () => {
 
     try {
       const login = await loginUser({ email, password });
-      console.log(login);
+
       if (login?.data?.message === "Login success") {
         signIn(email, password)
           .then((result) => {
@@ -34,7 +34,6 @@ const Login = () => {
             reset();
           })
           .catch((error) => {
-            console.log(error);
             toast.error(error.message);
           });
       }

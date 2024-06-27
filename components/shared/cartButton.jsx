@@ -83,7 +83,7 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
         alert(response.data.success);
       }
     } catch (error) {
-      console.log(error?.message);
+      // console.log(error?.message);
     }
   };
 

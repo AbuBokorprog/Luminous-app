@@ -8,7 +8,6 @@ const AboutPage = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmitNewsletterForm = async (data) => {
-    console.log(data);
     reset();
   };
 

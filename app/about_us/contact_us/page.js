@@ -8,7 +8,6 @@ const ContactPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const onSubmitForm = async (data) => {
-    console.log(data);
     setIsSubmitted(true);
     reset();
   };
