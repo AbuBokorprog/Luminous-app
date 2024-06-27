@@ -38,9 +38,12 @@ const CartButton = ({ setIsSidebarOpen, isSidebarOpen }) => {
     error: cartError,
   } = useCartGetByUserQuery(currentUser?._id);
   const [cartDelete, { isLoading: deleteIsLoading }] = useCartDeleteMutation();
-  const totalQuantity = cart?.reduce((total, item) => total + item.quantity, 0);
+  const totalQuantity = cart?.cart?.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
-  const totalPrice = cart?.reduce((total, item) => {
+  const totalPrice = cart?.cart?.reduce((total, item) => {
     const itemPrice = (item.discountPrice || item.price) * item.quantity;
     return total + itemPrice;
   }, 0);

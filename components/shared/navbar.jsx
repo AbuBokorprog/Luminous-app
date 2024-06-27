@@ -50,16 +50,28 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredProducts = product?.filter((p) =>
-    p.name.toLowerCase().includes(searchQuery?.toLowerCase())
-  );
+  console.log(product);
+  let filteredProducts;
+
+  if (product) {
+    filteredProducts = product.products?.filter((p) =>
+      p.name.toLowerCase().includes(searchQuery?.toLowerCase())
+    );
+  }
   const {
     data: cart,
     isLoading: cartLoading,
     isError,
     error: cartError,
   } = useCartGetByUserQuery(currentUser?._id);
-  const totalQuantity = cart?.reduce((total, item) => total + item.quantity, 0);
+
+  let totalQuantity = 0;
+  if (cart) {
+    totalQuantity = cart?.cart?.reduce(
+      (total, item) => total + item.quantity,
+      0
+    );
+  }
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };

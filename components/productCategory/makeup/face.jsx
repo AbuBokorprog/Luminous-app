@@ -14,7 +14,7 @@ const Face = ({ face, title }) => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data, isLoading, isError, error } = useGetProductQuery();
-  const products = data?.filter((p) => p.status === "approved");
+  const products = data?.products?.filter((p) => p.status === "approved");
   const [
     postCart,
     { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
