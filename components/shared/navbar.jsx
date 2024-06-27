@@ -50,9 +50,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     setSearchQuery(event.target.value);
   };
 
-  let filteredProducts;
-
-  filteredProducts = product?.filter((p) =>
+  const filteredProducts = product?.filter((p) =>
     p.name.toLowerCase().includes(searchQuery?.toLowerCase())
   );
   const {
@@ -62,12 +60,10 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     error: cartError,
   } = useCartGetByUserQuery(currentUser?._id);
 
-  if (cart) {
-    totalQuantity = cart?.cart?.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
-  }
+  const totalQuantity = cart?.cart?.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
