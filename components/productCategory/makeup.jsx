@@ -17,12 +17,12 @@ const Makeup = () => {
   const router = useRouter();
   const { currentUser } = useContext(authContext);
   const { data, isLoading, isError, error } = useGetProductQuery();
-  const products = data?.products?.filter((p) => p.status === "approved");
+  const products = data?.filter((p) => p.status === "approved");
   const [
     postCart,
     { isLoading: cartIsLoading, isError: cartIsError, error: cartError },
   ] = useCartPostMutation();
-  console.log(data);
+
   const { refetch } = useCartGetByUserQuery(currentUser?._id);
   const categoriesProducts = products?.filter((p) =>
     p.category.some((sub) => sub === "Makeup")
